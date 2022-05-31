@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DataPengajuanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+Route::get('/datapengajuan', function () {
+    return view('hc/datapengaju');
+});
+Route::get('/datapeserta', function () {
+    return view('hc/datapeserta');
+});
+Route::get('/dashboard', function () {
+    return view('hc/dashboard');
 });
