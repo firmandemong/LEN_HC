@@ -6,5 +6,11 @@ use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
 {
-    //
+    public function clockIn()
+    {
+    }
+
+    public function clockOut()
+    {
+    }
 }
