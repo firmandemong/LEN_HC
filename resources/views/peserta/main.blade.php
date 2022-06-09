@@ -61,9 +61,9 @@
                 </div>
                 <div class="navbar-nav w-100">
                     <a href="/dashboard" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <a href="/datapengajuan" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Data Pengajuan</a>
-                    <a href="{{ asset ('template/table.html') }}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Data Pembimbing</a>
-                    <a href="{{ asset ('template/chart.html') }}" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Data Peserta</a>
+                    <a href="/datapengajuan" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Data Peserta</a>
+                    <a href="{{ asset ('template/table.html') }}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Presensi</a>
+                    <a href="{{ asset ('template/chart.html') }}" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Kegiatan Peserta</a>
                     <div class="nav-item dropdown">
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="{{ asset ('template/signin.html') }}" class="dropdown-item">Sign In</a>
@@ -119,6 +119,7 @@
             <!-- Footer End -->
         </div>
         <!-- Content End -->
+      
 
 
         <!-- Back to Top -->

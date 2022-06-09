@@ -61,8 +61,9 @@
                 </div>
                 <div class="navbar-nav w-100">
                     <a href="/dashboard" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="/masterakun" class="nav-item nav-link"><i class="fa fa-times me-2"></i>Master Akun</a>
                     <a href="/datapengajuan" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Data Pengajuan</a>
-                    <a href="{{ asset ('template/table.html') }}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Data Pembimbing</a>
+                    <a href="/datapembimbing" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Data Pembimbing</a>
                     <a href="/datapeserta" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Data Peserta</a>
                     <div class="nav-item dropdown">
                         <div class="dropdown-menu bg-transparent border-0">

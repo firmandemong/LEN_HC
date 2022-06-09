@@ -18,10 +18,11 @@
                                     <th scope="col"><center>Universitas/Sekolah</th>
                                     <th scope="col"><center>Jurusan</th>
                                     <th scope="col"><center>Email</th>
-                                    <th scope="col"><center>Surat PKL</th>
-                                    <th scope="col"><center>CV</th>
-                                    <th scope="col"><center>Transkrip Nilai</th>
                                     <th scope="col"><center>Penilaian</th>
+                                        <th scope="col"><center>Periode</th>
+                                        <th scope="col"><center>Pembimbing</th>
+                                            <th scope="col"><center>Divisi</th>
+                                              
                                 </tr>
                             </thead>
                             <tbody>
@@ -31,13 +32,12 @@
                                     <td><center>Fauzi Ramdani</td>
                                     <td><center>Institud Digital Ekonomi LPKIA</td>
                                     <td><center>Teknik Informatika</td>
-                                    <td><center>f@gmail.com</td>
+                                    <td><center>f@gmail.com</td>                  
                                     <td><center>File Hasil Upload</td>
                                     <td><center>File Hasil Upload</td>
-                                    <td><center>File Hasil Upload</td>
-                                    <td>
-                                        <button type="button" data-target="#tambahTipe" data-toggle="modal" class="btn btn-info my-2" style="float: right;">Tambah</button>
-                                    </td>
+                                        <td><center>File Hasil Upload</td>
+                                        <td><center>Periode</td>
+                                    
                                     </tr>
                             </tbody>
                         </table>

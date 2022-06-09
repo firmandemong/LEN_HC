@@ -36,10 +36,10 @@
                                     <td><center>File Hasil Upload</td>
                                     <td><center>File Hasil Upload</td>
                                     <td><center>
-                                        <button type="button" data-target="#tambahTipe" data-toggle="modal" class="btn btn-info my-2" style="float: right;">ACCEPT</button>                                     
+                                        <a href="/penerimaan" button type="submit" class="btn btn-primary py-3 w-100 mb-4">ACCEPT</a>
                                     </td>
                                     <td><center>
-                                        <button type="button" data-target="#tambahTipe" data-toggle="modal" class="btn btn-info my-2" style="float: right;">TOLAK</button>
+                                        <a href="/penolakan" button type="submit" class="btn btn-primary py-3 w-100 mb-4">DECLINE</a>
                                     </td>
                                 </tr>
                             </tbody>
