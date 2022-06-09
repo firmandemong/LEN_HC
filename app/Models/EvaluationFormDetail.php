@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EvaluationForm extends Model
+class EvaluationFormDetail extends Model
 {
     use HasFactory;
 
-    public function getDetail()
+    public function getSubject()
     {
-        return $this->hasMany(EvaluationFormDetail::class, 'form_id');
+        return $this->belongsTo(EvaluationSubject::class, 'subject_id');
     }
 }

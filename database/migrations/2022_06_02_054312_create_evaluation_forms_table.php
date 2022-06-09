@@ -15,6 +15,13 @@ class CreateEvaluationFormsTable extends Migration
     {
         Schema::create('evaluation_forms', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('participant_id');
+            $table->double('average')->nullable();
+            $table->string('predicate')->nullable();
+            $table->foreignId('evaluator_id')->nullable();
+            $table->datetime('evaluate_date');
+            $table->foreign('participant_id')->references('id')->on('participants')->onDelete('cascade');
+            $table->foreign('evaluator_id')->references('id')->on('mentors')->onDelete('set null');
             $table->timestamps();
         });
     }

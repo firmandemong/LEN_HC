@@ -15,6 +15,9 @@ class CreateCertificatesTable extends Migration
     {
         Schema::create('certificates', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('participant_id');
+            $table->string('file');
+            $table->dateTime('uploaded_at');
             $table->timestamps();
         });
     }

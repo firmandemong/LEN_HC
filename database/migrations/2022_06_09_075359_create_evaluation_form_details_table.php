@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateParticipantsTable extends Migration
+class CreateEvaluationFormDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateParticipantsTable extends Migration
      */
     public function up()
     {
-        Schema::create('participants', function (Blueprint $table) {
+        Schema::create('evaluation_form_details', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('form_id')->references('id')->on('evaluation_forms')->cascadeOnDelete();
+            $table->foreignId('subject_id')->references('id')->on('evaluation_subjects');
+            $table->integer('point');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateParticipantsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('participants');
+        Schema::dropIfExists('evaluation_form_details');
     }
 }

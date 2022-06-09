@@ -15,6 +15,8 @@ class CreateEvaluationSubjectsTable extends Migration
     {
         Schema::create('evaluation_subjects', function (Blueprint $table) {
             $table->id();
+            $table->string('subject');
+            $table->string('category');
             $table->timestamps();
         });
     }

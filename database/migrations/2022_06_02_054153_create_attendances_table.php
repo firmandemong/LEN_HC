@@ -15,6 +15,11 @@ class CreateAttendancesTable extends Migration
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('participant_id');
+            $table->date('date');
+            $table->time('clockIn');
+            $table->time('clockOut')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

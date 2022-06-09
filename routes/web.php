@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\DataPengajuanController;
+use App\Http\Controllers\MentorController;
+use App\Http\Controllers\ParticipantController;
+use App\Http\Controllers\UserController;
+use App\Models\Participant;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,24 +21,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('login');
 });
-Route::get('/datapengajuan', function () {
-    return view('hc/datapengaju');
-});
-Route::get('/datapembimbing', function () {
-    return view('hc/datapembimbing');
-});
-Route::get('/datapeserta', function () {
-    return view('hc/datapeserta');
-});
+Route::get('/datapengajuan', [ParticipantController::class, 'dataPengajuan']);
+Route::get('/datapembimbing', [MentorController::class, 'dataPembimbing']);
+Route::get('/datapeserta', [ParticipantController::class, 'dataParticipant']);
 Route::get('/dashboard', function () {
     return view('hc/dashboard');
 });
-Route::get('/pengajuan', function () {
-    return view('peserta/pengajuan');
-});
-Route::get('/masterakun', function () {
-    return view('hc/masterAkun');
-});
+Route::get('/pengajuan', [ParticipantController::class, 'formPengajuan']);
+Route::get('/masterakun', [UserController::class, 'masterAkun']);
 Route::get('/penerimaan', function () {
     return view('hc/penerimaan');
 });
