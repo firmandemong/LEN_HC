@@ -69,8 +69,8 @@
                             </div>
                             <a href="">Forgot Password</a>
                         </div>
-                        <a href="/dashboard" button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign In</a>
-                        <a href="/pengajuan" button type="submit" class="btn btn-primary py-3 w-100 mb-4">Pengajuan disini</a>
+                        <a href="/dashboard" button type="submit" class="btn btn-primary py-3 w-100 mb-4">SIGN IN</a>
+                        <a href="/pengajuan" button type="submit" class="btn btn-primary py-3 w-100 mb-4">PENGAJUAN DISINI</a>
                     </div>
                 </div>
             </div>

@@ -48,7 +48,7 @@
             <div class="col-12">
                 <div class="bg-light rounded">
                     <center><a><b> DATA AKUN PEMBIMBING </a></center></b><br>
-                    <center><a href="/penilain" button type="submit" class="btn btn-primary">Tambah</a>
+                    <center><a href="/createAccountMentor" button type="submit" class="btn btn-primary">Tambah</a>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -56,6 +56,7 @@
                                     <th scope="col"><center>No</th>         
                                     <th scope="col"><center>Nama</th>
                                     <th scope="col"><center>Email</th>
+                                        <th scope="col"><center>Divisi</th>
                                         <th colspan="2">
                                             <center>Aksi
                                         </th>
@@ -66,9 +67,10 @@
                                     <th scope="row"><center>1</th>
                                     <td><center>T1222</td>
                                     <td><center>Fauzi Ramdani</td>
+                                        <th scope="col"><center>Divisi</th>
                                     <td><center>
-                                        <button type="button" class="btn btn-primary">EDIT</button>
-                                        <button type="button" class="btn btn-secondary">DELETE</button>       
+                                        <a href="/editAccountMentor" button type="submit" class="btn btn-primary">Edit</a>
+                                        <a href="/" button type="submit" class="btn btn-secondary">Delete</a>      
                                     </td>
                                     </tr>
                             </tbody>
@@ -79,7 +81,7 @@
                 
                 <div class="bg-light rounded">
                     <center><a><b> DATA AKUN PESERTA </a></center></b><br>
-                    <center> <a href="/penilain" button type="submit" class="btn btn-primary">Tambah</a>
+                    <center> <a href="/createAccountParticipants" button type="submit" class="btn btn-primary">Tambah</a>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -98,8 +100,8 @@
                                     <td><center>T1222</td>
                                     <td><center>Fauzi Ramdani</td>
                                     <td><center>
-                                        <button type="button" class="btn btn-primary">EDIT</button>
-                                        <button type="button" class="btn btn-secondary">DELETE</button>       
+                                        <a href="/editAccountParticipants" button type="submit" class="btn btn-primary">Edit</a>
+                                        <a href="/" button type="submit" class="btn btn-secondary">Delete</a>  
                                     </td>
                                     </tr>
                             </tbody>

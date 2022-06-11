@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="col-md-8 offset-md-2">
-        <h3><center> Tambah Data Pembimbing </h3>
+        <h3><center> Tambah Akun Participant </h3>
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -12,22 +12,10 @@
                 </ul>
             </div> <br />
         @endif
-        <form method="post" action="/datapengajuan">
+        <form method="post" action="/masterAkun">
             @csrf
             <div class="form-group">
                 <label for="name"> Nama </label>
-                <input type="text" class="form-control" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="name"> Gedung </label>
-                <input type="text" class="form-control" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="name"> Lantai </label>
-                <input type="text" class="form-control" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="name"> Divisi </label>
                 <input type="text" class="form-control" name="name" required>
             </div>
             <div class="form-group">
@@ -35,15 +23,15 @@
                 <input type="text" class="form-control" name="name" required>
             </div>
             <div class="form-group">
-                <label for="name"> dataPengajuan </label>
+                <label for="name"> Divisi </label>
                 <input type="text" class="form-control" name="name" required>
             </div>
             <div class="form-group">
-                <label for="name"> No. Telpon </label>
+                <label for="name"> Password </label>
                 <input type="text" class="form-control" name="name" required>
             </div>
             <div class="form-group">
-                <label for="name"> Peserta </label>
+                <label for="name"> Konfirmasi Password </label>
                 <input type="text" class="form-control" name="name" required>
             </div>
             <button type="submit" class="btn btn-primary"> Simpan </button>

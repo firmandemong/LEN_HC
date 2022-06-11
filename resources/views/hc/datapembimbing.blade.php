@@ -8,7 +8,7 @@
             <div class="col-12">
                 <div class="bg-light rounded">
                     <center><a><b> DATA PEMBIMBING </a></center></b><br>
-                    <center><a href="/penilain" button type="submit" class="btn btn-primary">Tambah</a>
+                    <center><a href="/createMentor" button type="submit" class="btn btn-primary">Tambah</a>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -37,8 +37,8 @@
                                             <td><center>T1222</td>
                                     <td><center>Fauzi Ramdani</td>
                                     <td><center>
-                                        <button type="button" class="btn btn-primary">EDIT</button>
-                                        <button type="button" class="btn btn-secondary">DELETE</button>       
+                                        <a href="/editMentor" button type="submit" class="btn btn-primary">Edit</a>
+                                        <a href="/editMentor" button type="submit" class="btn btn-secondary">Delete</a>
                                     </td>
                                     </tr>
                             </tbody>

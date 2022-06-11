@@ -15,7 +15,35 @@
         <form method="post" action="/datapengajuan">
             @csrf
             <div class="form-group">
+                <label for="name"> Nama </label>
+                <input type="text" class="form-control" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="name"> Gedung </label>
+                <input type="text" class="form-control" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="name"> Lantai </label>
+                <input type="text" class="form-control" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="name"> Divisi </label>
+                <input type="text" class="form-control" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="name"> Email </label>
+                <input type="text" class="form-control" name="name" required>
+            </div>
+            <div class="form-group">
                 <label for="name"> dataPengajuan </label>
+                <input type="text" class="form-control" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="name"> No. Telpon </label>
+                <input type="text" class="form-control" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="name"> Peserta </label>
                 <input type="text" class="form-control" name="name" required>
             </div>
             <button type="submit" class="btn btn-primary"> Simpan </button>

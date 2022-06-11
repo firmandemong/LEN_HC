@@ -1,7 +1,7 @@
 @extends("hc.main")
 @section("content")
 <div class="col-md-8 offset-md-2">
-    <h3>Edit Pembimbing</h3>
+    <h3>Edit Akun Pembimbing</h3>
     @if($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -19,11 +19,7 @@
             <input type="text" class="form-control" name="name" required>
         </div>
         <div class="form-group">
-            <label for="name"> Gedung </label>
-            <input type="text" class="form-control" name="name" required>
-        </div>
-        <div class="form-group">
-            <label for="name"> Lantai </label>
+            <label for="name"> Email </label>
             <input type="text" class="form-control" name="name" required>
         </div>
         <div class="form-group">
@@ -31,19 +27,11 @@
             <input type="text" class="form-control" name="name" required>
         </div>
         <div class="form-group">
-            <label for="name"> Email </label>
+            <label for="name"> Password </label>
             <input type="text" class="form-control" name="name" required>
         </div>
         <div class="form-group">
-            <label for="name"> dataPengajuan </label>
-            <input type="text" class="form-control" name="name" required>
-        </div>
-        <div class="form-group">
-            <label for="name"> No. Telpon </label>
-            <input type="text" class="form-control" name="name" required>
-        </div>
-        <div class="form-group">
-            <label for="name"> Peserta </label>
+            <label for="name"> Konfirmasi Password </label>
             <input type="text" class="form-control" name="name" required>
         </div>
         <button type="submit" class="btn btn-primary"> Simpan </button>

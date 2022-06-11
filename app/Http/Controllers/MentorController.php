@@ -9,7 +9,7 @@ class MentorController extends Controller
 
     public function dataPembimbing()
     {
-        return view('hc/datapengaju');
+        return view('hc/datapembimbing');
     }
 
     public function create()

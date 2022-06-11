@@ -1,4 +1,4 @@
-@extends("hc.main")
+@extends("pembimbing.main")
 
 @section("content")
 <div class="col-sm-12">
