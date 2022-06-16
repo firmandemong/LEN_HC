@@ -9,6 +9,7 @@ class ParticipantController extends Controller
 
     public function formPengajuan()
     {
+        return view('peserta/pengajuan');
     }
 
     public function dataPengajuan()

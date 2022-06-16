@@ -17,16 +17,32 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
-    return view('login');
+    return redirect()->intended('/login');
 });
-Route::get('/datapengajuan', [ParticipantController::class, 'dataPengajuan']);
-Route::get('/datapembimbing', [MentorController::class, 'dataPembimbing']);
-Route::get('/datapeserta', [ParticipantController::class, 'dataParticipant']);
-Route::get('/dataPeserta', function () {
-    return view('pembimbing/datapeserta');
+Route::group(['middleware'=>'guest'],function(){
+    Route::get('/login',[UserController::class,'loginView']);
+    Route::post('/login',[UserController::class,'login']);
 });
+
+Route::group(['middleware'=>'auth'],function(){
+    Route::get('/dashboard',[UserController::class,'dashboard']);
+});
+
+Route::group(['middleware'=>'isHC'],function(){
+    Route::get('/datapengajuan', [ParticipantController::class, 'dataPengajuan']);
+    Route::get('/datapembimbing', [MentorController::class, 'dataPembimbing']);
+    Route::get('/datapeserta', [ParticipantController::class, 'dataParticipant']);    
+});
+
+Route::group(['middleware'=>'isMentor'],function(){
+
+});
+
+Route::group(['middleware'=>'isParticipant'],function(){
+
+});
+
 Route::get('/presensi', function () {
     return view('pembimbing/presensi');
 });

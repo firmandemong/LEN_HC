@@ -23,7 +23,7 @@ class CreateParticipantsTable extends Migration
             $table->string('file_application_letter');
             $table->string('file_cv');
             $table->string('file_transcript');
-            $table->foreignId('division_d')->nullable();
+            $table->foreignId('division_id')->nullable();
             $table->foreignId('mentor_id')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();

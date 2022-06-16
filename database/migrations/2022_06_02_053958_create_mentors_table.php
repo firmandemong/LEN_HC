@@ -22,7 +22,7 @@ class CreateMentorsTable extends Migration
             $table->foreignId('division_id')->nullable();
             $table->foreignId('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->nullOnDelete();
-            $table->foreign('division_id')->references('id')->on('division')->nullOnDelete();
+            $table->foreign('division_id')->references('id')->on('divisions')->nullOnDelete();
             $table->timestamps();
         });
     }
