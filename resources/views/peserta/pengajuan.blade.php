@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -34,51 +33,53 @@
 
 <body>
     <div class="container-xxl position-relative bg-white d-flex p-0">
-            <!-- Form Start -->
-            <div class="container-fluid">
-                <div class="row g-4">
-                    <div class="bg-light rounded h-100 p-4">
+        <!-- Form Start -->
+        <div class="container-fluid">
+            <div class="row g-4">
+                <div class="bg-light rounded h-100 p-4">
+                    <form action="/submission" enctype="multipart/form-data" method="post">
+                        @csrf
                         <div class="row mb-3">
                             <label for="inputPassword3" class="col-sm-2 col-form-label">Nama</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="inputPassword3">
+                                <input type="text" name="name" class="form-control" id="inputPassword3" required>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="inputPassword3" class="col-sm-2 col-form-label">Universitas/Sekolah</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="inputPassword3">
+                                <input type="text" name="univ" class="form-control" id="inputPassword3" required>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="inputPassword3" class="col-sm-2 col-form-label">Jurusan</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="inputPassword3">
+                                <input type="text" name="major" class="form-control" id="inputPassword3" required>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="inputPassword3" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="inputPassword3">
+                                <input type="email" name="email" class="form-control" id="inputPassword3" required>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Upload Surat Pengajuan PKL</label>
-                            <input class="form-control" type="file" id="formFile">
-                        </div> 
+                            <input class="form-control" name="file_application_letter" type="file" id="formFile" required>
+                        </div>
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Upload Curicullum Vitae</label>
-                            <input class="form-control" type="file" id="formFile">
-                        </div> 
+                            <input class="form-control" name="file_cv" type="file" id="formFile" required>
+                        </div>
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Upload Transkrip Nilai</label>
-                            <input class="form-control" type="file" id="formFile">
-                        </div>                        
+                            <input class="form-control" name="file_transcript" type="file" id="formFile" required>
+                        </div>
                         <center><button type="submit" class="btn btn-primary">AJUKAN</button>
-                            </form>
-                    </div>
+                    </form>
                 </div>
             </div>
+        </div>
     </div>
 
     <!-- JavaScript Libraries -->

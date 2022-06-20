@@ -1,4 +1,9 @@
-@extends("hc.main")
+@extends("layout.main")
+
+@section('sidebar')
+@include('layout.hc-sidebar')
+@endsection
+
 @section("content")
 <div class="col-md-8 offset-md-2">
     <h3>Edit Pembimbing</h3>

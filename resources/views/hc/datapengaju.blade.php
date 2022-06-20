@@ -1,4 +1,8 @@
-@extends("hc.main")
+@extends("layout.main")
+
+@section('sidebar')
+@include('layout.hc-sidebar')
+@endsection
 
 @section("content")
 <div class="col-sm-12">
@@ -12,36 +16,38 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col"><center>No</th>
-                                    <th scope="col"><center>Nama</th>
-                                    <th scope="col"><center>Universitas/Sekolah</th>
-                                    <th scope="col"><center>Jurusan</th>
-                                    <th scope="col"><center>Email</th>
-                                    <th scope="col"><center>Surat PKL</th>
-                                    <th scope="col"><center>CV</th>
-                                    <th scope="col"><center>Transkrip Nilai</th>
+                                    <th width="50%"><center>No</th>
+                                    <th><center>Nama</th>
+                                    <th><center>Universitas/Sekolah</th>
+                                    <th><center>Jurusan</th>
+                                    <th><center>Email</th>
+                                    <th><center>Surat PKL</th>
+                                    <th><center>CV</th>
+                                    <th><center>Transkrip Nilai</th>
                                         <th colspan="2">
                                             <center>Aksi
                                         </th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($submissions as $submission)
                                 <tr>
-                                    <th scope="row"><center>1</th>
-                                    <td><center>Fauzi Ramdani</td>
-                                    <td><center>Institud Digital Ekonomi LPKIA</td>
-                                    <td><center>Teknik Informatika</td>
-                                    <td><center>f@gmail.com</td>
-                                    <td><center>File Hasil Upload</td>
-                                    <td><center>File Hasil Upload</td>
-                                    <td><center>File Hasil Upload</td>
-                                    <td><center>
-                                        <a href="/penerimaan" button type="submit" class="btn btn-primary py-3 w-100 mb-4">ACCEPT</a>
+                                    <th scope="row">{{$loop->iteration}}</th>
+                                    <td>{{$submission->name}}</td>
+                                    <td>{{$submission->univ}}</td>
+                                    <td>{{$submission->major}}</td>
+                                    <td>{{$submission->email}}</td>
+                                    <td><a href="{{asset('/file_submission/'.$submission->file_application_letter)}}">Download File</a></td>
+                                    <td><a href="{{asset('/file_submission/'.$submission->file_cv)}}">Download File</a></td>
+                                    <td><a href="{{asset('/file_submission/'.$submission->file_transcript)}}">Download File</a></td>
+                                    <td>
+                                        <a href="/penerimaan" button type="submit" class="btn btn-primary py-3 w-100 mb-4 btn-sm">ACCEPT</a>
                                     </td>
-                                    <td><center>
-                                        <a href="/penolakan" button type="submit" class="btn btn-primary py-3 w-100 mb-4">DECLINE</a>
+                                    <td>
+                                        <a href="/penolakan" button type="submit" class="btn btn-primary py-3 w-100 mb-4 btn-sm">DECLINE</a>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

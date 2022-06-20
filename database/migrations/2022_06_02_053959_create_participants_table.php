@@ -28,6 +28,7 @@ class CreateParticipantsTable extends Migration
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->foreignId('user_id')->nullable();
+            $table->boolean('status')->default(0);
             $table->foreign('user_id')->references('id')->on('users')->nullOnDelete();
             $table->foreign('division_id')->references('id')->on('divisions')->nullOnDelete();
             $table->foreign('mentor_id')->references('id')->on('mentors')->nullOnDelete();

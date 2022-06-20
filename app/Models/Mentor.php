@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Mentor extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
     public function getDivision()
     {
         return $this->belongsTo(Division::class, 'division_id');

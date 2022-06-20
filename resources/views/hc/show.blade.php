@@ -1,4 +1,8 @@
-@extends("hc.main")
+@extends("layout.main")
+
+@section('sidebar')
+@include('layout.hc-sidebar')
+@endsection
 
 @section("content")
 <h3>Lihat Data dataPengajuan #{{$dataPengajuan->name}}</h3>

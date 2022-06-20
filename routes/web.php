@@ -23,6 +23,7 @@ Route::get('/', function () {
 Route::group(['middleware'=>'guest'],function(){
     Route::get('/login',[UserController::class,'loginView']);
     Route::post('/login',[UserController::class,'login']);
+    Route::post('/submission',[ParticipantController::class,'submission']);
 });
 
 Route::group(['middleware'=>'auth'],function(){

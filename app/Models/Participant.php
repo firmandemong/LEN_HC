@@ -9,6 +9,8 @@ class Participant extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function Division()
     {
         return $this->belongsTo(Division::class, 'division_id');
@@ -22,5 +24,13 @@ class Participant extends Model
     public function User()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function scopeActive($query){
+        return $query->where('status',1);
+    }
+
+    public function scopeNotActive($query){
+        return $query->where('status',0);
     }
 }

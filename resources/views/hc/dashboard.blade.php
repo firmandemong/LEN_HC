@@ -1,4 +1,8 @@
-@extends("hc.main")
+@extends("layout.main")
+
+@section('sidebar')
+@include('layout.hc-sidebar')
+@endsection
 
 @section("content")
            <!-- Sale & Revenue Start -->
