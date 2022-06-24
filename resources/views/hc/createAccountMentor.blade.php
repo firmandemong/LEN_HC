@@ -16,29 +16,28 @@
                 </ul>
             </div> <br />
         @endif
-        <form method="post" action="/masterAkun">
-            @csrf
-            <div class="form-group">
-                <label for="name"> Nama </label>
-                <input type="text" class="form-control" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="name"> Email </label>
-                <input type="text" class="form-control" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="name"> Divisi </label>
-                <input type="text" class="form-control" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="name"> Password </label>
-                <input type="text" class="form-control" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="name"> Konfirmasi Password </label>
-                <input type="text" class="form-control" name="name" required>
-            </div>
-            <button type="submit" class="btn btn-primary"> Simpan </button>
-        </form>
+        <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Basic Form</h6>
+                            <form>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp">
+                                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword1">
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Sign in</button>
+                            </form>
+                        </div>
+                    </div>
     </div>
 @endsection

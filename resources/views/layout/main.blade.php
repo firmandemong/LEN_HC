@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,20 +15,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="{{asset ('template/lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
-    <link href="{{ asset ('template/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet" />
+    <link href="{{asset('template/lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('template/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{ asset ('template/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('template/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="{{ asset ('template/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -60,7 +59,7 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                  @yield('sidebar')
+                    @yield('sidebar')
                 </div>
             </nav>
         </div>
@@ -77,29 +76,29 @@
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
-                
+
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <img class="rounded-circle me-lg-2" src="template/img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                           
+
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">My Profile</a>
-                            <a href="#" class="dropdown-item">Log Out</a>
+                            <a href="/logout" class="dropdown-item">Log Out</a>
                         </div>
                     </div>
                 </div>
             </nav>
             <!-- Navbar End -->
-            <div class="container">
-                @yield('content')
-            </div>
+         
+             @yield('content')
+              
             <!-- Footer Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-light rounded-top p-4">
                     <div class="row">
-                           <center> <a href="#">  &copy; PT LEN INDUSTRI (PERSERO) </a> 
+                        <center> <a href="#"> &copy; PT LEN INDUSTRI (PERSERO) </a>
                     </div>
                 </div>
             </div>
@@ -125,6 +124,7 @@
 
     <!-- Template Javascript -->
     <script src="template/js/main.js"></script>
+    @yield('js')
 </body>
 
 </html>

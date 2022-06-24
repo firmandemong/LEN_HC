@@ -17,8 +17,11 @@ class isHC
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!Auth::check() && !Auth::User()->role != 'HC'){
+        if(!Auth::check()){
             abort('404');                
+        }
+        if(Auth::User()->role != 'HC'){
+            abort('40');     
         }
         return $next($request);
     }

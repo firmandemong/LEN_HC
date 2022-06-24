@@ -1,13 +1,6 @@
+
 <a href="/dashboard" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-<a href="/masterakun" class="nav-item nav-link"><i class="fa fa-times me-2"></i>Master Akun</a>
-<a href="/datapengajuan" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Data Pengajuan</a>
-<a href="/datapeserta" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Data Peserta</a>
-<a href="/datapembimbing" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Data Pembimbing</a>
-<div class="nav-item dropdown">
-    <div class="dropdown-menu bg-transparent border-0">
-        <a href="{{ asset ('template/signin.html') }}" class="dropdown-item">Sign In</a>
-        <a href="{{ asset ('template/signup.html') }}" class="dropdown-item">Sign Up</a>
-        <a href="{{ asset ('template/404.html') }}" class="dropdown-item">404 Error</a>
-        <a href="{{ asset ('template/blank.html') }}" class="dropdown-item">Blank Page</a>
-    </div>
-</div>
+<a href="/master-akun" class="nav-item nav-link"><i class="fa fa-times me-2"></i>Master Akun</a>
+<a href="/data-peserta" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Data Peserta</a>
+<a href="/data-pembimbing" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Data Pembimbing</a>
+<a href="/data-divisi" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Data Divisi</a>

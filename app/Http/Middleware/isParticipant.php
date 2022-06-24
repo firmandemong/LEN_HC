@@ -17,8 +17,11 @@ class isParticipant
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!Auth::check() && && !Auth::User()->role != 'Participant'){
+        if(!Auth::check()){
             abort('404');                
+        }
+        if(Auth::User()->role != 'Participant'){
+            abort('404');        
         }
         return $next($request);
     }

@@ -46,9 +46,19 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Universitas/Sekolah</label>
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Jenis Pendidikan</label>
                             <div class="col-sm-10">
-                                <input type="text" name="univ" class="form-control" id="inputPassword3" required>
+                               <select name="school_type" id="" class="form-select">
+                               <option disabled selected>===Pilih===</option>
+                                <option value="SMK">SMK</option>
+                                <option value="Universitas">Universitas</option>
+                               </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Nama Univ/Sekolah</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="school_name" class="form-control" id="inputPassword3" required>
                             </div>
                         </div>
                         <div class="row mb-3">

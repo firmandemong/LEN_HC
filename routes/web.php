@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DataPengajuanController;
+use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\UserController;
@@ -28,12 +29,14 @@ Route::group(['middleware'=>'guest'],function(){
 
 Route::group(['middleware'=>'auth'],function(){
     Route::get('/dashboard',[UserController::class,'dashboard']);
+    Route::get('/logout',[UserController::class,'logout']);
 });
 
 Route::group(['middleware'=>'isHC'],function(){
-    Route::get('/datapengajuan', [ParticipantController::class, 'dataPengajuan']);
-    Route::get('/datapembimbing', [MentorController::class, 'dataPembimbing']);
-    Route::get('/datapeserta', [ParticipantController::class, 'dataParticipant']);    
+    Route::get('/data-pembimbing', [MentorController::class, 'dataPembimbing']);
+    Route::put('/data-peserta/{id}/accept',[ParticipantController::class,'acceptSubmission']);
+    Route::get('/data-peserta', [ParticipantController::class, 'dataParticipant']);   
+    Route::get('/data-divisi', [DivisionController::class, 'dataDivisi']);    
 });
 
 Route::group(['middleware'=>'isMentor'],function(){
@@ -62,7 +65,7 @@ Route::get('/dashboardPeserta', function () {
 Route::get('/pengajuan', [ParticipantController::class, 'formPengajuan']);
 // Master AKUN
 // Route::get('/masterakun', [UserController::class, 'masterAkun']);
-Route::get('/masterakun', function () {
+Route::get('/master-akun', function () {
     return view('hc/masterAkun');
 });
 Route::get('/createAccountMentor', function () {
@@ -83,7 +86,7 @@ Route::get('/penerimaan', function () {
 });
 //Pembimbing
 Route::get('/createMentor', function () {
-    return view('hc/create');
+    return view('hc/createMentor');
 });
 Route::get('/editMentor', function () {
     return view('hc/edit');
