@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +18,9 @@ class UserController extends Controller
         }
 
         else if(Auth::User()->role == 'Participant'){
-            return view('peserta.dashboard');
+            $presensiToday = Attendance::where(['participant_id'=>$this->getUser()->id,'date'=>date('Y-m-d')])->first();
+            $listPresensi = Attendance::where('participant_id',$this->getUser()->id)->get();
+            return view('peserta.dashboard',compact('presensiToday','listPresensi'));
             
         }
     }

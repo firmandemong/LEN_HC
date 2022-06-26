@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\DataPengajuanController;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\ParticipantController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
+use App\Models\Attendance;
 use App\Models\Participant;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +25,7 @@ Route::get('/', function () {
     return redirect()->intended('/login');
 });
 Route::group(['middleware'=>'guest'],function(){
-    Route::get('/login',[UserController::class,'loginView']);
+    Route::get('/login',[UserController::class,'loginView'])->name('login');
     Route::post('/login',[UserController::class,'login']);
     Route::post('/submission',[ParticipantController::class,'submission']);
 });
@@ -44,17 +47,17 @@ Route::group(['middleware'=>'isMentor'],function(){
 });
 
 Route::group(['middleware'=>'isParticipant'],function(){
-
+    Route::get('/data-presensi', [AttendanceController::class, 'dataPresensi']);
+    Route::get('/data-tugas', [TaskController::class, 'dataTugas']);
+    Route::post('/clock-in',[AttendanceController::class,'clockIn']);
+    Route::put('/clock-out',[AttendanceController::class,'clockOut']);
 });
 
 Route::get('/presensi', function () {
     return view('pembimbing/presensi');
 });
 
-//Dashboard
-Route::get('/dashboard', function () {
-    return view('hc/dashboard');
-});
+
 Route::get('/dashboardPembimbing', function () {
     return view('pembimbing/dashboardPembimbing');
 });

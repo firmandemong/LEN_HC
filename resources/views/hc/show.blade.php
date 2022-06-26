@@ -40,7 +40,7 @@
                     </form>
                 </td>
             </tr>
-            @endforeach
+            @endoreach
             @endif
         </tbody>
     </table>

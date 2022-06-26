@@ -9,6 +9,7 @@ use Illuminate\Queue\SerializesModels;
 
 class sendAccountMail extends Mailable
 {
+    public $password, $email;
     use Queueable, SerializesModels;
 
     /**
@@ -16,9 +17,10 @@ class sendAccountMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($email, $password)
     {
-        //
+        $this->password = $password;
+        $this->email = $email;
     }
 
     /**
@@ -28,6 +30,7 @@ class sendAccountMail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->subject('Email From LEN')->view('layout.sendAccountMail');
+
     }
 }

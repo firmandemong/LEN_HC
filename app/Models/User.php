@@ -42,4 +42,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getProfile(){
+        $profile = null;
+        if(Auth::User()->role =='Participant'){
+            
+        }
+
+        return $profile;
+    }
 }

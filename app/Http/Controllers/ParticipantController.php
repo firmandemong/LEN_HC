@@ -9,6 +9,7 @@ use App\Models\Division;
 use App\Models\Participant;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use GrahamCampbell\ResultType\Success;
 
 class ParticipantController extends Controller
@@ -109,7 +110,7 @@ class ParticipantController extends Controller
                 'user_id'=>$user->id,
             ]);
 
-     
+            Mail::to($id->email)->send(new \App\Mail\sendAccountMail($id->email, $password));
     
             toast('Peserta Berhasil diterima','success');
             return back();
