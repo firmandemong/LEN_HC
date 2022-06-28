@@ -20,7 +20,7 @@ class ParticipantController extends Controller
         return view('peserta/pengajuan');
     }
 
-    public function dataParticipant()
+    public function getParticipant()
     {
         $submissions = Participant::NotActive()->get();
         $divisions = Division::all();
@@ -29,8 +29,11 @@ class ParticipantController extends Controller
         return view('hc/datapeserta',compact('submissions','divisions','mentors','participants'));
     }
 
-    public function rejectSubmission()
+    public function rejectSubmission(Participant $id)
     {
+        $id->delete();
+        toast('Calon Peserta berhasil ditolak','success');
+        return back();
     }
 
     public function submission(Request $request)
@@ -134,4 +137,9 @@ class ParticipantController extends Controller
 
         return $code;
     }
+
+    public function getParticipantByMentor(){
+        return view('pembimbing.datapeserta');
+    }
 }
+

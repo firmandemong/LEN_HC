@@ -77,10 +77,10 @@
                                 <td><a href="{{asset('/file_submission/'.$submission->file_cv)}}">Download File</a></td>
                                 <td><a href="{{asset('/file_submission/'.$submission->file_transcript)}}">Download File</a></td>
                                 <td>
-                                    <a href="#" button type="submit" class="btn btn-success btn-sm acceptSubmission" data-id="{{$submission->id}}" data-name="{{$submission->name}}">ACCEPT</a>
+                                    <a href="javcasript:void(0)" button type="submit" class="btn btn-success btn-sm acceptSubmission" data-id="{{$submission->id}}" data-name="{{$submission->name}}">ACCEPT</a>
                                 </td>
                                 <td>
-                                    <a href="/penolakan" button type="submit" class="btn btn-danger btn-sm">DECLINE</a>
+                                    <a href="javcasript:void(0)" class="btn btn-danger btn-sm rejectSubmission" data-id="{{$submission->id}}" data-name="{{$submission->name}}">DECLINE</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -143,6 +143,30 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="modalReject" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tolak Pengajuan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="formReject" method="post">
+                @csrf
+                @method('DELETE')
+                <div class="modal-body">
+                   <p>Dengan ini, Pengajuan atas nama <span id="submitorName"></span> akan ditolak dan akan dihapus dari database. Lanjutkan Aksi?</p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Ya</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <!-- Table End -->
 @stop
 
@@ -165,6 +189,19 @@
         $('#division').val('');
         $('#start_date').val('');
         $('#end_date').val('');
+    })
+
+    $('.rejectSubmission').on('click', function() {
+        let id = $(this).attr('data-id');
+        let nama = $(this).attr('data-name');
+        $('#submitorName').text(nama);
+        $('#formReject').prop('action', `/data-peserta/${id}/reject`)
+        $('#modalReject').modal('show');
+    });
+
+    $('#modalReject').on('hidden.bs.modal', function() {
+        $('#formReject').removeAttr('action');
+        $('#submitorName').text('');
     })
 </script>
 @endsection

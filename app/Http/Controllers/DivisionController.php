@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class DivisionController extends Controller
 {
-    public function dataDivisi(){
+    public function getDivision(){
         return view('hc.dataDivisi');
     }
 }
