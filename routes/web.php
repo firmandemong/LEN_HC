@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\DataPengajuanController;
 use App\Http\Controllers\DivisionController;
@@ -9,7 +10,6 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Models\Attendance;
 use App\Models\Participant;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +39,16 @@ Route::group(['middleware'=>'isHC'],function(){
     Route::get('/data-pembimbing', [MentorController::class, 'dataPembimbing']);
     Route::put('/data-peserta/{id}/accept',[ParticipantController::class,'acceptSubmission']);
     Route::get('/data-peserta', [ParticipantController::class, 'dataParticipant']);   
-    Route::get('/data-divisi', [DivisionController::class, 'dataDivisi']);    
+    Route::resource('/data-divisi', DivisionController::class, [
+        'names' => [
+            'index' => 'division.index',
+            'create' => 'division.create',
+            'store' => 'division.store',
+            'edit' => 'division.edit',
+            'update' => 'division.update',
+            'destroy' => 'division.destroy'
+        ]
+    ]);    
 });
 
 Route::group(['middleware'=>'isMentor'],function(){
