@@ -6,5 +6,7 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    //
+    public function getTaskByMentor(){
+        return view('pembimbing.tugasPembimbing');
+    }
 }

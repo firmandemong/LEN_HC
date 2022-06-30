@@ -1,4 +1,7 @@
-@extends("pembimbing.main")
+@extends("layout.main")
+@section('sidebar')
+@include('layout.mentor-sidebar')
+@endsection
 
 @section("content")
 <div class="col-sm-12">

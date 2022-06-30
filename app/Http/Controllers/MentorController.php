@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class MentorController extends Controller
 {
 
-    public function dataPembimbing()
+    public function getMentor()
     {
         return view('hc/datapembimbing');
     }

@@ -17,7 +17,7 @@ class isMentor
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!!Auth::check()){
+        if(!Auth::check()){
             abort('404');                
         }
         if((Auth::User()->role != 'Mentor' && !Auth::User()->role != 'HC')){
