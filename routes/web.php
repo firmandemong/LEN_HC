@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\DataPengajuanController;
 use App\Http\Controllers\DivisionController;
@@ -10,6 +9,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Models\Attendance;
 use App\Models\Participant;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,28 +36,20 @@ Route::group(['middleware'=>'auth'],function(){
 });
 
 Route::group(['middleware'=>'isHC'],function(){
-    Route::get('/data-pembimbing', [MentorController::class, 'dataPembimbing']);
+    Route::get('/data-pembimbing', [MentorController::class, 'getMentor']);
     Route::put('/data-peserta/{id}/accept',[ParticipantController::class,'acceptSubmission']);
-    Route::get('/data-peserta', [ParticipantController::class, 'dataParticipant']);   
-    Route::resource('/data-divisi', DivisionController::class, [
-        'names' => [
-            'index' => 'division.index',
-            'create' => 'division.create',
-            'store' => 'division.store',
-            'edit' => 'division.edit',
-            'update' => 'division.update',
-            'destroy' => 'division.destroy'
-        ]
-    ]);    
+    Route::delete('/data-peserta/{id}/reject',[ParticipantController::class,'rejectSubmission']);
+    Route::get('/data-peserta', [ParticipantController::class, 'getParticipant']);   
+    Route::get('/data-divisi', [DivisionController::class, 'getDivision']);    
 });
 
 Route::group(['middleware'=>'isMentor'],function(){
-
+    Route::get('/list-peserta', [ParticipantController::class, 'getParticipantByMentor']);   
+    Route::get('/list-tugas', [TaskController::class, 'getTaskByMentor']);   
+    Route::get('/list-presensi', [AttendanceController::class, 'getAttendanceByMentor']);   
 });
 
 Route::group(['middleware'=>'isParticipant'],function(){
-    Route::get('/data-presensi', [AttendanceController::class, 'dataPresensi']);
-    Route::get('/data-tugas', [TaskController::class, 'dataTugas']);
     Route::post('/clock-in',[AttendanceController::class,'clockIn']);
     Route::put('/clock-out',[AttendanceController::class,'clockOut']);
 });
@@ -101,7 +93,7 @@ Route::get('/createMentor', function () {
     return view('hc/createMentor');
 });
 Route::get('/editMentor', function () {
-    return view('hc/edit');
+    return view('hc/editMentor');
 });
 //Presensi
 Route::get('/presensiPeserta', function () {

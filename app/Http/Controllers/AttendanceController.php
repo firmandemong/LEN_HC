@@ -42,4 +42,8 @@ class AttendanceController extends Controller
 
         return back();
     }
+
+    public function getAttendanceByMentor(){
+        return view('pembimbing.presensi');
+    }
 }
