@@ -33,7 +33,7 @@
                                 <td>{{$participant->participant_code}}</td>
                                 <td>{{$participant->name}}</td>
                                 <td>{{date('d F Y',strtotime($participant->start_date)). ' - ' . date('d F Y',strtotime($participant->end_date))}}</td>
-                                <td>{{$participant->Division->name}}</td>
+                                <td>{{$participant->Division->name ?? "-"}}</td>
                                 <td>{{$participant->Mentor->name}}</td>
                                 <td> <a href="/editMentor" button type="submit" class="btn btn-warning btn-sm">Edit</a>
                                     <a href="/editMentor" button type="submit" class="btn btn-danger btn-sm">Delete</a>

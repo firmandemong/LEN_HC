@@ -19,7 +19,11 @@ class CreateTasksTable extends Migration
             $table->string('description');
             $table->date('deadline');
             $table->foreignId('participant_id');
-            $table->foreignId('craeted_id');
+            $table->foreignId('created_id');
+            $table->boolean('status')->default(0);
+            $table->foreign('participant_id')->references('id')->on('participants')->onDelete('cascade');
+            $table->foreign('created_id')->references('id')->on('mentors')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

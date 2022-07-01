@@ -139,7 +139,7 @@ class ParticipantController extends Controller
     }
 
     public function getParticipantByMentor(){
-        return view('pembimbing.datapeserta');
+        return view('pembimbing.participant-attendance.index');
     }
 }
 

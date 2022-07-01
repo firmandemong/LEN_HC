@@ -54,6 +54,8 @@ Route::group(['middleware'=>'isHC'],function(){
 
 Route::group(['middleware'=>'isMentor'],function(){
     Route::get('/list-peserta', [ParticipantController::class, 'getParticipantByMentor']);   
+    Route::get('/list-tugas/create', [TaskController::class, 'create']);   
+    Route::post('/list-tugas/store', [TaskController::class, 'store']);   
     Route::get('/list-tugas', [TaskController::class, 'getTaskByMentor']);   
     Route::get('/list-presensi', [AttendanceController::class, 'getAttendanceByMentor']);   
 });
