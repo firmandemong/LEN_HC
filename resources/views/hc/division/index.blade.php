@@ -30,15 +30,11 @@
                         <tbody>
                             @foreach ($divisions as $division)
                                 <tr>
-                                    <th scope="row">1</th>
+                                    <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$division->name}}</td>
                                     <td>
                                     <a href="{{route('division.edit', $division->id)}}" button type="submit" class="btn btn-warning btn-sm">Edit</a>
-                                    <form action="{{route('division.destroy', $division->id)}}" method="POST">
-                                        @method('delete')
-                                        @csrf
-                                        <button button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                    </form>
+                                    <button button id="delete-button" data-id="{{$division->id}}" data-bs-toggle="modal" data-bs-target="#delete-modal" class="btn btn-danger btn-sm">Delete</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -50,4 +46,40 @@
     </div>
 </div>
 <!-- Table End -->
-@stop
+<!-- Modal Delete -->
+<div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="delete-modal-label">Apakah anda yakin ?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            Data yang dihapus tidak dapat dikembalikan!!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <form id="delete-form" method="POST">
+                    {{-- <form action="{{route('division.destroy', $division->id)}}" method="POST"> --}}
+                    @method('delete')
+                    @csrf
+                    <button button type="submit" class="btn btn-danger">Hapus</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+@section('js')
+<script>
+$(document).ready(function () {
+    $(document).on('click', "#delete-button", function() {
+        var data_id = $(this).attr('data-id');
+        var url = '/data-divisi/' + data_id;
+        console.log(url);
+        $('#delete-form').attr('action', url);
+    });
+});
+</script>
+@endsection
