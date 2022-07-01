@@ -40,7 +40,16 @@ Route::group(['middleware'=>'isHC'],function(){
     Route::put('/data-peserta/{id}/accept',[ParticipantController::class,'acceptSubmission']);
     Route::delete('/data-peserta/{id}/reject',[ParticipantController::class,'rejectSubmission']);
     Route::get('/data-peserta', [ParticipantController::class, 'getParticipant']);   
-    Route::get('/data-divisi', [DivisionController::class, 'getDivision']);    
+    Route::resource('/data-divisi', DivisionController::class, [
+        'names' => [
+            'index' => 'division.index',
+            'create' => 'division.create',
+            'store' => 'division.store',
+            'edit' => 'division.edit',
+            'update' => 'division.update',
+            'destroy' => 'division.destroy'
+        ]
+    ]);    
 });
 
 Route::group(['middleware'=>'isMentor'],function(){
