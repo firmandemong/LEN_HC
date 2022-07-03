@@ -36,10 +36,21 @@ Route::group(['middleware'=>'auth'],function(){
 });
 
 Route::group(['middleware'=>'isHC'],function(){
-    Route::get('/data-pembimbing', [MentorController::class, 'getMentor']);
     Route::put('/data-peserta/{id}/accept',[ParticipantController::class,'acceptSubmission']);
     Route::delete('/data-peserta/{id}/reject',[ParticipantController::class,'rejectSubmission']);
-    Route::get('/data-peserta', [ParticipantController::class, 'getParticipant']);   
+    Route::get('/data-peserta', [ParticipantController::class, 'getParticipant']); 
+    
+    Route::resource('/data-pembimbing', MentorController::class, [
+        'names' => [
+            'index' => 'mentor.index',
+            'create' => 'mentor.create',
+            'store' => 'mentor.store',
+            'edit' => 'mentor.edit',
+            'update' => 'mentor.update',
+            'destroy' => 'mentor.destroy'
+        ]
+    ]);    
+
     Route::resource('/data-divisi', DivisionController::class, [
         'names' => [
             'index' => 'division.index',

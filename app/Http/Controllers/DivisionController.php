@@ -24,7 +24,8 @@ class DivisionController extends Controller
         $new_division = Division::create([
             'name'=>$request->division_name,
         ]);
-        return redirect()->route('division.index')->with('success', "Divisi ". $new_division->name ." ditambahkan");
+        toast("Divisi ". $new_division->name ." ditambahkan", 'success');
+        return redirect()->route('division.index');
     }
 
     public function show($id)
@@ -48,7 +49,8 @@ class DivisionController extends Controller
         $division->update([
             'name' => $request->division_name,
         ]);
-        return redirect()->route('division.index')->with('success', 'Data divisi diubah');
+        toast('Data divisi diubah', 'success');
+        return redirect()->route('division.index');
     }
 
     public function destroy($id)
@@ -57,6 +59,7 @@ class DivisionController extends Controller
         $division = Division::where('id', $id)->first();
         $name = $division->name;
         $division->delete();
-        return redirect()->route('division.index')->with('success', 'Divisi '. $name.' dihapus');
+        toast('Divisi '. $name.' dihapus', 'success');
+        return redirect()->route('division.index');
     }
 }
