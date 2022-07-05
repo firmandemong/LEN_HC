@@ -35,7 +35,7 @@
                                 <td>{{date('d F Y',strtotime($participant->start_date)). ' - ' . date('d F Y',strtotime($participant->end_date))}}</td>
                                 <td>{{$participant->Division->name ?? "-"}}</td>
                                 <td>{{$participant->Mentor->name}}</td>
-                                <td> <a href="/editMentor" button type="submit" class="btn btn-warning btn-sm">Edit</a>
+                                <td> <a href="{{route('participant.edit', $participant->id)}}" button type="submit" class="btn btn-warning btn-sm">Edit</a>
                                     <a href="/editMentor" button type="submit" class="btn btn-danger btn-sm">Delete</a>
                                     <button button class="btn btn-success btn-sm btn-modal-detail" id="btn-modal-detail" 
                                         data-bs-toggle="modal" data-bs-target="#modal-detail-peserta" 
