@@ -26,7 +26,7 @@ class ParticipantController extends Controller
         $divisions = Division::all();
         $mentors = Mentor::all();
         $participants = Participant::with('Division','Mentor')->Active()->get();
-        return view('hc/datapeserta',compact('submissions','divisions','mentors','participants'));
+        return view('hc/participant/index',compact('submissions','divisions','mentors','participants'));
     }
 
     public function rejectSubmission(Participant $id)
