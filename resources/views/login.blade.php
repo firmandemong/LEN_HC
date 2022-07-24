@@ -25,16 +25,17 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="login-form">
+                                    @include('layout.notif')
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Sign In</h1>
                                     </div>
                                     <form class="user" method="post" action="/login">
                                         @csrf
                                         <div class="form-group">
-                                            <input type="email" name="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address">
+                                            <input type="email" name="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address" required value="{{old('email')}}">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" name="password" class="form-control" id="exampleInputPassword" placeholder="Password">
+                                            <input type="password" name="password" class="form-control" id="exampleInputPassword" placeholder="Password" required>
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small" style="line-height: 1.5rem;">

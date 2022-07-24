@@ -1,4 +1,19 @@
-<a href="/dashboard" class="nav-item nav-link {{Request::is('dashboard') ? 'active' : ''}}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-<a href="/list-peserta" class="nav-item nav-link {{Request::is('list-peserta') ? 'active' : ''}}"><i class="fa fa-users me-2"></i>Data Peserta</a>
-<a href="/list-presensi" class="nav-item nav-link {{Request::is('list-presensi') ? 'active' : ''}}"><i class="fa fa-calendar me-2"></i>Presensi Peserta</a>
-<a href="/list-tugas" class="nav-item nav-link {{Request::is('list-tugas*') ? 'active' : ''}}"><i class="fa fa-file me-2"></i>Tugas Peserta</a>
+<li class="nav-item {{Request::is('dashboard') ? 'active' : ''}}">
+    <a class="nav-link" href="index.html">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Dashboard</span></a>
+</li>
+<hr class="sidebar-divider">
+<div class="sidebar-heading">
+    Peserta
+</div>
+<li class="nav-item {{Request::is('dashboard') ? 'active' : ''}}">
+    <a class="nav-link" href="index.html">
+        <i class="fas fa-fw fa-chalkboard-teacher"></i>
+        <span>Data Peserta</span></a>
+</li>
+<li class="nav-item {{Request::is('dashboard') ? 'active' : ''}}">
+    <a class="nav-link" href="index.html">
+        <i class="fas fa-fw fa-list-alt"></i>
+        <span>Report Peserta</span></a>
+</li>

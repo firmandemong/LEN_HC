@@ -35,8 +35,7 @@ class UserController extends Controller
             $request->session()->regenerate();
             return redirect()->intended('dashboard');
         } else {
-            toast('Email atau Password Salah', 'error');
-            return back()->withInput();
+            return back()->withInput()->with('error', 'Username atau Password Salah!');
         }
     }
 
