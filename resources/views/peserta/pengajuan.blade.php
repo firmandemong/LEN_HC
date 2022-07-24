@@ -3,108 +3,124 @@
 
 <head>
     <meta charset="utf-8">
-    <title>DASHMIN - Bootstrap Admin Template</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="{{asset('template/img/logo/logo.png')}}" rel="icon">
+    <title>Sign In</title>
+    <link href="{{asset('template/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('template/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('template/css/ruang-admin.min.css')}}" rel="stylesheet">
 
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
-
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="template/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link href="template/css/style.css" rel="stylesheet">
 </head>
 
-<body>
-    <div class="container-xxl position-relative bg-white d-flex p-0">
-        <!-- Form Start -->
-        <div class="container-fluid">
-            <div class="row g-4">
-                <div class="bg-light rounded h-100 p-4">
-                    <form action="/submission" enctype="multipart/form-data" method="post">
-                        @csrf
-                        <div class="row mb-3">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Nama</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="name" class="form-control" id="inputPassword3" required>
+<body class="bg-gradient-login">
+@include('sweetalert::alert')
+    <!-- Login Content -->
+    <div class="container-login">
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-12 col-md-9">
+                <div class="card shadow-sm my-5">
+                    <div class="card-body p-0">
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="login-form">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Pengajuan Magang / PKL</h1>
+                                    </div>
+                                    <p>Silahkan Lengkapi Data Berikut Untuk Mengajukan Mangang / PKL</p>
+                                    <form action="/submission" method="post" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="">Nama Lengkap</label>
+                                                    <input type="text" class="form-control" placeholder="Nama Lengkap" required name="name">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="">Email Aktif</label>
+                                                    <input type="email" class="form-control" placeholder="example@example.com" required name="email">
+                                                    <small class="text-info">Pastikan Email valid, karena informasi selanjutnya akan dikirim melalui email</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="">Jenis Pendidikan</label>
+                                                    <select name="school_type" id="" class="form-control" required >
+                                                        <option disabled selected>Pilih Jenis Pendidikan</option>
+                                                        <option value="SMK">SMK</option>
+                                                        <option value="Universitas">Universitas</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="">Nama Universitas/Sekolah</label>
+                                                    <input type="text" class="form-control" name="school_name" placeholder="Universitas/Sekolah" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="">Jurusan</label>
+                                                    <select  id="" class="form-control" name="major" required>
+                                                        <option disabled selected>Pilih Jurusan</option>
+                                                        <option value="Informatika">Informatika</option>
+                                                        <option value="Administrasi">Administrasi</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="">Upload Surat Pengajuan PKL</label>
+                                                    <input type="file" class="form-control"  name="file_application_letter" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="">Upload CV</label>
+                                                    <input type="file" name="file_cv" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="">Upload Transkrip Nilai</label>
+                                                    <input type="file" name="file_transcript" class="form-control" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary btn-block">Kirim Berkas</button>
+                                        </div>
+                                        <hr>
+                                    </form>
+                                    <div class="text-center">
+                                        <a class="font-weight-bold small" href="/login">Kembali ke Halaman Login</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Jenis Pendidikan</label>
-                            <div class="col-sm-10">
-                               <select name="school_type" id="" class="form-select">
-                               <option disabled selected>===Pilih===</option>
-                                <option value="SMK">SMK</option>
-                                <option value="Universitas">Universitas</option>
-                               </select>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Nama Univ/Sekolah</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="school_name" class="form-control" id="inputPassword3" required>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Jurusan</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="major" class="form-control" id="inputPassword3" required>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Email</label>
-                            <div class="col-sm-10">
-                                <input type="email" name="email" class="form-control" id="inputPassword3" required>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="formFile" class="form-label">Upload Surat Pengajuan PKL</label>
-                            <input class="form-control" name="file_application_letter" type="file" id="formFile" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="formFile" class="form-label">Upload Curicullum Vitae</label>
-                            <input class="form-control" name="file_cv" type="file" id="formFile" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="formFile" class="form-label">Upload Transkrip Nilai</label>
-                            <input class="form-control" name="file_transcript" type="file" id="formFile" required>
-                        </div>
-                        <center><button type="submit" class="btn btn-primary">AJUKAN</button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="template/lib/chart/chart.min.js"></script>
-    <script src="template/lib/easing/easing.min.js"></script>
-    <script src="template/lib/waypoints/waypoints.min.js"></script>
-    <script src="template/lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="template/lib/tempusdominus/js/moment.min.js"></script>
-    <script src="template/lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="template/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
-    <!-- Template Javascript -->
-    <script src="template/js/main.js"></script>
+    <!-- Login Content -->
+    <script src="{{asset('template/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('template/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('template/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+    <script src="{{asset('template/js/ruang-admin.min.js')}}"></script>
 </body>
 
 </html>

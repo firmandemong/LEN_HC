@@ -114,8 +114,8 @@ class ParticipantController extends Controller
             'file_transcript'=>$fileNameTranscipt,
         ]);
 
-        toast('Pengajuan berhasil disubmit','success');
-        return redirect('/login');
+        alert()->success('SuccessAlert','Pengajuan berhasil dikirim, Informasi Berikutnya akan dikirim melalui Email');
+        return back();
     }
 
     public function acceptSubmission(Participant $id, Request $request){
