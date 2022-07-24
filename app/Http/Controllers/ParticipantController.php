@@ -26,7 +26,37 @@ class ParticipantController extends Controller
         $divisions = Division::all();
         $mentors = Mentor::all();
         $participants = Participant::with('Division','Mentor')->Active()->get();
-        return view('hc/datapeserta',compact('submissions','divisions','mentors','participants'));
+        return view('hc/participant/index',compact('submissions','divisions','mentors','participants'));
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $participant = Participant::where('id', $id)->first();
+        $divisions = Division::all();
+        $mentors = Mentor::all();
+        return view('hc.participant.edit', compact(
+            'divisions',
+            'mentors',
+            'participant',
+        ));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $participant = Participant::where('id', $id)->first();
+        $participant->update([
+            "participant_code" => $request->participant_code,
+            "name" => $request->name,
+            "school_type" => $request->school_type,
+            "school_name" => $request->school_name,
+            "major" => $request->major,
+            "email" => $request->email,
+            "division_id" => $request->division,
+            "mentor_id" => $request->mentor,
+            "status" => $request->status,
+        ]);
+        toast('Data calon peserta berhasil diubah','success');
+        return redirect('/data-peserta');
     }
 
     public function rejectSubmission(Participant $id)
