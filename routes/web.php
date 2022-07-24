@@ -24,6 +24,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect()->intended('/login');
 });
+
+Route::get('/templates',function(){
+    return view('template');
+});
 Route::group(['middleware'=>'guest'],function(){
     Route::get('/login',[UserController::class,'loginView'])->name('login');
     Route::post('/login',[UserController::class,'login']);
