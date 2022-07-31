@@ -24,6 +24,7 @@
                     <tr>
                         <th>No</th>
                         <th>Nama Divisi</th>
+                        <th>Jumlah Kuota</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -32,6 +33,7 @@
                     <tr>
                         <th scope="row">{{$loop->iteration}}</th>
                         <td>{{$division->name}}</td>
+                        <td>0</td>
                         <td>
                             <a href="{{route('division.edit', $division->id)}}" button type="submit" class="btn btn-warning btn-sm">Edit</a>
                             <button button id="delete-button" data-id="{{$division->id}}" data-bs-toggle="modal" data-bs-target="#delete-modal" class="btn btn-danger btn-sm">Delete</button>

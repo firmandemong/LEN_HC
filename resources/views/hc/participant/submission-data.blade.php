@@ -21,7 +21,7 @@
     <div class="col-lg-12">
         <div class="card mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h5>Pengajuan Perlu Approval</h5>    
+            <h5>Pengajuan Awal</h5>    
         </div>
             <div class="table-responsive p-3">
                 <table class="table align-items-center table-flush table-hover table-stripped" id="dataTableHover">
@@ -31,7 +31,7 @@
                             <th rowspan="2" style="vertical-align: middle">Asal Instansi</th>
                             <th rowspan="2" style="vertical-align: middle">Jurusan</th>
                             <th colspan="3">File Submission</th>
-                            <th rowspan="2" style="vertical-align: middle">Action</th>
+                            <th rowspan="2" style="vertical-align: middle">Keputusan</th>
                         </tr>
                         <tr class="text-center">
                             <th>Pengajuan</th>
@@ -48,7 +48,7 @@
                             <td><a href="">Lihat File</a></td>
                             <td><a href="">Lihat File</a></td>
                             <td><a href="">Lihat File</a></td>
-                            <td><button class="btn btn-success btn-sm">Accept</button><br><button class="btn btn-danger btn-sm mt-1">Reject</button></td>
+                            <td><button class="btn btn-success btn-sm">Lanjut</button><br><button class="btn btn-danger btn-sm mt-1">Tolak</button></td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -70,7 +70,7 @@
                             <th style="vertical-align: middle">Asal Instansi</th>
                             <th style="vertical-align: middle">Jurusan</th>
                             <th>Jadwal Wawancara</th>
-                            <th style="vertical-align: middle">Action</th>
+                            <th style="vertical-align: middle">Keputusan</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,7 +80,7 @@
                             <td>{{@$submission->getInstitute->name}}</td>
                             <td>{{@$submission->getMajor->name}}</td>
                             <td><a href="">Lihat Jadwal</a></td>
-                            <td><button class="btn btn-success btn-sm">Accept</button><br><button class="btn btn-danger btn-sm mt-1">Reject</button></td>
+                            <td><button class="btn btn-success btn-sm">Lanjut</button><br><button class="btn btn-danger btn-sm mt-1">Tolak</button></td>
                         </tr>
                         @endforeach
                     </tbody>

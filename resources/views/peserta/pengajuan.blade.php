@@ -12,11 +12,10 @@
     <link href="{{asset('template/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('template/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('template/css/ruang-admin.min.css')}}" rel="stylesheet">
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 </head>
 
 <body class="bg-gradient-login">
-
     @include('sweetalert::alert')
     <!-- Login Content -->
     <div class="container-login">
@@ -56,19 +55,15 @@
                                                     <select name="school_type" id="" class="form-control" required>
                                                         <option disabled selected>Pilih Jenis Pendidikan</option>
                                                         <option value="SMK" {{old('school_type') == 'SMK' ? 'selected' : ''}}>SMK</option>
-                                                        <option value="Universitas"  {{old('school_type') == 'Universitas' ? 'selected' : ''}}>Universitas</option>
+                                                        <option value="Universitas" {{old('school_type') == 'Universitas' ? 'selected' : ''}}>Universitas</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="">Nama Universitas/Sekolah</label>
-                                                    <input type="text" name="school_name" list="cityname" class="form-control" value="{{old('school_name')}}">
-                                                    <datalist id="cityname">
-                                                        @foreach($schools as $school)
-                                                        <option value="{{$school->name}}">
-                                                            @endforeach
-                                                    </datalist>
+                                                    <input type="text" id="tags" name="school_name" list="cityname" class="form-control" value="{{old('school_name')}}">
+
                                                     <small class="text-info">Pilih dari rekomendasi bila data tersedia</small>
                                                 </div>
                                             </div>
@@ -146,12 +141,9 @@
         </div>
     </div>
     <!-- Login Content -->
-    <script src="{{asset('template/vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{asset('template/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{asset('template/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-    <script src="{{asset('template/js/ruang-admin.min.js')}}"></script>
-</body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </body>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script>
     $('#reload').click(function() {
         $.ajax({
@@ -162,8 +154,16 @@
             }
         });
     });
-
-
 </script>
 
-</html> 
+<script>
+    $(function() {
+        var availableTags = <?php echo $schools ?>;
+        console.log(`aa ${availableTags}`);
+        $("#tags").autocomplete({
+            source: availableTags
+        });
+    });
+</script>
+
+</html>

@@ -17,6 +17,11 @@
         <i class="fas fa-fw fa-user"></i>
         <span>Data Peserta</span></a>
 </li>
+<li class="nav-item {{Request::is('data-peserta') ? 'active' : ''}}">
+    <a class="nav-link" href="/data-peserta">
+        <i class="fas fa-fw fa-user"></i>
+        <span>Sertifikat Peserta</span></a>
+</li>
 <hr class="sidebar-divider">
 <div class="sidebar-heading">
     Pembimbing & Divisi

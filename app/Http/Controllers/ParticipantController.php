@@ -27,8 +27,14 @@ class ParticipantController extends Controller
     public function formPengajuan()
     {
         $majors = Major::all();
-        $schools = Institute::all();
-        return view('peserta/pengajuan',compact('majors','schools'));
+
+        $schools = [];
+        $allSchool = Institute::select('name')->get();
+        foreach($allSchool as $school){
+            $schools[] = $school->name;
+        }
+        
+        return view('peserta/pengajuan',compact('majors'))->with(['schools'=>json_encode($schools)]);
     }
 
     public function getParticipant()
@@ -94,9 +100,15 @@ class ParticipantController extends Controller
         $fileNameCV = null;
         $fileNameTranscipt = null;
 
-        $school = Institute::create([
-            'name'=>$request->school_name,
-        ]);
+        $checkSchool = Institute::where('name',$request->school_name)->first();
+        if(!empty($checkSchool)){
+            $school = $checkSchool->id;
+        }else{
+            $school = Institute::create([
+                'name'=>$request->school_name,
+            ]);
+        }
+
 
         if ($request->hasFile('file_application_letter')) {
             $image = $request->file_application_letter;

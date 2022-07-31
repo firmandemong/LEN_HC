@@ -20,6 +20,7 @@ Data Peserta
 @section("content")
 <div class="col-lg-12">
     <div class="card mb-4">
+        
         <div class="table-responsive p-3">
             <table class="table align-items-center table-flush table-hover table-stripped" id="dataTableHover">
                 <thead class="thead-light">
