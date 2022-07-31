@@ -6,81 +6,82 @@
 
 @section("content")
 @include('sweetalert::alert')
-<div class="col-sm-12">
+
+@section('subheader')
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Data Pembimbing</h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Data Pembimbing</li>
+    </ol>
 </div>
-<div class="container-fluid pt-4 px-4">
-    <div class="row g-4">
-        <div class="col-12">
-            <div class="bg-light rounded p-3">
-                <center><h5 class="text-center"><b> Data Pembimbing </b></h5>
-                <a href="{{route('mentor.create')}}" button type="submit" class="btn btn-primary btn-sm mb-4">Tambah</a></center>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th style="min-width:20px">
-                                        No
-                                    </th>
-                                    <th style="min-width:120px">
-                                        Nama
-                                    </th>
-                                   
-                                    <th style="min-width:120px">
-                                        Divisi
-                                 
-                                    <th style="min-width:120px">
-                                        No. Telpon
-                                    </th>
-                                    
-                                    <th style="min-width:120px">
-                                        Gedung
-                                    </th>
+@endsection
 
-                                    <th style="min-width:120px">
-                                        Lantai
-                                    </th>
+@section("content")
+<div class="col-lg-12">
+    <div class="card mb-4">
+        <div class="table-responsive p-3">
+            <button class="btn btn-primary mb-3">Tambah Data</button>
+            <table class="table align-items-center table-flush table-hover table-stripped" id="dataTableHover">
+                <thead class="thead-light">
+                    <tr>
+                        <th style="">
+                            No
+                        </th>
+                        <th style="">
+                            Nama
+                        </th>
 
-                                    <th colspan="2">
-                                        Aksi
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($mentors as $mentor)
-                                    <tr>
-                                        <th scope="row">
-                                            {{$loop->iteration}}
-                                        </th>
-                                        <td>
-                                            {{$mentor->name}}
-                                        </td>
-                                    
-                                        <td>
-                                            {{$mentor->getDivision->name}}
-                                        </td>
-                                        <td>
-                                            {{$mentor->no_hp}}
-                                        </td>
-                                        <td>
-                                            {{$mentor->gedung}}
-                                        </td>
-                                        <td>
-                                            {{$mentor->lantai}}
-                                        </td>
-                                        <td>
-                                            <a href="{{route('mentor.edit', $mentor->id)}}" button class="btn btn-warning btn-sm">Edit</a>
-                                            <button id="delete-button" data-id="{{$mentor->id}}" data-bs-toggle="modal" data-bs-target="#delete-modal" button class="btn btn-danger btn-sm">Delete</button>
-                                        </td>
-                                    </tr>
-                                
-                                @endforeach
-                            </tbody>
-                        </table>
+                        <th style="">
+                            Divisi
 
-                    </div>
-                    <div>
-                    </div>
-            </div>
+                        <th style="">
+                            No. Telpon
+                        </th>
+
+                        <th style="">
+                            Gedung
+                        </th>
+
+                        <th style="">
+                            Lantai
+                        </th>
+
+                        <th>
+                            Aksi
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($mentors as $mentor)
+                    <tr>
+                        <th scope="row">
+                            {{$loop->iteration}}
+                        </th>
+                        <td>
+                            {{$mentor->name}}
+                        </td>
+
+                        <td>
+                            {{$mentor->getDivision->name}}
+                        </td>
+                        <td>
+                            {{$mentor->no_hp}}
+                        </td>
+                        <td>
+                            {{$mentor->gedung}}
+                        </td>
+                        <td>
+                            {{$mentor->lantai}}
+                        </td>
+                        <td>
+                            <a href="{{route('mentor.edit', $mentor->id)}}" button class="btn btn-warning btn-sm">Edit</a>
+                            <button id="delete-button" data-id="{{$mentor->id}}" data-bs-toggle="modal" data-bs-target="#delete-modal" button class="btn btn-danger btn-sm">Delete</button>
+                        </td>
+                    </tr>
+
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -93,7 +94,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            Data yang dihapus tidak dapat dikembalikan!!
+                Data yang dihapus tidak dapat dikembalikan!!
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -109,14 +110,37 @@
 </div>
 @endsection
 
+
+@section('css')
+<link href="{{asset('template/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+@endsection
+
 @section('js')
+<!-- Page level plugins -->
+<script src="{{asset('template/vendor/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('template/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
 <script>
-$(document).ready(function () {
-    $(document).on('click', "#delete-button", function() {
-        var data_id = $(this).attr('data-id');
-        var url = '/data-pembimbing/' + data_id;
-        $('#delete-form').attr('action', url);
+
+$(document).ready(function() {
+        $(document).on('click', "#delete-button", function() {
+            var data_id = $(this).attr('data-id');
+            var url = '/data-pembimbing/' + data_id;
+            $('#delete-form').attr('action', url);
+        });
     });
-});
+
+    $(document).ready(function() {
+        $('#dataTableHover').DataTable({
+            "ordering": false,
+        });
+
+        $('#dataTableHover2').DataTable({
+            "ordering": false,
+        }); // I
+
+        $('#dataTableHover3').DataTable({
+            "ordering": false,
+        }); // I// ID From dataTable with Hover
+    });
 </script>
 @endsection

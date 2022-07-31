@@ -25,8 +25,8 @@ class ParticipantSeeder extends Seeder
             'participant_code'=>'123456',
             'name'=>'Peserta',
             'school_type'=>'Universitas',
-            'school_name'=>'LPKIA',
-            'major' => 'RPL',
+            'school_id'=>1,
+            'major_id' => 1,
             'email'=>'participant@gmail.com',
             'file_application_letter'=>'file1.pdf',
             'file_cv'=>'file2.pdf',
@@ -39,15 +39,15 @@ class ParticipantSeeder extends Seeder
             'status'=>1,
         ]);
 
-        Participant::create([
-            'name'=>'Peserta2',
-            'school_type'=>'Universitas',
-            'school_name'=>'LPKIA',
-            'major' => 'RPL',
-            'email'=>'robbygystian11@gmail.com',
-            'file_application_letter'=>'file1.pdf',
-            'file_cv'=>'file2.pdf',
-            'file_transcript'=>'file3.pdf',
-        ]);
+        // Participant::create([
+        //     'name'=>'Peserta2',
+        //     'school_type'=>'Universitas',
+        //     'school_name'=>'LPKIA',
+        //     'major' => 'RPL',
+        //     'email'=>'robbygystian11@gmail.com',
+        //     'file_application_letter'=>'file1.pdf',
+        //     'file_cv'=>'file2.pdf',
+        //     'file_transcript'=>'file3.pdf',
+        // ]);
     }
 }

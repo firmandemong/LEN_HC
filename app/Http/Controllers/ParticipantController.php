@@ -6,6 +6,8 @@ use Exception;
 use App\Models\User;
 use App\Models\Mentor;
 use App\Models\Division;
+use App\Models\Institute;
+use App\Models\Major;
 use App\Models\Participant;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -15,9 +17,18 @@ use GrahamCampbell\ResultType\Success;
 class ParticipantController extends Controller
 {
 
+    public function index(){
+        $submissions = Participant::query()->NotActive()->orderBy('created_at')->get();
+        $acceptedSubmission = Participant::where('status',1)->orderBy('updated_at')->get();
+        $rejectedSubmission = Participant::where('status',2)->orderBy('updated_at')->get();
+        return view('hc.participant.submission-data',compact('submissions','acceptedSubmission','rejectedSubmission'));
+    }
+
     public function formPengajuan()
     {
-        return view('peserta/pengajuan');
+        $majors = Major::all();
+        $schools = Institute::all();
+        return view('peserta/pengajuan',compact('majors','schools'));
     }
 
     public function getParticipant()
@@ -77,10 +88,15 @@ class ParticipantController extends Controller
             'file_application_letter'=>'required|max:10240',
             'file_cv'=>'required|max:10240',
             'file_transcript'=>'required|max:10240',
+            'captcha' => 'required|captcha',
         ]);
         $fileNameApplicationLetter = null;
         $fileNameCV = null;
         $fileNameTranscipt = null;
+
+        $school = Institute::create([
+            'name'=>$request->school_name,
+        ]);
 
         if ($request->hasFile('file_application_letter')) {
             $image = $request->file_application_letter;
@@ -106,8 +122,8 @@ class ParticipantController extends Controller
         Participant::create([
             'name'=>$request->name,
             'school_type'=>$request->school_type,
-            'school_name'=>$request->school_name,
-            'major'=>$request->major,
+            'school_id'=>$school->id,
+            'major_id'=>$request->major,
             'email'=>$request->email,
             'file_application_letter'=>$fileNameApplicationLetter,
             'file_cv'=>$fileNameCV,

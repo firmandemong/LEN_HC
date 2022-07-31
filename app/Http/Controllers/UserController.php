@@ -58,4 +58,9 @@ class UserController extends Controller
     public function masterAkun(){
         return view('hc/masterAkun');
     }
+
+    public function reloadCaptcha()
+    {
+        return response()->json(['captcha'=> captcha_img()]);
+    }
 }

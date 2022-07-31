@@ -18,8 +18,10 @@ class CreateParticipantsTable extends Migration
             $table->string('participant_code')->nullable();
             $table->string('name');
             $table->string('school_type');
-            $table->string('school_name');
-            $table->string('major');
+            $table->foreignId('school_id')->nullable();
+            $table->foreignId('major_id')->nullable();
+            $table->foreign('school_id')->references('id')->on('institutes');
+            $table->foreign('major_id')->references('id')->on('majors');
             $table->string('email');
             $table->string('file_application_letter');
             $table->string('file_cv');

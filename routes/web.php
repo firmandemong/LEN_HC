@@ -3,6 +3,8 @@
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\DataPengajuanController;
 use App\Http\Controllers\DivisionController;
+use App\Http\Controllers\InstituteController;
+use App\Http\Controllers\MajorController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\TaskController;
@@ -24,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect()->intended('/login');
 });
-
+Route::get('/reload-captcha', [UserController::class, 'reloadCaptcha']);
 Route::get('/templates',function(){
     return view('template');
 });
@@ -40,6 +42,8 @@ Route::group(['middleware'=>'auth'],function(){
 });
 
 Route::group(['middleware'=>'isHC'],function(){
+    Route::get('/data-pengajuan',[ParticipantController::class,'index']);
+
     Route::get('/data-peserta', [ParticipantController::class, 'getParticipant']); 
     Route::get('/data-peserta/{id}',[ParticipantController::class,'edit'])->name('participant.edit');
     Route::put('/data-peserta/{id}',[ParticipantController::class,'update'])->name('participant.update');
@@ -67,6 +71,28 @@ Route::group(['middleware'=>'isHC'],function(){
             'destroy' => 'division.destroy'
         ]
     ]);    
+
+    Route::resource('/data-instansi', InstituteController::class, [
+        'names' => [
+            'index' => 'division.index',
+            'create' => 'division.create',
+            'store' => 'division.store',
+            'edit' => 'division.edit',
+            'update' => 'division.update',
+            'destroy' => 'division.destroy'
+        ]
+    ]);  
+
+    Route::resource('/data-jurusan', MajorController::class, [
+        'names' => [
+            'index' => 'division.index',
+            'create' => 'division.create',
+            'store' => 'division.store',
+            'edit' => 'division.edit',
+            'update' => 'division.update',
+            'destroy' => 'division.destroy'
+        ]
+    ]);  
 });
 
 Route::group(['middleware'=>'isMentor'],function(){

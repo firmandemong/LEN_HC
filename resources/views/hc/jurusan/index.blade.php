@@ -1,7 +1,7 @@
 @extends("layout.main")
 
 @section('title')
-Data Peserta
+Data Jurusan
 @endsection
 
 @section('sidebar')
@@ -10,9 +10,9 @@ Data Peserta
 
 @section('subheader')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Data Peserta</h1>
+    <h1 class="h3 mb-0 text-gray-800">Data Jurusan</h1>
     <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Data Peserta</li>
+        <li class="breadcrumb-item active" aria-current="page">Data Jurusan</li>
     </ol>
 </div>
 @endsection
@@ -21,18 +21,17 @@ Data Peserta
 <div class="col-lg-12">
     <div class="card mb-4">
         <div class="table-responsive p-3">
+        <button class="btn btn-primary mb-3">Tambah Data</button>
             <table class="table align-items-center table-flush table-hover table-stripped" id="dataTableHover">
                 <thead class="thead-light">
-                    <th style="min-width:20px">No</th>
-                    <th style="">No Peserta</th>
-                    <th style="">Nama</th>
-                    <th style="">Periode</th>
-                    <th style="">Divisi</th>
-                    <th style="">Action</th>
-
+                    <tr>
+                        <th>Nama Jurusan</th>
+                        <th>Action</th>
+                    </tr>
                 </thead>
                 <tbody>
-
+                    <td>Rekayasa Perangkat Lunak</td>
+                    <td><button class="btn btn-warning btn-sm">Edit</button> <button class="btn btn-danger btn-sm ml-2">Hapus</button></td>
                 </tbody>
             </table>
         </div>

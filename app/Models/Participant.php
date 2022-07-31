@@ -26,6 +26,14 @@ class Participant extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function getInstitute(){
+        return $this->belongsTo(Institute::class,'school_id');
+    }
+
+    public function getMajor(){
+        return $this->belongsTo(Major::class,'major_id');
+    }
+
     public function scopeActive($query){
         return $query->where('status',1);
     }
