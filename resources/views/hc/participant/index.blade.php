@@ -20,16 +20,16 @@ Data Peserta
 @section("content")
 <div class="col-lg-12">
     <div class="card mb-4">
-        
+
         <div class="table-responsive p-3">
             <table class="table align-items-center table-flush table-hover table-stripped" id="dataTableHover">
                 <thead class="thead-light">
                     <th style="min-width:20px">No</th>
-                    <th style="">No Peserta</th>
-                    <th style="">Nama</th>
-                    <th style="">Periode</th>
-                    <th style="">Divisi</th>
-                    <th style="">Action</th>
+                    <th>No Peserta</th>
+                    <th>Nama</th>
+                    <th>Periode</th>
+                    <th>Divisi</th>
+                    <th>Action</th>
 
                 </thead>
                 <tbody>

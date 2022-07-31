@@ -21,8 +21,8 @@
     <div class="col-lg-12">
         <div class="card mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h5>Pengajuan Awal</h5>    
-        </div>
+                <h5>Pengajuan Awal</h5>
+            </div>
             <div class="table-responsive p-3">
                 <table class="table align-items-center table-flush table-hover table-stripped" id="dataTableHover">
                     <thead class="thead-light">
@@ -60,8 +60,8 @@
     <div class="col-lg-12">
         <div class="card mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h5>Pengajuan Lolos Tahap 1</h5>    
-        </div>
+                <h5>Pengajuan Lolos Tahap 1</h5>
+            </div>
             <div class="table-responsive p-3">
                 <table class="table align-items-center table-flush table-hover" id="dataTableHover2">
                     <thead class="thead-light">
@@ -92,12 +92,12 @@
     <div class="col-lg-12">
         <div class="card mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h5>Pengajuan Ditolak</h5>    
-        </div>
+                <h5>Pengajuan Ditolak</h5>
+            </div>
             <div class="table-responsive p-3">
                 <table class="table align-items-center table-flush table-hover" id="dataTableHover3">
                     <thead class="thead-light">
-                    <tr class="text-center">
+                        <tr class="text-center">
                             <th rowspan="2" style="vertical-align: middle">Nama</th>
                             <th rowspan="2" style="vertical-align: middle">Asal Instansi</th>
                             <th rowspan="2" style="vertical-align: middle">Jurusan</th>
@@ -138,15 +138,15 @@
     <script>
         $(document).ready(function() {
             $('#dataTableHover').DataTable({
-                "ordering" : false,
+                "ordering": false,
             });
-            
+
             $('#dataTableHover2').DataTable({
-                "ordering" : false,
+                "ordering": false,
             }); // I
-            
+
             $('#dataTableHover3').DataTable({
-                "ordering" : false,
+                "ordering": false,
             }); // I// ID From dataTable with Hover
         });
     </script>

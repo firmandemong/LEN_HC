@@ -31,8 +31,8 @@
                             <input type="text" class="form-control" name="email" value="{{$participant->email}}">
                         </div>
                     </div>
-                    
-                    
+
+
                     <div class="row mt-3">
                         <div class="col">
                             <label class="form-label">Jenis Sekolah</label>
@@ -47,21 +47,21 @@
                             <input type="text" class="form-control" name="major" value="{{$participant->major}}">
                         </div>
                     </div>
-                    
+
                     <div class="row mt-3">
                         <div class="col">
                             <label class="form-label">Divisi</label>
-                            <select class="form-select" name="division" >
+                            <select class="form-select" name="division">
                                 @foreach ($divisions as $division)
-                                    <option {{($division->id == $participant->division_id)? 'selected' : ''}} value="{{$division->id}}">{{$division->name}}</option>
+                                <option {{($division->id == $participant->division_id)? 'selected' : ''}} value="{{$division->id}}">{{$division->name}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col">
                             <label class="form-label">Pembimbing</label>
-                            <select class="form-select" name="mentor" >
+                            <select class="form-select" name="mentor">
                                 @foreach ($mentors as $mentor)
-                                    <option {{($mentor->id == $participant->mentor_id)? 'selected' : ''}} value="{{$mentor->id}}">{{$mentor->name}}</option>
+                                <option {{($mentor->id == $participant->mentor_id)? 'selected' : ''}} value="{{$mentor->id}}">{{$mentor->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -70,7 +70,7 @@
                             <input type="text" class="form-control" name="status" value="{{$participant->status}}">
                         </div>
                     </div>
-                        
+
                     <button type="submit" class="btn btn-primary mt-3">Ubah</button>
                 </form>
             </div>

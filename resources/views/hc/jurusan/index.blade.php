@@ -21,7 +21,7 @@ Data Jurusan
 <div class="col-lg-12">
     <div class="card mb-4">
         <div class="table-responsive p-3">
-        <button class="btn btn-primary mb-3">Tambah Data</button>
+            <button class="btn btn-primary mb-3">Tambah Data</button>
             <table class="table align-items-center table-flush table-hover table-stripped" id="dataTableHover">
                 <thead class="thead-light">
                     <tr>

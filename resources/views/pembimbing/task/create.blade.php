@@ -17,14 +17,14 @@
                         <label for="task_name" class="form-label">Nama Tugas</label>
                         <input type="text" class="form-control @error('task_name') is-invalid @enderror" id="task_name" name="task_name" placeholder="Nama Tugas" required>
                         @error('task_name') <div class="invalid-feedback">{{$message}}</div> @enderror
-                   
+
                     </div>
 
                     <div class="mb-3">
                         <label for="task_description" class="form-label">Deskripsi Tugas</label>
                         <textarea class="form-control @error('task_description') is-invalid @enderror" id="task_description" name="task_description" placeholder="Deskripsi Tugas" required></textarea>
                         @error('task_description') <div class="invalid-feedback">{{$message}}</div> @enderror
-                    
+
                     </div>
                     <div class="row">
                         <div class="col">

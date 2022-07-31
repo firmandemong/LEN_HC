@@ -24,25 +24,25 @@
             <table class="table align-items-center table-flush table-hover table-stripped" id="dataTableHover">
                 <thead class="thead-light">
                     <tr>
-                        <th style="">
+                        <th>
                             No
                         </th>
-                        <th style="">
+                        <th>
                             Nama
                         </th>
 
-                        <th style="">
+                        <th>
                             Divisi
 
-                        <th style="">
+                        <th>
                             No. Telpon
                         </th>
 
-                        <th style="">
+                        <th>
                             Gedung
                         </th>
 
-                        <th style="">
+                        <th>
                             Lantai
                         </th>
 
@@ -120,8 +120,7 @@
 <script src="{{asset('template/vendor/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('template/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
 <script>
-
-$(document).ready(function() {
+    $(document).ready(function() {
         $(document).on('click', "#delete-button", function() {
             var data_id = $(this).attr('data-id');
             var url = '/data-pembimbing/' + data_id;
