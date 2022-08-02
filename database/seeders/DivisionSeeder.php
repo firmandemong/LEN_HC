@@ -15,15 +15,18 @@ class DivisionSeeder extends Seeder
     public function run()
     {
         Division::create([
-            'name'=>'HC'
+            'name'=>'HC',
+            'quota'=> 100,
         ]);
 
         Division::create([
-            'name'=>'Sisfo'
+            'name'=>'Sisfo',
+            'quota'=> 100,
         ]);
 
         Division::create([
-            'name'=>'Akuntansi'
+            'name'=>'Akuntansi',
+            'quota'=> 100,
         ]);
     }
 }

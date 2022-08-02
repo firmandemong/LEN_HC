@@ -23,6 +23,7 @@ class DivisionController extends Controller
     {
         $new_division = Division::create([
             'name'=>$request->division_name,
+            'quota'=>$request->quota,
         ]);
         toast("Divisi ". $new_division->name ." ditambahkan", 'success');
         return redirect()->route('division.index');
@@ -35,11 +36,7 @@ class DivisionController extends Controller
 
     public function edit($id)
     {
-        $division = Division::where('id', $id)->first();
-        // dd($division);
-        return view('hc.division.edit', [
-            'division' => $division,
-        ]);
+        return redirect()->route("division.index");
     }
 
     public function update(Request $request, $id)
@@ -48,8 +45,9 @@ class DivisionController extends Controller
         $division = Division::where('id', $id)->first();
         $division->update([
             'name' => $request->division_name,
+            'quota' => $request->quota,
         ]);
-        toast('Data divisi diubah', 'success');
+        toast('Divisi diubah', 'success');
         return redirect()->route('division.index');
     }
 
