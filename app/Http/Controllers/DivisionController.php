@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Division;
+use App\Models\Mentor;
 
 class DivisionController extends Controller
 {
@@ -56,6 +57,12 @@ class DivisionController extends Controller
         # code...
         $division = Division::where('id', $id)->first();
         $name = $division->name;
+        $mentor = Mentor::where('division_id', $id)->first();
+        if ($mentor) {
+            toast('Divisi '. $name.' digunakan oleh pembimbing "'.$mentor->name.'" !', 'error');
+            return redirect()->route('division.index');
+        }
+
         $division->delete();
         toast('Divisi '. $name.' dihapus', 'success');
         return redirect()->route('division.index');
