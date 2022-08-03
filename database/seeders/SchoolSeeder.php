@@ -17,5 +17,9 @@ class SchoolSeeder extends Seeder
         Institute::create([
             'name'=>'Institute Digital Ekonomi LPKIA'
         ]);
+
+        Institute::create([
+            'name'=>'Institute Teknologi Bandung'
+        ]);
     }
 }

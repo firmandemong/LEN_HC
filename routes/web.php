@@ -44,8 +44,8 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'isHC'], function () {
+    Route::get('/submission/{id}/recomendation',[ParticipantController::class,'recomendation']);
     Route::get('/data-pengajuan', [ParticipantController::class, 'index']);
-
     Route::get('/data-peserta', [ParticipantController::class, 'getParticipant']);
     Route::get('/data-peserta/{id}', [ParticipantController::class, 'edit'])->name('participant.edit');
     Route::put('/data-peserta/{id}', [ParticipantController::class, 'update'])->name('participant.update');
@@ -98,12 +98,14 @@ Route::group(['middleware' => 'isHC'], function () {
 });
 
 Route::group(['middleware' => 'isMentor'], function () {
+    Route::get('/my-peserta',[ParticipantController::class,'showQuota']);
+    Route::get('/divisi/kuota',[DivisionController::class,'showQuota']);
     Route::get('/list-peserta', [ParticipantController::class, 'getParticipantByMentor']);
     Route::get('/list-tugas/create', [TaskController::class, 'create']);
     Route::post('/list-tugas/store', [TaskController::class, 'store']);
     Route::get('/list-tugas', [TaskController::class, 'getTaskByMentor']);
+    Route::put('/divisi/{id}/update-kuota',[DivisionController::class,'updateQuota']);
     // Route::get('/list-presensi', [AttendanceController::class, 'getAttendanceByMentor']);
-    // Route::get('/divisi/kuota',[DivisionController::class,'showQuota']);
 });
 
 Route::group(['middleware' => 'isParticipant'], function () {

@@ -34,10 +34,10 @@
                         $kuota = \App\Models\DetailDivisionQuota::where(['major_id'=>$major->id,'division_id'=>$division])->first();
                     @endphp
                     <tr>
-                        <th>{{$loop->iteration}}</th>
-                        <th>{{$major->name}}</th>
-                        <th>{{empty($kuota) ? 0 : $kuota->quota}}</th>
-                        <th><button class="btn btn-primary btn-sm btn-update" data-major-name="{{$major->name}}" data-division="{{$division}}" data-major="{{$major->id}}">Update</button></th>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$major->name}}</td>
+                        <td>{{empty($kuota) ? 0 : $kuota->quota}}</td>
+                        <td><button class="btn btn-primary btn-sm btn-update" data-major-name="{{$major->name}}" data-division="{{$division}}" data-major="{{$major->id}}">Update</button></td>
                     </tr>
                  @endforeach
                 </tbody>
@@ -45,7 +45,7 @@
         </div>
     </div>
 </div>
-{{-- modal add --}}
+
 <div class="modal fade" id="modalUpdateKuota" tabindex="-1" aria-labelledby="update-modal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -56,22 +56,25 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="add-division-form" action="{{route('division.store')}}" method="post">
+                <form id="update-quota-form" method="post">
                     @csrf
+                    @method('PUT')
                     <div class="mb-3">
                         <label for="division_name" class="form-label">Nama Jurusan</label>
-                        <input type="text" class="form-control" id="major_name" name="division_name" readonly>
+                        <input type="text" class="form-control" id="major_name" name="major_name" readonly>
+                        <input type="hidden" name="major_id" id="major_id">
                     </div>
                     <div class="mb-3">
                         <label for="division_name" class="form-label">Kuota</label>
-                        <input type="text" class="form-control" id="quota" name="quota">
+                        <input type="number" min=0 class="form-control" id="quota" name="quota">
                     </div>
-                </form>
+            
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="add-division-form-button">Update</button>
+                <button type="submit" class="btn btn-primary"  >Update</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
@@ -87,32 +90,6 @@
 <script>
     
     $(document).ready(function() {
-        let edit_id;
-        $(document).on('click', '#add-division-form-button', function(){
-            $('#add-division-form').submit();
-        });
-
-        $(document).on('click', '#edit-button', function(){
-            $('#edit_division_name').val($(this).attr('data-name'));
-            $('#edit_quota').val($(this).attr('data-quota'));
-            edit_id = $(this).attr('data-id');
-        });
-
-        $(document).on('click', '#edit-division-form-button', function(){
-            var data_id = edit_id;
-            var url = '/data-divisi/' + data_id;
-            $('#edit-division-form').attr('action', url);
-            $('#edit-division-form').submit();
-        });
-
-        $(document).on('click', "#delete-button", function() {
-            var data_id = $(this).attr('data-id');
-            var url = '/data-divisi/' + data_id;
-            $('#delete-form').attr('action', url);
-        });
-    });
-
-    $(document).ready(function() {
         $('#dataTableHover').DataTable({
             "ordering": false,
         });
@@ -120,6 +97,8 @@
 
     $(document).on('click','.btn-update',function(){
         $('#major_name').val($(this).attr('data-major-name'));
+        $('#update-quota-form').prop('action',`/divisi/${$(this).attr('data-division')}/update-kuota`);
+        $('#major_id').val($(this).attr('data-major'));
         $('#modalUpdateKuota').modal('show');
     })
 </script>

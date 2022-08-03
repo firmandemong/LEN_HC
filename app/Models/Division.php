@@ -15,4 +15,8 @@ class Division extends Model
         $name = empty($division->id) ? '-' : $division->name;
         return $name;
     }
+
+    public function getDetailQuota(){
+        return $this->hasMany(DetailDivisionQuota::class,'division_id');
+    }
 }

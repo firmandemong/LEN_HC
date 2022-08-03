@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\User;
+use App\Models\Major;
 use App\Models\Mentor;
 use App\Models\Division;
 use App\Models\Institute;
-use App\Models\Major;
 use App\Models\Participant;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\DetailDivisionQuota;
 use Illuminate\Support\Facades\Mail;
 use GrahamCampbell\ResultType\Success;
 
@@ -18,10 +20,11 @@ class ParticipantController extends Controller
 {
 
     public function index(){
+        $divisions = Division::orderBy('name')->get();
         $submissions = Participant::query()->NotActive()->orderBy('created_at')->get();
         $acceptedSubmission = Participant::where('status',1)->orderBy('updated_at')->get();
-        $rejectedSubmission = Participant::where('status',2)->orderBy('updated_at')->get();
-        return view('hc.participant.submission-data',compact('submissions','acceptedSubmission','rejectedSubmission'));
+        $rejectedSubmission = Participant::where('status',3)->orderBy('updated_at')->get();
+        return view('hc.participant.submission-data',compact('divisions','submissions','acceptedSubmission','rejectedSubmission'));
     }
 
     public function formPengajuan()
@@ -198,6 +201,48 @@ class ParticipantController extends Controller
 
     public function getParticipantByMentor(){
         return view('pembimbing.participant-attendance.index');
+    }
+
+    public function recomendation(Participant $id){
+        $recomendationByMajor = '-';
+        $recomendationByInstance = '-';
+        $recomendationByNeed = '-';
+
+        //by major
+        $getParticipant = Participant::select('division_id',DB::raw("count(division_id) as jumlah"))->where('id','!=',$id->id)->where('major_id',$id->major_id)->where('status',2)->groupBy('division_id')->get();
+        $participantByMajor = null;
+        $maxMajor = 0;
+        foreach($getParticipant as $participant){
+            if($participant->jumlah > $maxMajor){
+                $maxMajor = $participant->jumlah;
+                $participantByMajor = $participant->division_id;
+            }
+        }
+        if(!empty($participantByMajor)){
+            $recomendationByMajor = Division::where('id',$participantByMajor)->first()->name;
+        }
+
+        //by need
+        $getNeed = DetailDivisionQuota::with('Division')->where('quota','>',0)->where('major_id',$id->major_id)->orderBy('quota','desc')->orderBy('updated_at','asc')->first();
+        if(!empty($getNeed)){
+            $recomendationByNeed = $getNeed->Division->name;
+        }
+
+        //by instance
+        $getInstance = Participant::select('division_id',DB::raw("count(division_id) as jumlah"))->where('id','!=',$id->id)->where('school_id',$id->school_id)->where('status',2)->groupBy('division_id')->get();
+        $participantByInstance = null;
+        $maxInstance = 0;
+        foreach($getInstance as $participant){
+            if($participant->jumlah > $maxInstance){
+                $maxInstance = $participant->jumlah;
+                $participantByInstance = $participant->division_id;
+            }
+        }
+        if(!empty($participantByInstance)){
+            $recomendationByInstance = Division::where('id',$participantByInstance)->first()->name;
+        }
+
+        return response()->json(['recomendationByMajor'=>$recomendationByMajor,'recomendationByInstance'=>$recomendationByInstance,'recomendationByNeed'=>$recomendationByNeed]);
     }
 }
 

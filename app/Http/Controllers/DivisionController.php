@@ -78,4 +78,27 @@ class DivisionController extends Controller
         $quotas = DetailDivisionQuota::where('division_id');
         return view('pembimbing.division.kuota',compact('majors','division'));
     }
+
+    public function updateQuota(Request $request, Division $id){
+        $request->validate([
+            'major_id'=>'required',
+            'quota'=>'required'
+        ]);
+        $id->load('getDetailQuota');
+        $checkDivisi = $id->getDetailQuota->where('major_id',$request->major_id)->first();
+        if(empty($checkDivisi)){
+            $id->getDetailQuota()->create([
+                'major_id'=>$request->major_id,
+                'quota'=>$request->quota
+            ]);
+        }else{
+            $checkDivisi->update([
+                'quota'=>$request->quota
+            ]);
+        }
+
+        toast('Kuota Berhasil di update','success'); 
+        return back();
+
+    }
 }

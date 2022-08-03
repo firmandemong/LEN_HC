@@ -12,11 +12,6 @@
         <i class="fas fa-fw fa-chalkboard-teacher"></i>
         <span>Data Peserta</span></a>
 </li>
-<li class="nav-item {{Request::is('dashboard') ? 'active' : ''}}">
-    <a class="nav-link" href="index.html">
-        <i class="fas fa-fw fa-list-alt"></i>
-        <span>Report Peserta</span></a>
-</li>
 
 <hr class="sidebar-divider">
 <div class="sidebar-heading">

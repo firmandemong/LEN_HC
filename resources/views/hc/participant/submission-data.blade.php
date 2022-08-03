@@ -43,12 +43,12 @@
                         @foreach($submissions as $submission)
                         <tr>
                             <td>{{$submission->name}}</td>
-                            <td>{{@$submission->getInstitute->name}}<br><a href="">Lihat Histori</a></td>
+                            <td>{{@$submission->getInstitute->name}}<br><a href="javascript:void(0)" class="btnHistori" data-instansi="{{$submission->school_id}}">Lihat Histori</a></td>
                             <td>{{@$submission->getMajor->name}}</td>
-                            <td><a href="">Lihat File</a></td>
-                            <td><a href="">Lihat File</a></td>
-                            <td><a href="">Lihat File</a></td>
-                            <td><button class="btn btn-success btn-sm">Lanjut</button><br><button class="btn btn-danger btn-sm mt-1">Tolak</button></td>
+                            <td><a href="{{asset('/file_submission/'.$submission->file_application_letter)}}">Lihat File</a></td>
+                            <td><a href="{{asset('/file_submission/'.$submission->file_cv)}}">Lihat File</a></td>
+                            <td><a href="{{asset('/file_submission/'.$submission->file_transcript)}}">Lihat File</a></td>
+                            <td><button class="btn btn-success btn-sm btnLanjut" data-id="{{$submission->id}}">Lanjut</button><br><button class="btn btn-danger btn-sm mt-1">Tolak</button></td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -115,13 +115,127 @@
                             <td>{{$submission->name}}</td>
                             <td>{{@$submission->getInstitute->name}}</td>
                             <td>{{@$submission->getMajor->name}}</td>
-                            <td><a href="">Lihat File</a></td>
+                            <td><a href="{{asset('/file_submission/'.$submission->file_application_letter)}}">Lihat File</a></td>
                             <td><a href="">Lihat File</a></td>
                             <td><a href="">Lihat File</a></td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalHistori" tabindex="-1" aria-labelledby="update-modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-label">History Instansi</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-flush table-bordered">
+                            <tr>
+                                <th>Nama Instansi</th>
+                                <td>LPKIA</td>
+                            </tr>
+                            <tr>
+                                <th>Histori Jumlah Peserta</th>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <th>Histori Divisi terbanyak</th>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <th>Histori Rata-rata Nilai</th>
+                                <td>0</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalLanjut" tabindex="-1" aria-labelledby="update-modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-label">Lanjutkan Pengajuan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="update-quota-form" method="post">
+                        @csrf
+                        @method('PUT')
+                <div class="modal-body">
+                        <div class="table-responsive">
+                            <div class="form-group">
+                                <label for="">Rekomendasi Divisi</label>
+                                <table class="table table-flush table-bordered">
+                                    <tr>
+                                        <th>Berdasarkan Jurusan</th>
+                                        <td><span id="recomendByMajor"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Berdasarkan Instansi</th>
+                                        <td><span id="recomendByInstance"></span></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Berdasarkan Kebutuhan</th>
+                                        <td><span id="recomendByNeed"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Pilih Divisi</label>
+                            <select name="" id="" class="form-control">
+                                <option selected disabled>Pilih Divisi</option>
+                                @foreach($divisions as $division)
+                                <option value="{{$division->id}}">{{$division->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Pilih Mentor</label>
+                            <select name="" id="" class="form-control" readonly>
+                                <option value=""></option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Tanggal Wawancara</label>
+                            <input type="date" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Jam Wawancara</label>
+                            <input type="time" class="form-control">
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Link/Tempat Wawancara</label>
+                            <input type="text" class="form-control">
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" >Submit</button>
+                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -149,5 +263,20 @@
                 "ordering": false,
             }); // I// ID From dataTable with Hover
         });
+
+        $(document).on('click', '.btnHistori', function() {
+            $('#modalHistori').modal('show');
+        })
+
+        $(document).on('click', '.btnLanjut', function() {
+            $.get(`/submission/${$(this).attr('data-id')}/recomendation`,function(data){
+                console.log(data);
+                $('#recomendByMajor').text(data.recomendationByMajor);
+                $('#recomendByNeed').text(data.recomendationByNeed);
+                $('#recomendByInstance').text(data.recomendationByInstance);
+                
+            })
+            $('#modalLanjut').modal('show');
+        })
     </script>
     @endsection

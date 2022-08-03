@@ -17,6 +17,9 @@ class MajorSeeder extends Seeder
         Major::create([
             'name'=>'Informatika'
         ]);
+        Major::create([
+            'name'=>'Sistem Informasi'
+        ]);
 
         Major::create([
             'name'=>'Administrasi'
