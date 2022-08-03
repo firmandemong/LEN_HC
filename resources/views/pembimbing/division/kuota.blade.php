@@ -18,7 +18,7 @@
 <div class="col-lg-12">
     <div class="card mb-4">
         <div class="table-responsive p-3">
-            <button class="btn btn-primary mb-3" id="add-button" data-toggle="modal" data-target="#add-modal">Tambah Kuota </button>
+            <!-- <button class="btn btn-primary mb-3" id="add-button" data-toggle="modal" data-target="#add-modal">Tambah Kuota </button> -->
             <table class="table align-items-center table-flush table-hover table-stripped" id="dataTableHover">
                 <thead class="thead-light">
                     <tr>
@@ -29,18 +29,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                   
+                    @foreach($majors as $major)
+                    @php
+                        $kuota = \App\Models\DetailDivisionQuota::where(['major_id'=>$major->id,'division_id'=>$division])->first();
+                    @endphp
+                    <tr>
+                        <th>{{$loop->iteration}}</th>
+                        <th>{{$major->name}}</th>
+                        <th>{{empty($kuota) ? 0 : $kuota->quota}}</th>
+                        <th><button class="btn btn-primary btn-sm btn-update" data-major-name="{{$major->name}}" data-division="{{$division}}" data-major="{{$major->id}}">Update</button></th>
+                    </tr>
+                 @endforeach
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 {{-- modal add --}}
-<div class="modal fade" id="add-modal" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
+<div class="modal fade" id="modalUpdateKuota" tabindex="-1" aria-labelledby="update-modal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modal-label">Tambah Divisi</h5>
+                <h5 class="modal-title" id="modal-label">Update Kuota</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -49,8 +59,8 @@
                 <form id="add-division-form" action="{{route('division.store')}}" method="post">
                     @csrf
                     <div class="mb-3">
-                        <label for="division_name" class="form-label">Nama Divisi</label>
-                        <input type="text" class="form-control" id="division_name" name="division_name">
+                        <label for="division_name" class="form-label">Nama Jurusan</label>
+                        <input type="text" class="form-control" id="major_name" name="division_name" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="division_name" class="form-label">Kuota</label>
@@ -60,63 +70,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="add-division-form-button">Tambah</button>
-            </div>
-        </div>
-    </div>
-</div>
-{{-- modal edit --}}
-<div class="modal fade" id="edit-modal" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modal-label">Edit Divisi</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="edit-division-form" method="post">
-                    @csrf
-                    @method('put')
-                    <div class="mb-3">
-                        <label for="division_name" class="form-label">Nama Divisi</label>
-                        <input type="text" class="form-control" id="edit_division_name" name="division_name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="division_name" class="form-label">Kuota</label>
-                        <input type="text" class="form-control" id="edit_quota" name="quota">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="edit-division-form-button">Edit</button>
-            </div>
-        </div>
-    </div>
-</div>
-{{-- <!-- Modal Delete --> --}}
-<div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="delete-modal-label">Apakah anda yakin ?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Data yang dihapus tidak dapat dikembalikan!!
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <form id="delete-form" method="POST">
-                    {{-- <form action="{{route('division.destroy', $division->id)}}" method="POST"> --}}
-                    @method('delete')
-                    @csrf
-                    <button button type="submit" class="btn btn-danger">Hapus</button>
-                </form>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="add-division-form-button">Update</button>
             </div>
         </div>
     </div>
@@ -163,5 +117,10 @@
             "ordering": false,
         });
     });
+
+    $(document).on('click','.btn-update',function(){
+        $('#major_name').val($(this).attr('data-major-name'));
+        $('#modalUpdateKuota').modal('show');
+    })
 </script>
 @endsection

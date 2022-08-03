@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Division;
+use App\Models\Major;
 use App\Models\Mentor;
+use App\Models\Division;
+use Illuminate\Http\Request;
+use App\Models\DetailDivisionQuota;
+use Illuminate\Support\Facades\Auth;
 
 class DivisionController extends Controller
 {
@@ -69,6 +72,10 @@ class DivisionController extends Controller
     }
 
     public function showQuota(){
-        return view('pembimbing.division.kuota');
+        $majors = Major::orderBy('name')->get();
+        $mentor = Mentor::where('user_id',Auth::id())->first();
+        $division = $mentor->getDivision->id;
+        $quotas = DetailDivisionQuota::where('division_id');
+        return view('pembimbing.division.kuota',compact('majors','division'));
     }
 }
