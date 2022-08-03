@@ -12,6 +12,7 @@ Data Instansi
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Data Instansi</h1>
     <ol class="breadcrumb">
+        <li class="breadcrumb-item" aria-current="page"><a href="{{route('dashboard')}}">Dashboard</a></li>
         <li class="breadcrumb-item active" aria-current="page">Data Instansi</li>
     </ol>
 </div>

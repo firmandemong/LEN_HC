@@ -37,7 +37,7 @@ class DivisionController extends Controller
 
     public function edit($id)
     {
-        return redirect()->route("division.index");
+        # code...
     }
 
     public function update(Request $request, $id)
