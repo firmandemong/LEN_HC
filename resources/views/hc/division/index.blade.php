@@ -62,17 +62,17 @@
                     @csrf
                     <div class="mb-3">
                         <label for="division_name" class="form-label">Nama Divisi</label>
-                        <input type="text" class="form-control" id="division_name" name="division_name">
+                        <input type="text" class="form-control" id="division_name" name="division_name" required>
                     </div>
                     <div class="mb-3">
                         <label for="division_name" class="form-label">Kuota</label>
-                        <input type="text" class="form-control" id="quota" name="quota">
+                        <input type="number"  maxlength="3" class="form-control" id="quota" name="quota" required>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="add-division-form-button">Tambah</button>
+                <button type="button" class="btn btn-primary" id="add-division-form-button">Tambah</button>
             </div>
         </div>
     </div>
@@ -88,22 +88,22 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="edit-division-form" method="post">
+                <form id="edit-division-form" onkeydown="return event.key != 'Enter';" method="post">
                     @csrf
                     @method('put')
                     <div class="mb-3">
                         <label for="division_name" class="form-label">Nama Divisi</label>
-                        <input type="text" class="form-control" id="edit_division_name" name="division_name">
+                        <input type="text" class="form-control" id="edit_division_name" name="division_name" required>
                     </div>
                     <div class="mb-3">
                         <label for="division_name" class="form-label">Kuota</label>
-                        <input type="text" class="form-control" id="edit_quota" name="quota">
+                        <input type="number" min="0" maxlength="3" class="form-control" id="edit_quota" name="quota" required>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="edit-division-form-button">Edit</button>
+                <button type="button" class="btn btn-primary" id="edit-division-form-button">Edit</button>
             </div>
         </div>
     </div>

@@ -19,6 +19,7 @@ Data Instansi
 @endsection
 
 @section("content")
+@include('sweetalert::alert')
 <div class="col-lg-12">
     <div class="card mb-4">
         <div class="table-responsive p-3">
