@@ -44,5 +44,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function Mentor(){
+        return $this->hasOne(Mentor::class,'user_id');
+    }
+
+    public function Participant(){
+        return $this->hasOne(Participant::class,'user_id');
+    }
+
     
 }

@@ -67,4 +67,8 @@ class DivisionController extends Controller
         toast('Divisi '. $name.' dihapus', 'success');
         return redirect()->route('division.index');
     }
+
+    public function showQuota(){
+        return view('pembimbing.division.kuota');
+    }
 }

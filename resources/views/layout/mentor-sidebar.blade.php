@@ -17,3 +17,13 @@
         <i class="fas fa-fw fa-list-alt"></i>
         <span>Report Peserta</span></a>
 </li>
+
+<hr class="sidebar-divider">
+<div class="sidebar-heading">
+    Divisi
+</div>
+<li class="nav-item {{Request::is('dashboard') ? 'active' : ''}}">
+    <a class="nav-link" href="/divisi/kuota">
+        <i class="fas fa-fw fa-chalkboard-teacher"></i>
+        <span>Kuota Divisi</span></a>
+</li>

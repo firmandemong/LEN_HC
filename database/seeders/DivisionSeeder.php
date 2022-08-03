@@ -16,17 +16,17 @@ class DivisionSeeder extends Seeder
     {
         Division::create([
             'name'=>'HC',
-            'quota'=> 100,
+            'quota'=> 0,
         ]);
 
         Division::create([
             'name'=>'Sisfo',
-            'quota'=> 100,
+            'quota'=> 0,
         ]);
 
         Division::create([
             'name'=>'Akuntansi',
-            'quota'=> 100,
+            'quota'=> 0,
         ]);
     }
 }

@@ -9,4 +9,10 @@ class Division extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public static function getDivisionById($id){
+        $division = Division::find($id);
+        $name = empty($division->id) ? '-' : $division->name;
+        return $name;
+    }
 }

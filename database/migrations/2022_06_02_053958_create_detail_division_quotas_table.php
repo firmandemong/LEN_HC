@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAttendancesTable extends Migration
+class CreateDetailDivisionQuotasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateAttendancesTable extends Migration
      */
     public function up()
     {
-        Schema::create('attendances', function (Blueprint $table) {
+        Schema::create('detail_division_quotas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('participant_id');
-            $table->date('date');
-            $table->time('clockIn');
-            $table->time('clockOut')->nullable();
-            $table->text('description')->nullable();
+            $table->foreignId('division_id')->references('id')->on('divisions')->cascadeOnDelete();
+            $table->foreignId('major_id')->references('id')->on('majors')->cascadeOnDelete();
+            $table->tinyInteger('quota');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateAttendancesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attendances');
+        Schema::dropIfExists('detail_division_quotas');
     }
 }
