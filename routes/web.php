@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AttendanceController;
+// use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\DataPengajuanController;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\InstituteController;
@@ -39,7 +39,7 @@ Route::group(['middleware' => 'guest'], function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/dashboard', [UserController::class, 'dashboard']);
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
     Route::get('/logout', [UserController::class, 'logout']);
 });
 
@@ -76,23 +76,23 @@ Route::group(['middleware' => 'isHC'], function () {
 
     Route::resource('/data-instansi', InstituteController::class, [
         'names' => [
-            'index' => 'division.index',
-            'create' => 'division.create',
-            'store' => 'division.store',
-            'edit' => 'division.edit',
-            'update' => 'division.update',
-            'destroy' => 'division.destroy'
+            'index' => 'institute.index',
+            'create' => 'institute.create',
+            'store' => 'institute.store',
+            'edit' => 'institute.edit',
+            'update' => 'institute.update',
+            'destroy' => 'institute.destroy'
         ]
     ]);
 
     Route::resource('/data-jurusan', MajorController::class, [
         'names' => [
-            'index' => 'division.index',
-            'create' => 'division.create',
-            'store' => 'division.store',
-            'edit' => 'division.edit',
-            'update' => 'division.update',
-            'destroy' => 'division.destroy'
+            'index' => 'major.index',
+            'create' => 'major.create',
+            'store' => 'major.store',
+            'edit' => 'major.edit',
+            'update' => 'major.update',
+            'destroy' => 'major.destroy'
         ]
     ]);
 });
@@ -102,13 +102,13 @@ Route::group(['middleware' => 'isMentor'], function () {
     Route::get('/list-tugas/create', [TaskController::class, 'create']);
     Route::post('/list-tugas/store', [TaskController::class, 'store']);
     Route::get('/list-tugas', [TaskController::class, 'getTaskByMentor']);
-    Route::get('/list-presensi', [AttendanceController::class, 'getAttendanceByMentor']);
-    Route::get('/divisi/kuota',[DivisionController::class,'showQuota']);
+    // Route::get('/list-presensi', [AttendanceController::class, 'getAttendanceByMentor']);
+    // Route::get('/divisi/kuota',[DivisionController::class,'showQuota']);
 });
 
 Route::group(['middleware' => 'isParticipant'], function () {
-    Route::post('/clock-in', [AttendanceController::class, 'clockIn']);
-    Route::put('/clock-out', [AttendanceController::class, 'clockOut']);
+    // Route::post('/clock-in', [AttendanceController::class, 'clockIn']);
+    // Route::put('/clock-out', [AttendanceController::class, 'clockOut']);
 });
 
 Route::get('/presensi', function () {

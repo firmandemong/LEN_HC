@@ -72,7 +72,7 @@ class MentorController extends Controller
             'lantai' => $request->lantai,
             'division_id' => $request->divisi,
         ]);
-        toast('Data pembimbing diubah', 'success');
+        toast('Pembimbing diubah', 'success');
         return redirect()->route('mentor.index');
     }
 

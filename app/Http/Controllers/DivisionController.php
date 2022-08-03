@@ -40,7 +40,7 @@ class DivisionController extends Controller
 
     public function edit($id)
     {
-        return redirect()->route("division.index");
+        # code...
     }
 
     public function update(Request $request, $id)
@@ -62,7 +62,7 @@ class DivisionController extends Controller
         $name = $division->name;
         $mentor = Mentor::where('division_id', $id)->first();
         if ($mentor) {
-            toast('Divisi '. $name.' digunakan oleh pembimbing "'.$mentor->name.'" !', 'error');
+            toast('Divisi '. $name.' tidak dapat dihapus, digunakan oleh pembimbing "'.$mentor->name.'" !', 'error');
             return redirect()->route('division.index');
         }
 

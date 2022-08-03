@@ -11,12 +11,14 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Data Pembimbing</h1>
     <ol class="breadcrumb">
+        <li class="breadcrumb-item" aria-current="page"><a href="{{route('dashboard')}}">Dashboard</a></li>
         <li class="breadcrumb-item active" aria-current="page">Data Pembimbing</li>
     </ol>
 </div>
 @endsection
 
 @section("content")
+@include('sweetalert::alert')
 <div class="col-lg-12">
     <div class="card mb-4">
         <div class="table-responsive p-3">
@@ -75,7 +77,7 @@
                         </td>
                         <td>
                             <a href="{{route('mentor.edit', $mentor->id)}}" button class="btn btn-warning btn-sm">Edit</a>
-                            <button id="delete-button" data-id="{{$mentor->id}}" data-bs-toggle="modal" data-bs-target="#delete-modal" button class="btn btn-danger btn-sm">Delete</button>
+                            <button id="delete-button" data-id="{{$mentor->id}}" data-toggle="modal" data-target="#delete-modal" button class="btn btn-danger btn-sm">Delete</button>
                         </td>
                     </tr>
 
@@ -85,19 +87,21 @@
         </div>
     </div>
 </div>
-<!-- Modal Delete -->
+{{-- <!-- Modal Delete --> --}}
 <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="delete-modal-label">Apakah anda yakin ?</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 Data yang dihapus tidak dapat dikembalikan!!
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <form id="delete-form" method="POST">
                     {{-- <form action="{{route('division.destroy', $division->id)}}" method="POST"> --}}
                     @method('delete')
