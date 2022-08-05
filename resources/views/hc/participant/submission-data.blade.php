@@ -117,8 +117,8 @@
                             <td>{{@$submission->getInstitute->name}}</td>
                             <td>{{@$submission->getMajor->name}}</td>
                             <td><a href="{{asset('/file_submission/'.$submission->file_application_letter)}}">Lihat File</a></td>
-                            <td><a href="">Lihat File</a></td>
-                            <td><a href="">Lihat File</a></td>
+                            <td><a href="{{asset('/file_submission/'.$submission->file_cv)}}">Lihat File</a></td>
+                            <td><a href="{{asset('/file_submission/'.$submission->file_transcript)}}">Lihat File</a></td>
                         </tr>
                         @endforeach
                     </tbody>
