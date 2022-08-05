@@ -18,6 +18,7 @@
     @endsection
 
     @section("content")
+    @include('layout.notif')
     <div class="col-lg-12">
         <div class="card mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -173,7 +174,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="update-quota-form" method="post">
+                <form id="accept-submission-form" method="post">
                         @csrf
                         @method('PUT')
                 <div class="modal-body">
@@ -182,11 +183,11 @@
                                 <label for="">Rekomendasi Divisi</label>
                                 <table class="table table-flush table-bordered">
                                     <tr>
-                                        <th>Berdasarkan Jurusan</th>
+                                        <th>Berdasarkan Histori Jurusan</th>
                                         <td><span id="recomendByMajor"></span></td>
                                     </tr>
                                     <tr>
-                                        <th>Berdasarkan Instansi</th>
+                                        <th>Berdasarkan Histori Instansi</th>
                                         <td><span id="recomendByInstance"></span></span></td>
                                     </tr>
                                     <tr>
@@ -199,7 +200,7 @@
 
                         <div class="form-group">
                             <label for="">Pilih Divisi</label>
-                            <select name="" id="" class="form-control">
+                            <select name="division"  class="form-control" id="division" required>
                                 <option selected disabled>Pilih Divisi</option>
                                 @foreach($divisions as $division)
                                 <option value="{{$division->id}}">{{$division->name}}</option>
@@ -209,25 +210,33 @@
 
                         <div class="form-group">
                             <label for="">Pilih Mentor</label>
-                            <select name="" id="" class="form-control" readonly>
-                                <option value=""></option>
+                            <select name="mentor" class="form-control" id="mentor" readonly required>
+                                <option selected disabled></option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="">Tanggal Wawancara</label>
-                            <input type="date" class="form-control">
+                            <input type="date" name="interviewDate" class="form-control" required>
                         </div>
 
                         <div class="form-group">
                             <label for="">Jam Wawancara</label>
-                            <input type="time" class="form-control">
+                            <input type="time" name="interviewTime" class="form-control" required>
 
                         </div>
 
                         <div class="form-group">
+                            <label for="">Jenis Wawancara</label>
+                           <select name="interviewType" id="" class="form-control" required>
+                                <option value="Online">Online</option>
+                                <option value="Offline">Offline</option>
+                           </select>
+                        </div>
+
+                        <div class="form-group">
                             <label for="">Link/Tempat Wawancara</label>
-                            <input type="text" class="form-control">
+                            <input type="text" name="interviewPlace" class="form-control" required>
                         </div>
 
                 </div>
@@ -276,7 +285,20 @@
                 $('#recomendByInstance').text(data.recomendationByInstance);
                 
             })
+            $('#accept-submission-form').prop('action',`/submission/${$(this).attr('data-id')}/acceptStepOne`)
             $('#modalLanjut').modal('show');
         })
+
+        $(document).on('change','#division',function(){
+            $("#mentor").empty();
+            $("division").prop('readonly')
+            $.get(`/division/${$(this).val()}/getMentor`,function(data){
+                $.each(data.mentors,function(index){
+                    $("#mentor").append(new Option(data.mentors[index].name, data.mentors[index].id));
+                })
+            });
+           
+            $('#mentor').removeAttr('readonly')
+        });
     </script>
     @endsection

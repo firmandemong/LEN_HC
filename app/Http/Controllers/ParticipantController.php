@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Major;
 use App\Models\Mentor;
 use App\Models\Division;
+use App\Models\Schedule;
 use App\Models\Institute;
 use App\Models\Participant;
 use Illuminate\Support\Str;
@@ -105,7 +106,7 @@ class ParticipantController extends Controller
 
         $checkSchool = Institute::where('name',$request->school_name)->first();
         if(!empty($checkSchool)){
-            $school = $checkSchool->id;
+            $school = $checkSchool;
         }else{
             $school = Institute::create([
                 'name'=>$request->school_name,
@@ -243,6 +244,40 @@ class ParticipantController extends Controller
         }
 
         return response()->json(['recomendationByMajor'=>$recomendationByMajor,'recomendationByInstance'=>$recomendationByInstance,'recomendationByNeed'=>$recomendationByNeed]);
+    }
+
+    public function acceptStepOne( Participant $id, Request $request){
+        $request->validate([
+            'mentor'=>'required',
+            'division'=>'required',
+            'interviewType'=>'required',
+            'interviewDate'=>'required',
+            'interviewTime'=>'required',
+            'interviewPlace'=>'required'
+        ]);
+
+        $id->update([
+            'mentor_id'=>$request->mentor,
+            'division_id'=>$request->division,
+            'status'=>1,
+        ]);
+
+        Schedule::create([
+            'participant_id'=>$id->id,
+            'interviewDate'=>$request->interviewDate,
+            'interviewTime'=>$request->interviewTime,
+            'interviewType'=>$request->interviewType,
+            'interviewPlace'=>$request->interviewPlace,
+        ]);
+
+        $divisi = Division::find($request->division);
+        $mentor = Mentor::with('getUser')->where('id',$request->mentor)->first();
+
+        Mail::to($id->email)->send(new \App\Mail\sendInterviewSchedule($request->interviewDate, $request->interviewTime, $request->interviewType, $request->interviewPlace, 'peserta', $id->name, $divisi->name));
+        Mail::to($mentor->getUser->email)->send(new \App\Mail\sendInterviewSchedule($request->interviewDate, $request->interviewTime, $request->interviewType, $request->interviewPlace, 'mentor', $mentor->name, $divisi->name));
+    
+        toast('Pengajuan berhasil diupdate','success');
+        return back();
     }
 }
 

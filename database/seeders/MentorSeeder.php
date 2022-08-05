@@ -30,12 +30,12 @@ class MentorSeeder extends Seeder
         ]);
 
         $user3 = User::create([
-            'email'=>'mentor@gmail.com',
+            'email'=>'190613011.1mi2.robbygustian@gmail.com',
             'password'=>bcrypt('password'),
             'role'=>'Mentor',
         ]);
         Mentor::create([
-            'name'=>'HC',
+            'name'=>'Bob Mentor',
             'no_hp'=>'089626317662',
             'gedung'=>'gedung A',
             'lantai' => '4',

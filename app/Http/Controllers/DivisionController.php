@@ -99,6 +99,10 @@ class DivisionController extends Controller
 
         toast('Kuota Berhasil di update','success'); 
         return back();
+    }
 
+    public function getMentor($id){
+        $mentors = Mentor::where('division_id',$id)->get();
+        return response()->json(['mentors'=>$mentors]);
     }
 }
