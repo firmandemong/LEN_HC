@@ -18,6 +18,7 @@
     @endsection
 
     @section("content")
+    @include('sweetalert::alert')
     @include('layout.notif')
     <div class="col-lg-12">
         <div class="card mb-4">
@@ -81,7 +82,7 @@
                             <td>{{@$submission->getInstitute->name}}</td>
                             <td>{{@$submission->getMajor->name}}</td>
                             <td><a href="">Lihat Jadwal</a></td>
-                            <td><button class="btn btn-success btn-sm">Lanjut</button><br><button class="btn btn-danger btn-sm mt-1">Tolak</button></td>
+                            <td><button class="btn btn-success btn-sm btnLanjut2" data-id="{{$submission->id}}">Lanjut</button><br><button class="btn btn-danger btn-sm mt-1">Tolak</button></td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -175,9 +176,9 @@
                     </button>
                 </div>
                 <form id="accept-submission-form" method="post">
-                        @csrf
-                        @method('PUT')
-                <div class="modal-body">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-body">
                         <div class="table-responsive">
                             <div class="form-group">
                                 <label for="">Rekomendasi Divisi</label>
@@ -200,7 +201,7 @@
 
                         <div class="form-group">
                             <label for="">Pilih Divisi</label>
-                            <select name="division"  class="form-control" id="division" required>
+                            <select name="division" class="form-control" id="division" required>
                                 <option selected disabled>Pilih Divisi</option>
                                 @foreach($divisions as $division)
                                 <option value="{{$division->id}}">{{$division->name}}</option>
@@ -228,10 +229,10 @@
 
                         <div class="form-group">
                             <label for="">Jenis Wawancara</label>
-                           <select name="interviewType" id="" class="form-control" required>
+                            <select name="interviewType" id="" class="form-control" required>
                                 <option value="Online">Online</option>
                                 <option value="Offline">Offline</option>
-                           </select>
+                            </select>
                         </div>
 
                         <div class="form-group">
@@ -239,11 +240,43 @@
                             <input type="text" name="interviewPlace" class="form-control" required>
                         </div>
 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalLanjut2" tabindex="-1" aria-labelledby="update-modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-label">Terima Pengajuan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" >Submit</button>
-                </div>
+                <form id="accept-submission-form2" method="post">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="">Tanggal Mulai Magang/PKL</label>
+                            <input type="date" name="start_date" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Tanggal Berakhir Magang/PKL</label>
+                            <input type="date" name="end_date" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -278,26 +311,31 @@
         })
 
         $(document).on('click', '.btnLanjut', function() {
-            $.get(`/submission/${$(this).attr('data-id')}/recomendation`,function(data){
+            $.get(`/submission/${$(this).attr('data-id')}/recomendation`, function(data) {
                 console.log(data);
                 $('#recomendByMajor').text(data.recomendationByMajor);
                 $('#recomendByNeed').text(data.recomendationByNeed);
                 $('#recomendByInstance').text(data.recomendationByInstance);
-                
+
             })
-            $('#accept-submission-form').prop('action',`/submission/${$(this).attr('data-id')}/acceptStepOne`)
+            $('#accept-submission-form').prop('action', `/submission/${$(this).attr('data-id')}/acceptStepOne`)
             $('#modalLanjut').modal('show');
         })
 
-        $(document).on('change','#division',function(){
+        $(document).on('click', '.btnLanjut2', function() {
+            $('#accept-submission-form2').prop('action', `/submission/${$(this).attr('data-id')}/acceptSubmission`)
+            $('#modalLanjut2').modal('show');
+        })
+
+        $(document).on('change', '#division', function() {
             $("#mentor").empty();
             $("division").prop('readonly')
-            $.get(`/division/${$(this).val()}/getMentor`,function(data){
-                $.each(data.mentors,function(index){
+            $.get(`/division/${$(this).val()}/getMentor`, function(data) {
+                $.each(data.mentors, function(index) {
                     $("#mentor").append(new Option(data.mentors[index].name, data.mentors[index].id));
                 })
             });
-           
+
             $('#mentor').removeAttr('readonly')
         });
     </script>

@@ -46,11 +46,11 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'isHC'], function () {
     Route::get('/submission/{id}/recomendation',[ParticipantController::class,'recomendation']);
     Route::put('/submission/{id}/acceptStepOne',[ParticipantController::class,'acceptStepOne']);
+    Route::put('/submission/{id}/acceptSubmission', [ParticipantController::class, 'acceptSubmission']);
     Route::get('/data-pengajuan', [ParticipantController::class, 'index']);
     Route::get('/data-peserta', [ParticipantController::class, 'getParticipant']);
     Route::get('/data-peserta/{id}', [ParticipantController::class, 'edit'])->name('participant.edit');
     Route::put('/data-peserta/{id}', [ParticipantController::class, 'update'])->name('participant.update');
-    Route::put('/data-peserta/{id}/accept', [ParticipantController::class, 'acceptSubmission']);
     Route::delete('/data-peserta/{id}/reject', [ParticipantController::class, 'rejectSubmission']);
     Route::get('/division/{id}/getMentor',[DivisionController::class,'getMentor']);
     Route::resource('/data-pembimbing', MentorController::class, [

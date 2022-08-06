@@ -152,8 +152,6 @@ class ParticipantController extends Controller
 
     public function acceptSubmission(Participant $id, Request $request){
         $request->validate([
-            'division'=>'required',
-            'mentor'=>'required',
             'start_date'=>'required',
             'end_date'=>'required',
         ]);
@@ -167,11 +165,9 @@ class ParticipantController extends Controller
     
             $id->update([
                 'participant_code'=>$this->generateCode($id->id, $id->school_type),
-                'division_id' => $request->division,
-                'mentor_id'=>$request->mentor,
                 'start_date'=>$request->start_date,
                 'end_date'=>$request->end_date,
-                'status'=>1,
+                'status'=>2,
                 'user_id'=>$user->id,
             ]);
 
