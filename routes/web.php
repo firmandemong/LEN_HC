@@ -3,6 +3,7 @@
 // use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\DataPengajuanController;
 use App\Http\Controllers\DivisionController;
+use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\InstituteController;
 use App\Http\Controllers\MajorController;
 use App\Http\Controllers\MentorController;
@@ -102,6 +103,8 @@ Route::group(['middleware' => 'isMentor'], function () {
     Route::get('/my-peserta',[ParticipantController::class,'showQuota']);
     Route::get('/divisi/kuota',[DivisionController::class,'showQuota']);
     Route::get('/list-peserta', [ParticipantController::class, 'getParticipantByMentor']);
+    Route::get('/tugas-peserta', [TaskController::class, 'index']);
+    Route::get('/nilai-peserta', [EvaluationController::class, 'index']);
     Route::get('/list-tugas/create', [TaskController::class, 'create']);
     Route::post('/list-tugas/store', [TaskController::class, 'store']);
     Route::get('/list-tugas', [TaskController::class, 'getTaskByMentor']);

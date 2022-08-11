@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
+
+    public function index(){
+        return view('pembimbing.task.index');
+    }
     public function getTaskByMentor(){
         $tasks = Task::with('getParticipant')->where('created_id', $this->getUser()->id)->get();
         return view('pembimbing.task.index',compact('tasks'));

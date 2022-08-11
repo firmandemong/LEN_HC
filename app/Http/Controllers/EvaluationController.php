@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 class EvaluationController extends Controller
 {
+
+    public function index(){
+        return view('pembimbing.score.index');
+    }
     public function Evaluate()
     {
     }

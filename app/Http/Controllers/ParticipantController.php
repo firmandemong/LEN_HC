@@ -197,8 +197,8 @@ class ParticipantController extends Controller
     }
 
     public function getParticipantByMentor(){
-        return view('pembimbing.participant-attendance.index');
-    }
+        return view('pembimbing.list-participant.index');
+    }   
 
     public function recomendation(Participant $id){
         $recomendationByMajor = '-';

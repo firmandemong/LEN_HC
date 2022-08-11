@@ -18,9 +18,7 @@ class UserController extends Controller
         }
 
         else if(Auth::User()->role == 'Participant'){
-            $presensiToday = Attendance::where(['participant_id'=>$this->getUser()->id,'date'=>date('Y-m-d')])->first();
-            $listPresensi = Attendance::where('participant_id',$this->getUser()->id)->get();
-            return view('peserta.dashboard',compact('presensiToday','listPresensi'));
+            return view('peserta.dashboard');
             
         }
     }

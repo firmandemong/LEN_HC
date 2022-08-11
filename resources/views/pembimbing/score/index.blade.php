@@ -10,7 +10,7 @@ Data Peserta
 
 @section('subheader')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Data Penugasan</h1>
+    <h1 class="h3 mb-0 text-gray-800">Data Penilaian</h1>
     <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page">Data Peserta</li>
     </ol>
@@ -25,10 +25,10 @@ Data Peserta
             <table class="table align-items-center table-flush table-hover table-stripped" id="dataTableHover">
                 <thead class="thead-light">
                     <th style="min-width:20px">#</th>
-                    <th>Judul Tugas</th>
-                    <th>Nama Peserta</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <th>No Peserta</th>
+                    <th>Nama</th>
+                    <th>Asal Instansi</th>
+                    <th>Periode</th>
                 </thead>
                 <tbody>
 

@@ -15,6 +15,8 @@ class CreateTaskFileSubmissionsTable extends Migration
     {
         Schema::create('task_file_submissions', function (Blueprint $table) {
             $table->id();
+            $table->string('file');
+            $table->foreignId('task_id')->references('id')->on('tasks')->cascadeOnDelete();
             $table->timestamps();
         });
     }
