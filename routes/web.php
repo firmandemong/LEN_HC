@@ -109,63 +109,68 @@ Route::group(['middleware' => 'isMentor'], function () {
     Route::post('/list-tugas/store', [TaskController::class, 'store']);
     Route::get('/list-tugas', [TaskController::class, 'getTaskByMentor']);
     Route::put('/divisi/{id}/update-kuota',[DivisionController::class,'updateQuota']);
+    Route::post('/task',[TaskController::class,'store']);
     // Route::get('/list-presensi', [AttendanceController::class, 'getAttendanceByMentor']);
 });
 
 Route::group(['middleware' => 'isParticipant'], function () {
+    Route::get('daily-activity',[TaskController::class,'dailyReport']);
+    Route::get('list-tugas',[TaskController::class,'getListTaskByParticipant']);
+    Route::get('evaluation-result',[EvaluationController::class,'getEvaluationByParticipant']);
+    Route::get('/list-tugas/{id}/detail',[TaskController::class,'show']);
     // Route::post('/clock-in', [AttendanceController::class, 'clockIn']);
     // Route::put('/clock-out', [AttendanceController::class, 'clockOut']);
 });
 
-Route::get('/presensi', function () {
-    return view('pembimbing/presensi');
-});
+// Route::get('/presensi', function () {
+//     return view('pembimbing/presensi');
+// });
 
 
-Route::get('/dashboardPembimbing', function () {
-    return view('pembimbing/dashboardPembimbing');
-});
-Route::get('/dashboardPeserta', function () {
-    return view('peserta/dashboardPeserta');
-});
-// pengajuan
-Route::get('/pengajuan', [ParticipantController::class, 'formPengajuan']);
-// Master AKUN
-// Route::get('/masterakun', [UserController::class, 'masterAkun']);
-Route::get('/master-akun', function () {
-    return view('hc/masterAkun');
-});
-Route::get('/createAccountMentor', function () {
-    return view('hc/createAccountMentor');
-});
-Route::get('/editAccountMentor', function () {
-    return view('hc/editAccountMentor');
-});
-Route::get('/createAccountParticipants', function () {
-    return view('hc/createAccountParticipants');
-});
-Route::get('/editAccountParticipants', function () {
-    return view('hc/editAccountParticipants');
-});
-//Penerimaan
-Route::get('/penerimaan', function () {
-    return view('hc/penerimaan');
-});
-//Pembimbing
-Route::get('/createMentor', function () {
-    return view('hc/createMentor');
-});
-Route::get('/editMentor', function () {
-    return view('hc/editMentor');
-});
-//Presensi
-Route::get('/presensiPeserta', function () {
-    return view('peserta/presensiPeserta');
-});
-Route::get('/inputPresensi', function () {
-    return view('peserta/inputPresensi');
-});
-//Tugas
-Route::get('/tugasPembimbing', function () {
-    return view('pembimbing/tugasPembimbing');
-});
+// Route::get('/dashboardPembimbing', function () {
+//     return view('pembimbing/dashboardPembimbing');
+// });
+// Route::get('/dashboardPeserta', function () {
+//     return view('peserta/dashboardPeserta');
+// });
+// // pengajuan
+// Route::get('/pengajuan', [ParticipantController::class, 'formPengajuan']);
+// // Master AKUN
+// // Route::get('/masterakun', [UserController::class, 'masterAkun']);
+// Route::get('/master-akun', function () {
+//     return view('hc/masterAkun');
+// });
+// Route::get('/createAccountMentor', function () {
+//     return view('hc/createAccountMentor');
+// });
+// Route::get('/editAccountMentor', function () {
+//     return view('hc/editAccountMentor');
+// });
+// Route::get('/createAccountParticipants', function () {
+//     return view('hc/createAccountParticipants');
+// });
+// Route::get('/editAccountParticipants', function () {
+//     return view('hc/editAccountParticipants');
+// });
+// //Penerimaan
+// Route::get('/penerimaan', function () {
+//     return view('hc/penerimaan');
+// });
+// //Pembimbing
+// Route::get('/createMentor', function () {
+//     return view('hc/createMentor');
+// });
+// Route::get('/editMentor', function () {
+//     return view('hc/editMentor');
+// });
+// //Presensi
+// Route::get('/presensiPeserta', function () {
+//     return view('peserta/presensiPeserta');
+// });
+// Route::get('/inputPresensi', function () {
+//     return view('peserta/inputPresensi');
+// });
+// //Tugas
+// Route::get('/tugasPembimbing', function () {
+//     return view('pembimbing/tugasPembimbing');
+// });

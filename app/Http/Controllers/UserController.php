@@ -14,11 +14,11 @@ class UserController extends Controller
         }
 
         else if (Auth::User()->role == 'Mentor'){
-            return view('pembimbing.dashboard');
+            return view('mentor.dashboard');
         }
 
         else if(Auth::User()->role == 'Participant'){
-            return view('peserta.dashboard');
+            return view('participant.dashboard');
             
         }
     }

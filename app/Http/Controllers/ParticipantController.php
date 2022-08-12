@@ -38,7 +38,7 @@ class ParticipantController extends Controller
             $schools[] = $school->name;
         }
         
-        return view('peserta/pengajuan',compact('majors'))->with(['schools'=>json_encode($schools)]);
+        return view('participant/pengajuan',compact('majors'))->with(['schools'=>json_encode($schools)]);
     }
 
     public function getParticipant()
@@ -197,7 +197,8 @@ class ParticipantController extends Controller
     }
 
     public function getParticipantByMentor(){
-        return view('pembimbing.list-participant.index');
+        $participants = Participant::where('mentor_id',$this->getUser()->id)->where('status',2)->get();
+        return view('mentor.list-participant.index',compact('participants'));
     }   
 
     public function recomendation(Participant $id){

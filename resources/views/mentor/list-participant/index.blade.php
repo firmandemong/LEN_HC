@@ -24,15 +24,24 @@ Data Peserta
         <div class="table-responsive p-3">
             <table class="table align-items-center table-flush table-hover table-stripped" id="dataTableHover">
                 <thead class="thead-light">
-                    <th style="min-width:20px">#</th>
-                    <th>No Peserta</th>
-                    <th>Nama</th>
-                    <th>Asal Instansi</th>
-                    <th>Periode</th>
-                    <th>Action</th>
+                    <th width="1%">#</th>
+                    <th width="15%">No Peserta</th>
+                    <th width="18%">Nama</th>
+                    <th width="23%">Asal Instansi</th>
+                    <th width="23%">Periode</th>
+                    <th width="20%">Action</th>
                 </thead>
                 <tbody>
-
+                    @foreach($participants as $participant)
+                    <tr>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$participant->participant_code}}</td>
+                        <td>{{$participant->name}}</td>
+                        <td>{{$participant->getInstitute->name}}</td>
+                        <td>{{date('d F Y',strtotime($participant->start_date)) .' - ' . date('d F Y',strtotime($participant->end_date))}}</td>
+                        <td><button class="btn btn-sm btn-primary">Daily Activity</button></td>
+                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

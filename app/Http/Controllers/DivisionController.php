@@ -76,7 +76,7 @@ class DivisionController extends Controller
         $mentor = Mentor::where('user_id',Auth::id())->first();
         $division = $mentor->getDivision->id;
         $quotas = DetailDivisionQuota::where('division_id');
-        return view('pembimbing.division.kuota',compact('majors','division'));
+        return view('mentor.division.kuota',compact('majors','division'));
     }
 
     public function updateQuota(Request $request, Division $id){

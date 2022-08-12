@@ -5,38 +5,35 @@ Data Peserta
 @endsection
 
 @section('sidebar')
-@include('layout.mentor-sidebar')
+@include('layout.participant-sidebar')
 @endsection
 
 @section('subheader')
+@include('sweetalert::alert')
+
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Data Penilaian</h1>
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Data Peserta</li>
-    </ol>
+    <h1 class="h3 mb-0 text-gray-800">Hasil Evaluasi & Sertifikat</h1>
 </div>
 @endsection
 
 @section("content")
 <div class="col-lg-12">
-    <div class="card mb-4">
-
+    <div class="card">
         <div class="table-responsive p-3">
             <table class="table align-items-center table-flush table-hover table-stripped" id="dataTableHover">
                 <thead class="thead-light">
                     <th style="min-width:20px">#</th>
-                    <th>No Peserta</th>
-                    <th>Nama</th>
-                    <th>Asal Instansi</th>
-                    <th>Periode</th>
+                    <th>Tanggal</th>
+                    <th>Jumlah Waktu Kerja</th>
+                    <th>Activity</th>
                 </thead>
                 <tbody>
-
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
 @stop
 
 @section('css')

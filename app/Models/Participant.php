@@ -30,6 +30,10 @@ class Participant extends Model
         return $this->belongsTo(Institute::class,'school_id');
     }
 
+    public function getEvaluation(){
+        return $this->belongsTo(EvaluationForm::class,'participant_id');
+    }
+
     public function getMajor(){
         return $this->belongsTo(Major::class,'major_id');
     }

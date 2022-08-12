@@ -11,36 +11,45 @@ class TaskController extends Controller
 {
 
     public function index(){
-        return view('pembimbing.task.index');
-    }
-    public function getTaskByMentor(){
         $tasks = Task::with('getParticipant')->where('created_id', $this->getUser()->id)->get();
-        return view('pembimbing.task.index',compact('tasks'));
+        $participants = Participant::where('mentor_id',$this->getUser()->id)->where('status',2)->get();
+        return view('mentor.task.index',compact('participants','tasks'));
     }
 
-    public function create(){
-        $participants = Participant::where('mentor_id',$this->getUser()->id)->get();
-        return view('pembimbing.task.create',compact('participants'));
+    public function getListTaskByParticipant(){
+        $tasks = Task::where('participant_id', $this->getUser()->id)->get();
+        return view('participant.list-task',compact('tasks'));
     }
 
     public function store(Request $request){
         $request->validate([
-            'task_name'=>'required',
+            'task_title'=>'required',
             'task_description'=>'required',
-            'deadline'=>'required',
             'participant'=>'required',
         ]); 
-   
         Task::create([
-            'name'=>$request->task_name,
+            'title'=>$request->task_title,
             'description'=>$request->task_description,
-            'deadline'=>$request->deadline,
             'participant_id'=>$request->participant,
             'created_id'=>$this->getUser()->id,
         ]);
 
         toast("Tugas berhasil dibuat",'success');
-        return redirect('list-tugas');
+        return back();
+    }
+
+    public function dailyReport(){
+        return view('participant.daily-report');
+    }
+
+    public function show($id){
+        if(Auth::User()->role == 'Mentor'){
+            return view('hc.dashboard');
+        }
+
+        else if(Auth::User()->role == 'Participant'){
+            return view('participant.detail-task');
+        }
     }
 }
                                     

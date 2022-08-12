@@ -10,7 +10,7 @@ Data Peserta
 
 @section('subheader')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Data Penugasan</h1>
+    <h1 class="h3 mb-0 text-gray-800">Data Penilaian</h1>
     <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page">Data Peserta</li>
     </ol>
@@ -25,13 +25,30 @@ Data Peserta
             <table class="table align-items-center table-flush table-hover table-stripped" id="dataTableHover">
                 <thead class="thead-light">
                     <th style="min-width:20px">#</th>
-                    <th>Judul Tugas</th>
-                    <th>Nama Peserta</th>
-                    <th>Status</th>
+                    <th>No Peserta</th>
+                    <th>Nama</th>
+                    <th>Grade</th>
+                    <th>Rata-rata</th>
                     <th>Action</th>
                 </thead>
                 <tbody>
+                    @foreach($participants as $participant)
+                    <tr>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$participant->participant_code}}</td>
+                        <td>{{$participant->name}}</td>
+                        <td>{{empty($participant->getEvaluation) ? '-' : $participant->getEvaluation->predicate}}</td>
+                        <td>{{empty($participant->getEvaluation) ? '-' : $participant->getEvaluation->average}}</td>
+                        <td>
+                            @if(empty($participant->getEvaluation))
+                                <button class="btn-sm btn btn-primary">Evaluasi</button>
+                            @else
+                            <button class="btn-sm btn btn-success">Lihat Hasil</button>
 
+                                @endif
+                        </td>
+                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

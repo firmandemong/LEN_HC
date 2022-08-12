@@ -20,7 +20,8 @@ class CreateDailyTasksTable extends Migration
             $table->foreignId('task_id')->nullable();
             $table->tinyInteger('hour')->default(0);
             $table->tinyInteger('minute')->default(0);
-            $table->foreign('participant_id')->references('id')->on('participants')->onDelete('cascade');
+            $table->foreignId('participant_id')->references('id')->on('participants')->onDelete('cascade');
+            $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade');
             $table->timestamps();
         });
     }
