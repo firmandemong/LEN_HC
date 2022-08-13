@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="{{asset('template/img/logo/logo.png')}}" rel="icon">
+    <link href="{{ asset('template/img/logo/logo.png') }}" rel="icon">
     <title>Sign In</title>
-    <link href="{{asset('template/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{asset('template/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{asset('template/css/ruang-admin.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('template/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('template/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('template/css/ruang-admin.min.css') }}" rel="stylesheet">
 
 </head>
 
@@ -32,13 +32,17 @@
                                     <form class="user" method="post" action="/login">
                                         @csrf
                                         <div class="form-group">
-                                            <input type="email" name="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address" required value="{{old('email')}}">
+                                            <input type="email" name="email" class="form-control"
+                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                                placeholder="Enter Email Address" required value="{{ old('email') }}">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" name="password" class="form-control" id="exampleInputPassword" placeholder="Password" required>
+                                            <input type="password" name="password" class="form-control"
+                                                id="exampleInputPassword" placeholder="Password" required>
                                         </div>
                                         <div class="form-group">
-                                            <div class="custom-control custom-checkbox small" style="line-height: 1.5rem;">
+                                            <div class="custom-control custom-checkbox small"
+                                                style="line-height: 1.5rem;">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
 
                                             </div>
@@ -49,7 +53,8 @@
                                         <hr>
                                     </form>
                                     <div class="text-center">
-                                        <a class="font-weight-bold small" href="/pengajuan">Kirim Pengajuan Magang / PKL</a>
+                                        <a class="font-weight-bold small" href="/pengajuan">Kirim Pengajuan Magang /
+                                            PKL</a>
                                     </div>
                                     <div class="text-center">
                                     </div>
@@ -62,10 +67,10 @@
         </div>
     </div>
     <!-- Login Content -->
-    <script src="{{asset('template/vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{asset('template/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{asset('template/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-    <script src="{{asset('template/js/ruang-admin.min.js')}}"></script>
+    <script src="{{ asset('template/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('template/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('template/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    <script src="{{ asset('template/js/ruang-admin.min.js') }}"></script>
 </body>
 
 </html>

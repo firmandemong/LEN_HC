@@ -11,9 +11,10 @@ use Illuminate\Support\Facades\Auth;
 
 class DivisionController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $divisions = Division::all();
-        return view('hc.division.index',[
+        return view('hc.division.index', [
             'divisions' => $divisions,
         ]);
     }
@@ -26,10 +27,10 @@ class DivisionController extends Controller
     public function store(Request $request)
     {
         $new_division = Division::create([
-            'name'=>$request->division_name,
-            'quota'=>$request->quota,
+            'name' => $request->division_name,
+            'quota' => $request->quota,
         ]);
-        toast("Divisi ". $new_division->name ." ditambahkan", 'success');
+        toast("Divisi " . $new_division->name . " ditambahkan", 'success');
         return redirect()->route('division.index');
     }
 
@@ -62,47 +63,50 @@ class DivisionController extends Controller
         $name = $division->name;
         $mentor = Mentor::where('division_id', $id)->first();
         if ($mentor) {
-            toast('Divisi '. $name.' tidak dapat dihapus, digunakan oleh pembimbing "'.$mentor->name.'" !', 'error');
+            toast('Divisi ' . $name . ' tidak dapat dihapus, digunakan oleh pembimbing "' . $mentor->name . '" !', 'error');
             return redirect()->route('division.index');
         }
 
         $division->delete();
-        toast('Divisi '. $name.' dihapus', 'success');
+        toast('Divisi ' . $name . ' dihapus', 'success');
         return redirect()->route('division.index');
     }
 
-    public function showQuota(){
+    public function showQuota()
+    {
         $majors = Major::orderBy('name')->get();
-        $mentor = Mentor::where('user_id',Auth::id())->first();
+        $mentor = Mentor::where('user_id', Auth::id())->first();
         $division = $mentor->getDivision->id;
         $quotas = DetailDivisionQuota::where('division_id');
-        return view('mentor.division.kuota',compact('majors','division'));
+        return view('mentor.division.kuota', compact('majors', 'division'));
     }
 
-    public function updateQuota(Request $request, Division $id){
+    public function updateQuota(Request $request, Division $id)
+    {
         $request->validate([
-            'major_id'=>'required',
-            'quota'=>'required'
+            'major_id' => 'required',
+            'quota' => 'required'
         ]);
         $id->load('getDetailQuota');
-        $checkDivisi = $id->getDetailQuota->where('major_id',$request->major_id)->first();
-        if(empty($checkDivisi)){
+        $checkDivisi = $id->getDetailQuota->where('major_id', $request->major_id)->first();
+        if (empty($checkDivisi)) {
             $id->getDetailQuota()->create([
-                'major_id'=>$request->major_id,
-                'quota'=>$request->quota
+                'major_id' => $request->major_id,
+                'quota' => $request->quota
             ]);
-        }else{
+        } else {
             $checkDivisi->update([
-                'quota'=>$request->quota
+                'quota' => $request->quota
             ]);
         }
 
-        toast('Kuota Berhasil di update','success'); 
+        toast('Kuota Berhasil di update', 'success');
         return back();
     }
 
-    public function getMentor($id){
-        $mentors = Mentor::where('division_id',$id)->get();
-        return response()->json(['mentors'=>$mentors]);
+    public function getMentor($id)
+    {
+        $mentors = Mentor::where('division_id', $id)->get();
+        return response()->json(['mentors' => $mentors]);
     }
 }

@@ -17,9 +17,9 @@
         <i class="fas fa-fw fa-user"></i>
         <span>Data Peserta</span></a>
 </li>
-<li class="nav-item {{Request::is('data-peserta') ? 'active' : ''}}">
-    <a class="nav-link" href="/data-peserta">
-        <i class="fas fa-fw fa-user"></i>
+<li class="nav-item {{Request::is('data-sertifikat') ? 'active' : ''}}">
+    <a class="nav-link" href="/data-sertifikat">
+        <i class="fas fa-fw fa-certificate"></i>
         <span>Sertifikat Peserta</span></a>
 </li>
 <hr class="sidebar-divider">

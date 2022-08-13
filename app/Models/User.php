@@ -44,13 +44,25 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function Mentor(){
-        return $this->hasOne(Mentor::class,'user_id');
+    public function Mentor()
+    {
+        return $this->hasOne(Mentor::class, 'user_id');
     }
 
-    public function Participant(){
-        return $this->hasOne(Participant::class,'user_id');
+    public function Participant()
+    {
+        return $this->hasOne(Participant::class, 'user_id');
     }
 
-    
+    public function getUser()
+    {
+        $profile = null;
+        if (Auth::User()->role == 'Participant') {
+            $profile = Participant::where('user_id', Auth::id())->first();
+        } else if (Auth::User()->role == 'Mentor' || Auth::User()->role == 'HC') {
+            $profile = Mentor::where('user_id', Auth::id())->first();
+        }
+
+        return $profile;
+    }
 }

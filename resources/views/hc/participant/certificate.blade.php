@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('title')
-    Data Instansi
+    Data Sertifikat
 @endsection
 
 @section('sidebar')
@@ -10,36 +10,34 @@
 
 @section('subheader')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Data Instansi</h1>
+        <h1 class="h3 mb-0 text-gray-800">Data Sertifikat</h1>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item" aria-current="page"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Data Instansi</li>
+            <li class="breadcrumb-item active" aria-current="page">Data Sertifikat</li>
         </ol>
     </div>
 @endsection
 
 @section('content')
-    @include('sweetalert::alert')
     <div class="col-lg-12">
         <div class="card mb-4">
+
             <div class="table-responsive p-3">
                 <table class="table align-items-center table-flush table-hover table-stripped" id="dataTableHover">
                     <thead class="thead-light">
-                        <tr>
-                            <th>Nama Instansi</th>
-                            <th>Action</th>
-                        </tr>
+                        <th style="min-width:20px">No</th>
+                        <th>No Peserta</th>
+                        <th>Nama</th>
+                        <th>Status</th>
+                        <th>Action</th>
+
                     </thead>
                     <tbody>
-                        <td>IDE LPKIA</td>
-                        <td><button class="btn btn-warning btn-sm">Edit</button> <button
-                                class="btn btn-danger btn-sm ml-2">Hapus</button></td>
+
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-
 @stop
 
 @section('css')

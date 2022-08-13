@@ -26,23 +26,42 @@ class Participant extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function getInstitute(){
-        return $this->belongsTo(Institute::class,'school_id');
+    public function getInstitute()
+    {
+        return $this->belongsTo(Institute::class, 'school_id');
     }
 
-    public function getEvaluation(){
-        return $this->belongsTo(EvaluationForm::class,'participant_id');
+    public function getEvaluation()
+    {
+        return $this->belongsTo(EvaluationForm::class, 'participant_id');
     }
 
-    public function getMajor(){
-        return $this->belongsTo(Major::class,'major_id');
+    public function getMajor()
+    {
+        return $this->belongsTo(Major::class, 'major_id');
     }
 
-    public function scopeActive($query){
-        return $query->where('status',1);
+    public function scopeActiveAndFinished($query)
+    {
+        return $query->where('status', 2)->orWhere('status', 4);
     }
 
-    public function scopeNotActive($query){
-        return $query->where('status',0);
+    public function scopeActive($query)
+    {
+        return $query->where('status', 2);
+    }
+
+    public function scopeNotActive($query)
+    {
+        return $query->where('status', 0);
+    }
+
+    public static function getLabelStatus($status)
+    {
+        if ($status == 2) {
+            return "<span class='badge badge-success'>Aktif</span>";
+        } else if ($status == 4) {
+            return "<span class='badge badge-danger'>Tidak Aktif</span>";
+        }
     }
 }

@@ -5,48 +5,70 @@
 @endsection
 
 @section('sidebar')
-    @include('layout.participant-sidebar')
+    @include('layout.mentor-sidebar')
 @endsection
 
 @section('subheader')
     @include('sweetalert::alert')
-
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Data Tugas</h1>
+        <h1 class="h3 mb-0 text-gray-800">Detail Tugas</h1>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">Data Tugas</li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="/tugas-peserta">Data Tugas</a></li>
+            <li class="breadcrumb-item" aria-current="page">Detail Tugas</li>
         </ol>
     </div>
 @endsection
 
 @section('content')
-    <div class="col-lg-12">
+    <div class="col-md-6">
         <div class="card">
-            <div class="table-responsive p-3">
-                <table class="table align-items-center table-flush table-hover table-stripped" id="dataTableHover">
-                    <thead class="thead-light">
-                        <th style="min-width:20px">#</th>
-                        <th>Judul Tugas</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </thead>
-                    <tbody>
-                        @foreach ($tasks as $task)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $task->title }}</td>
-                                <td>{!! \app\Models\Task::getStatusLabel($task->status) !!}</td>
-                                <td>
-                                    <a href="/list-tugas/{{ $task->id }}/detail"
-                                        class="btn-sm btn btn-success">Detail</a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="">Judul Tugas</label>
+                    <input type="text" class="form-control" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="">Deskripsi Tugas</label>
+                    <textarea class="form-control" readonly> </textarea>
+                </div>
+                <div class="form-group">
+                    <label for="">Tanggal Dibuat</label>
+                    <input name="task_title" type="date" class="form-control" readonly>
+
+                </div>
             </div>
         </div>
     </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">
+                    <h6 class="m-0 font-weight-bold text-primary">Upload File</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 mt-3">
+        <div class="card">
+            <div class="card-header">
+                <h5>History Pengerjaan</h5>
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush table-hover table-stripped" id="dataTableHover">
+                        <thead class="thead-light">
+                            <th>#</th>
+                            <th>Tanggal</th>
+                            <th>Deskripsi</th>
+                            <th>Waktu</th>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="modal fade" id="create-task-modal" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
         <div class="modal-dialog">
@@ -69,6 +91,7 @@
                             <label for="">Deskripsi Tugas</label>
                             <textarea name="task_description" class="form-control" id="" required></textarea>
                         </div>
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Submit</button>

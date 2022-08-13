@@ -48,7 +48,7 @@ class MentorController extends Controller
         $password = 'password';
 
         Mail::to($new_user->email)->send(new \App\Mail\sendAccountMail($new_user->email, $password));
-        toast("Pembimbing ". $new_mentor->name ." ditambahkan", 'success');
+        toast("Pembimbing " . $new_mentor->name . " ditambahkan", 'success');
         return redirect()->route('mentor.index');
     }
 
@@ -59,7 +59,7 @@ class MentorController extends Controller
         return view('hc/mentor/edit', [
             'divisions' => $divisions,
             'mentor' => $mentor,
-        ]);   
+        ]);
     }
 
     public function update(Request $request, $id)
@@ -81,7 +81,7 @@ class MentorController extends Controller
         $mentor = Mentor::where('id', $id)->first();
         $name = $mentor->name;
         $mentor->delete();
-        toast('Pembimbing '. $name.' dihapus', 'success');
+        toast('Pembimbing ' . $name . ' dihapus', 'success');
         return redirect()->route('mentor.index');
     }
 }

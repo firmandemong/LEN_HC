@@ -1,6 +1,8 @@
 <?php
 
 // use App\Http\Controllers\AttendanceController;
+
+use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\DataPengajuanController;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\EvaluationController;
@@ -42,18 +44,20 @@ Route::group(['middleware' => 'guest'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
     Route::get('/logout', [UserController::class, 'logout']);
+    Route::get('/activity/{date}/all', [TaskController::class, 'getActivityByDate']);
 });
 
 Route::group(['middleware' => 'isHC'], function () {
-    Route::get('/submission/{id}/recomendation',[ParticipantController::class,'recomendation']);
-    Route::put('/submission/{id}/acceptStepOne',[ParticipantController::class,'acceptStepOne']);
+    Route::get('/submission/{id}/recomendation', [ParticipantController::class, 'recomendation']);
+    Route::put('/submission/{id}/acceptStepOne', [ParticipantController::class, 'acceptStepOne']);
     Route::put('/submission/{id}/acceptSubmission', [ParticipantController::class, 'acceptSubmission']);
     Route::get('/data-pengajuan', [ParticipantController::class, 'index']);
     Route::get('/data-peserta', [ParticipantController::class, 'getParticipant']);
     Route::get('/data-peserta/{id}', [ParticipantController::class, 'edit'])->name('participant.edit');
     Route::put('/data-peserta/{id}', [ParticipantController::class, 'update'])->name('participant.update');
     Route::delete('/data-peserta/{id}/reject', [ParticipantController::class, 'rejectSubmission']);
-    Route::get('/division/{id}/getMentor',[DivisionController::class,'getMentor']);
+    Route::get('/division/{id}/getMentor', [DivisionController::class, 'getMentor']);
+    Route::get('/data-sertifikat', [CertificateController::class, 'index']);
     Route::resource('/data-pembimbing', MentorController::class, [
         'names' => [
             'index' => 'mentor.index',
@@ -100,24 +104,26 @@ Route::group(['middleware' => 'isHC'], function () {
 });
 
 Route::group(['middleware' => 'isMentor'], function () {
-    Route::get('/my-peserta',[ParticipantController::class,'showQuota']);
-    Route::get('/divisi/kuota',[DivisionController::class,'showQuota']);
+    Route::get('/my-peserta', [ParticipantController::class, 'showQuota']);
+    Route::get('/divisi/kuota', [DivisionController::class, 'showQuota']);
     Route::get('/list-peserta', [ParticipantController::class, 'getParticipantByMentor']);
     Route::get('/tugas-peserta', [TaskController::class, 'index']);
+    Route::get('/tugas-peserta/{id}/detail', [TaskController::class, 'show']);
     Route::get('/nilai-peserta', [EvaluationController::class, 'index']);
     Route::get('/list-tugas/create', [TaskController::class, 'create']);
     Route::post('/list-tugas/store', [TaskController::class, 'store']);
     Route::get('/list-tugas', [TaskController::class, 'getTaskByMentor']);
-    Route::put('/divisi/{id}/update-kuota',[DivisionController::class,'updateQuota']);
-    Route::post('/task',[TaskController::class,'store']);
+    Route::put('/divisi/{id}/update-kuota', [DivisionController::class, 'updateQuota']);
+    Route::post('/task', [TaskController::class, 'store']);
     // Route::get('/list-presensi', [AttendanceController::class, 'getAttendanceByMentor']);
 });
 
 Route::group(['middleware' => 'isParticipant'], function () {
-    Route::get('daily-activity',[TaskController::class,'dailyReport']);
-    Route::get('list-tugas',[TaskController::class,'getListTaskByParticipant']);
-    Route::get('evaluation-result',[EvaluationController::class,'getEvaluationByParticipant']);
-    Route::get('/list-tugas/{id}/detail',[TaskController::class,'show']);
+    Route::get('daily-activity', [TaskController::class, 'dailyReport']);
+    Route::get('list-tugas', [TaskController::class, 'getListTaskByParticipant']);
+    Route::get('evaluation-result', [EvaluationController::class, 'getEvaluationByParticipant']);
+    Route::get('/list-tugas/{id}/detail', [TaskController::class, 'show']);
+    Route::post('/daily-activity', [TaskController::class, 'storeDailyTask']);
     // Route::post('/clock-in', [AttendanceController::class, 'clockIn']);
     // Route::put('/clock-out', [AttendanceController::class, 'clockOut']);
 });

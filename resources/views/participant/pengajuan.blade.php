@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="{{asset('template/img/logo/logo.png')}}" rel="icon">
+    <link href="{{ asset('template/img/logo/logo.png') }}" rel="icon">
     <title>Sign In</title>
-    <link href="{{asset('template/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{asset('template/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{asset('template/css/ruang-admin.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('template/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('template/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('template/css/ruang-admin.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 </head>
 
@@ -37,14 +37,19 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="">Nama Lengkap</label>
-                                                    <input type="text" class="form-control" placeholder="Nama Lengkap" required name="name" value="{{old('name')}}">
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Nama Lengkap" required name="name"
+                                                        value="{{ old('name') }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="">Email Aktif</label>
-                                                    <input type="email" class="form-control" placeholder="example@example.com" required name="email" value="{{old('email')}}">
-                                                    <small class="text-info">Pastikan Email valid, karena informasi selanjutnya akan dikirim melalui email</small>
+                                                    <input type="email" class="form-control"
+                                                        placeholder="example@example.com" required name="email"
+                                                        value="{{ old('email') }}">
+                                                    <small class="text-info">Pastikan Email valid, karena informasi
+                                                        selanjutnya akan dikirim melalui email</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -52,19 +57,27 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="">Jenis Pendidikan</label>
-                                                    <select name="school_type" id="" class="form-control" required>
+                                                    <select name="school_type" id="" class="form-control"
+                                                        required>
                                                         <option disabled selected>Pilih Jenis Pendidikan</option>
-                                                        <option value="SMK" {{old('school_type') == 'SMK' ? 'selected' : ''}}>SMK</option>
-                                                        <option value="Universitas" {{old('school_type') == 'Universitas' ? 'selected' : ''}}>Universitas</option>
+                                                        <option value="SMK"
+                                                            {{ old('school_type') == 'SMK' ? 'selected' : '' }}>SMK
+                                                        </option>
+                                                        <option value="Universitas"
+                                                            {{ old('school_type') == 'Universitas' ? 'selected' : '' }}>
+                                                            Universitas</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="">Nama Universitas/Sekolah</label>
-                                                    <input type="text" id="tags" name="school_name" list="cityname" class="form-control" value="{{old('school_name')}}">
+                                                    <input type="text" id="tags" name="school_name"
+                                                        list="cityname" class="form-control"
+                                                        value="{{ old('school_name') }}">
 
-                                                    <small class="text-info">Pilih dari rekomendasi bila data tersedia</small>
+                                                    <small class="text-info">Pilih dari rekomendasi bila data
+                                                        tersedia</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -74,8 +87,10 @@
                                                     <label for="">Jurusan</label>
                                                     <select id="" class="form-control" name="major" required>
                                                         <option disabled selected>Pilih Jurusan</option>
-                                                        @foreach($majors as $major)
-                                                        <option value="{{$major->id}}" {{old('major') == $major->id ? 'selected' : ''}}>{{$major->name}}</option>
+                                                        @foreach ($majors as $major)
+                                                            <option value="{{ $major->id }}"
+                                                                {{ old('major') == $major->id ? 'selected' : '' }}>
+                                                                {{ $major->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -86,7 +101,8 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">Upload Surat Pengajuan PKL</label>
-                                                    <input type="file" class="form-control" name="file_application_letter" required>
+                                                    <input type="file" class="form-control"
+                                                        name="file_application_letter" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -98,7 +114,8 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">Upload Transkrip Nilai</label>
-                                                    <input type="file" name="file_transcript" class="form-control" required>
+                                                    <input type="file" name="file_transcript" class="form-control"
+                                                        required>
                                                 </div>
                                             </div>
                                         </div>
@@ -107,7 +124,8 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label class="">Enter Captcha</label>
-                                                    <input id="captcha" type="text" class="form-control " placeholder="Enter Captcha" name="captcha">
+                                                    <input id="captcha" type="text" class="form-control "
+                                                        placeholder="Enter Captcha" name="captcha">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -115,7 +133,8 @@
                                                     <label for="captcha" class="">Captcha</label>
                                                     <div class="captcha">
                                                         <span>{!! captcha_img() !!}</span>
-                                                        <button type="button" class="btn btn-danger" class="reload" id="reload">
+                                                        <button type="button" class="btn btn-danger" class="reload"
+                                                            id="reload">
 
                                                             &#x21bb;
                                                         </button>
@@ -125,7 +144,8 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-block">Kirim Berkas</button>
+                                            <button type="submit" class="btn btn-primary btn-block">Kirim
+                                                Berkas</button>
                                         </div>
                                         <hr>
                                     </form>
@@ -158,7 +178,7 @@
 
 <script>
     $(function() {
-        var availableTags = <?php echo $schools ?>;
+        var availableTags = <?php echo $schools; ?>;
         console.log(`aa ${availableTags}`);
         $("#tags").autocomplete({
             source: availableTags

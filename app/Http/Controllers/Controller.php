@@ -13,17 +13,16 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-    
-    public function getUser(){
+
+    public function getUser()
+    {
         $profile = null;
-        if(Auth::User()->role =='Participant'){
-            $profile = Participant::where('user_id',Auth::id())->first();
+        if (Auth::User()->role == 'Participant') {
+            $profile = Participant::where('user_id', Auth::id())->first();
+        } else if (Auth::User()->role == 'Mentor' || Auth::User()->role == 'HC') {
+            $profile = Mentor::where('user_id', Auth::id())->first();
         }
 
-        else if(Auth::User()->role == 'Mentor' ||Auth::User()->role == 'HC' ){
-            $profile = Mentor::where('user_id',Auth::id())->first();
-        }
-        
         return $profile;
     }
 }
