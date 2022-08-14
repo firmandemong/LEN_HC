@@ -33,4 +33,9 @@ class Task extends Model
     {
         return $query->where('status', 0);
     }
+
+    public function getFileSubmission()
+    {
+        return $this->hasOne(TaskFileSubmission::class, 'task_id');
+    }
 }

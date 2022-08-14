@@ -42,10 +42,37 @@
     </div>
     <div class="col-md-6">
         <div class="card">
+            <div class="card-header">
+                <h6 class="m-0 font-weight-bold text-primary">File Submission</h6>
+            </div>
             <div class="card-body">
-                <div class="card-title">
-                    <h6 class="m-0 font-weight-bold text-primary">Upload File</h6>
-                </div>
+                @if (empty($task->getFileSubmission))
+                    <p class="text-center">Belum terdapat Submission File</p>
+                @else
+                    <table class="table mb-2">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Nama File</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a
+                                        href="{{ asset('/file_submission/' . $task->getFileSubmission->file) }}">{{ $task->getFileSubmission->file }}</a>
+                                </td>
+                                <td>{!! \app\Models\Task::getStatusLabel($task->status) !!}</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                    @if ($task->status == 1)
+                        <div style="float:right">
+                            <button class="btn-success btn">Approve</button>
+                            <button class="btn-danger btn">Reject</button>
+                        </div>
+                    @endif
+                @endif
             </div>
         </div>
     </div>
@@ -93,7 +120,6 @@
                 <form action="/task" method="post">
                     @csrf
                     <div class="modal-body">
-
                         <div class="form-group">
                             <label for="">Judul Tugas</label>
                             <input name="task_title" type="text" class="form-control" required>

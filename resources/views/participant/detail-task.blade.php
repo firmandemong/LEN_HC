@@ -42,10 +42,39 @@
     </div>
     <div class="col-md-6">
         <div class="card">
+            <div class="card-header">
+                <h6 class="m-0 font-weight-bold text-primary">Upload File</h6>
+            </div>
             <div class="card-body">
-                <div class="card-title">
-                    <h6 class="m-0 font-weight-bold text-primary">Upload File</h6>
-                </div>
+                @if (empty($task->getFileSubmission))
+                    <form action="/task/{{ $task->id }}/upload" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <input type="file" class="form-control" name="file">
+                        </div>
+                        <button class="btn btn-primary" type="submit" style="float:right">Submit</button>
+                    </form>
+                @else
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Nama File</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a
+                                        href="{{ asset('/file_submission/' . $task->getFileSubmission->file) }}">{{ $task->getFileSubmission->file }}</a>
+                                </td>
+                                <td>{!! \app\Models\Task::getStatusLabel($task->status) !!}</td>
+                                <td><button class="btn btn-sm btn-danger" data-toggle="modal"
+                                        data-target="#konfirmasiDelete">Batalkan</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                @endif
             </div>
         </div>
     </div>
@@ -82,33 +111,25 @@
         </div>
     </div>
 
-
-    <div class="modal fade" id="create-task-modal" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
+    <div class="modal fade" id="konfirmasiDelete" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="delete-modal-label">Buat Penugasan</h5>
+                    <h5 class="modal-title" id="delete-modal-label">Batalkan Submission</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="/task" method="post">
+                <form action="/task/{{ $task->id }}/cancelUpload" method="post">
+                    @method('DELETE')
                     @csrf
                     <div class="modal-body">
+                        <p>Anda yakin akan membatalkan submission file?</p>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="">Judul Tugas</label>
-                            <input name="task_title" type="text" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Deskripsi Tugas</label>
-                            <textarea name="task_description" class="form-control" id="" required></textarea>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Ya</button>
                     </div>
                 </form>
             </div>

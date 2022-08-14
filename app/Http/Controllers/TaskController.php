@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DailyTask;
 use App\Models\Participant;
 use App\Models\Task;
+use App\Models\TaskFileSubmission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -128,5 +129,40 @@ class TaskController extends Controller
             ];
         }
         return view('mentor.list-participant.activity', ['activities' => $data, 'participant' => $participant]);
+    }
+
+    public function uploadFile(Request $request, Task $id)
+    {
+        $request->validate([
+            'file' => 'required'
+        ]);
+        $fileName = '';
+        if ($request->hasFile('file')) {
+            $file = $request->file;
+            $dest = 'file_submission';
+            $fileName = $id->id . '_' . $id->title . '_' . date('YmdHis') . "." . $file->getClientOriginalExtension();
+            $file->move($dest, $fileName);
+        }
+        TaskFileSubmission::create([
+            'file' => $fileName,
+            'task_id' => $id->id
+        ]);
+
+        $id->update([
+            'status' => 1
+        ]);
+
+        toast('File berhasil diupload', 'success');
+        return back();
+    }
+
+    public function cancelUpload(Request $request, Task $id)
+    {
+        $id->getFileSubmission()->delete();
+        $id->update([
+            'status' => 0
+        ]);
+        toast('Submission berhasil dibatalkan', 'success');
+        return back();
     }
 }
