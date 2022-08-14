@@ -44,7 +44,7 @@ Route::group(['middleware' => 'guest'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
     Route::get('/logout', [UserController::class, 'logout']);
-    Route::get('/activity/{date}/all', [TaskController::class, 'getActivityByDate']);
+    Route::get('/activity/peserta/{id}/tanggal/{date}/all', [TaskController::class, 'getActivityByDate']);
 });
 
 Route::group(['middleware' => 'isHC'], function () {
@@ -107,6 +107,7 @@ Route::group(['middleware' => 'isMentor'], function () {
     Route::get('/my-peserta', [ParticipantController::class, 'showQuota']);
     Route::get('/divisi/kuota', [DivisionController::class, 'showQuota']);
     Route::get('/list-peserta', [ParticipantController::class, 'getParticipantByMentor']);
+    Route::get('/list-peserta/{id}/activity', [TaskController::class, 'getParticipantActivity']);
     Route::get('/tugas-peserta', [TaskController::class, 'index']);
     Route::get('/tugas-peserta/{id}/detail', [TaskController::class, 'show']);
     Route::get('/nilai-peserta', [EvaluationController::class, 'index']);

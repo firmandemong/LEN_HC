@@ -5,9 +5,8 @@
 @endsection
 
 @section('sidebar')
-    @include('layout.participant-sidebar')
+    @include('layout.mentor-sidebar')
 @endsection
-
 @section('subheader')
     @include('sweetalert::alert')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -21,6 +20,9 @@
 @section('content')
     <div class="col-lg-12">
         <div class="card">
+            <div class="card-header">
+                <h6>Peserta : {{ $participant->name }} ({{ $participant->participant_code }})</h6>
+            </div>
             <div class="table-responsive p-3">
                 <table class="table align-items-center table-flush table-hover table-stripped" id="dataTableHover">
                     <thead class="thead-light">
@@ -38,8 +40,7 @@
                                 <td>{{ date('d F Y', strtotime($activity['date'])) }}</td>
                                 <td>{{ $activity['workTime'] }}</td>
                                 <td><button class="btn btn-sm btn-primary btn-detail-activity"
-                                        data-date="{{ $activity['date'] }}"
-                                        data-id="{{ Auth::User()->getUser()->id }}">Lihat
+                                        data-date="{{ $activity['date'] }}" data-id="{{ $participant->id }}">Lihat
                                         Kegiatan</button></td>
                             </tr>
                         @endforeach
@@ -137,11 +138,11 @@
                 data) {
                 $.each(data.activities, function(index) {
                     $('#table-body').append(`
-                        <tr>
-                            <td>${data.activities[index].description}</td>
-                            <td>${data.activities[index].totalTime}</td>
-                        </tr>
-                    `)
+                    <tr>
+                        <td>${data.activities[index].description}</td>
+                        <td>${data.activities[index].totalTime}</td>
+                    </tr>
+                `)
                 })
             })
             $('#modalDetailActivity').modal('show');

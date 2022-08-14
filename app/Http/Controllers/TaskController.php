@@ -92,10 +92,10 @@ class TaskController extends Controller
         return back();
     }
 
-    public function getActivityByDate($date)
+    public function getActivityByDate($id, $date)
     {
         $data = null;
-        $activities = DailyTask::where('date', $date)->where('participant_id', $this->getUser()->id)->get();
+        $activities = DailyTask::where('date', $date)->where('participant_id', $id)->get();
         foreach ($activities as $activity) {
             $totalTime = '0 Jam 0 Menit';
             $description = empty($activity->task_id) ? $activity->description : $activity->description . " <b>(" . $activity->Task->title . ")</b>";
@@ -106,5 +106,27 @@ class TaskController extends Controller
             ];
         }
         return response()->json(['activities' => $data]);
+    }
+
+    public function getParticipantActivity($id)
+    {
+        $participant = Participant::where('id', $id)->first();
+        $data = [];
+        $dates = DailyTask::select('date')->where('participant_id', $id)->groupBy('date')->get();
+        foreach ($dates as $date) {
+            $hour = 0;
+            $minute = 0;
+            $activities = DailyTask::where('date', $date->date)->where('participant_id', $id)->get();
+            foreach ($activities as $activity) {
+                $hour += $activity->hour;
+                $minute += $activity->minute;
+            }
+            $totalTime = DailyTask::countTime($hour, $minute);
+            $data[] = [
+                'date' => $date->date,
+                'workTime' => $totalTime,
+            ];
+        }
+        return view('mentor.list-participant.activity', ['activities' => $data, 'participant' => $participant]);
     }
 }

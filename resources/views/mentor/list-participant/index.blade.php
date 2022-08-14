@@ -40,7 +40,8 @@
                                 <td>{{ $participant->getInstitute->name }}</td>
                                 <td>{!! \App\Models\Participant::getLabelStatus($participant->status) !!}</td>
                                 {{-- <td>{{date('d F Y',strtotime($participant->start_date)) .' - ' . date('d F Y',strtotime($participant->end_date))}}</td> --}}
-                                <td><button class="btn btn-sm btn-primary">Daily Activity</button></td>
+                                <td><a href="/list-peserta/{{ $participant->id }}/activity"
+                                        class="btn btn-sm btn-primary">Daily Activity</a></td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -25,15 +25,16 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="">Judul Tugas</label>
-                    <input type="text" class="form-control" readonly>
+                    <input type="text" class="form-control" value="{{ $task->title }}" readonly>
                 </div>
                 <div class="form-group">
                     <label for="">Deskripsi Tugas</label>
-                    <textarea class="form-control" readonly> </textarea>
+                    <textarea class="form-control" value="" readonly> {{ $task->description }}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="">Tanggal Dibuat</label>
-                    <input name="task_title" type="date" class="form-control" readonly>
+                    <input name="task_title" type="date" value="{{ date('Y-m-d', strtotime($task->created_at)) }}"
+                        class="form-control" readonly>
 
                 </div>
             </div>
@@ -63,6 +64,16 @@
                             <th>Deskripsi</th>
                             <th>Waktu</th>
                         </thead>
+                        <tbody>
+                            @foreach ($histories as $history)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ date('d F Y', strtotime($history->date)) }}</td>
+                                    <td>{{ $history->description }}</td>
+                                    <td>{{ \App\Models\DailyTask::countTime($history->hour, $history->minute) }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>
