@@ -41,7 +41,7 @@
                 <div class="row align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-uppercase mb-1">Peserta Aktif</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $participants->count() }}</div>
                         <div class="mt-2 mb-0 text-muted text-xs">
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-uppercase mb-1">Tugas Belum Selesai</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">650</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $tasks }}</div>
                         <div class="mt-2 mb-0 text-muted text-xs">
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-uppercase mb-1">Jumlah Kuota</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $kuotas }}</div>
                         <div class="mt-2 mb-0 text-muted text-xs">
                         </div>
                     </div>
@@ -107,11 +107,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Udin Wayang</td>
-                                    <td>Nasi Padang</td>
-                                </tr>
+                                @foreach ($data as $participant)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $participant['name'] }}</td>
+                                        <td>{{ $participant['time'] }}</td>
+                                        <td><button class="btn btn-sm btn-primary">Detail Aktivitas</button></td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

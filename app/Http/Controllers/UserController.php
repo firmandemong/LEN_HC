@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Attendance;
 use App\Models\DailyTask;
+use App\Models\DetailDivisionQuota;
+use App\Models\Division;
+use App\Models\Institute;
+use App\Models\Mentor;
+use App\Models\Participant;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,9 +18,53 @@ class UserController extends Controller
     public function dashboard()
     {
         if (Auth::User()->role == 'HC') {
-            return view('hc.dashboard');
+            $submissions = Participant::where('status', 0)->orWhere('status', 1)->count();
+            $participants = Participant::where('status', 2)->count();
+            $mentors = Mentor::count();
+            $divisionCount = Division::count();
+
+            $schools = Institute::with(['Participant'])->get();
+            foreach ($schools as $data) {
+                $totalPeserta = $data->Participant->count('id');
+                $school[] = [
+                    'name' => $data->name,
+                    'totalPeserta' => $totalPeserta
+                ];
+            }
+            $collectSchool = collect($school);
+            $school = $collectSchool->sortByDesc('totalPeserta');
+
+            $divisions = Division::with('getDetailQuota')->get();
+            foreach ($divisions as $data) {
+                $quota = $data->getDetailQuota->sum('quota');
+                $division[] = [
+                    'name' => $data->name,
+                    'quota' => $quota,
+                ];
+            }
+            $collectDivision = collect($division);
+            $division = $collectDivision->sortByDesc('quota');
+            return view('hc.dashboard', compact('submissions', 'participants', 'mentors', 'division', 'divisionCount', 'school'));
         } else if (Auth::User()->role == 'Mentor') {
-            return view('mentor.dashboard');
+            $data = [];
+            $participants = Participant::where('mentor_id', $this->getUser()->id)->where('status', 2)->get();
+            $tasks = Task::where('created_id', $this->getUser()->id)->where('status', '!=', 2)->count();
+            $kuotas = DetailDivisionQuota::where('division_id', $this->getUser()->division_id)->sum('quota');
+            foreach ($participants as $participant) {
+                $hour = 0;
+                $minute = 0;
+                $activities = DailyTask::where('date', date('Y-m-d'))->where('participant_id', $participant->id)->get();
+                foreach ($activities as $activity) {
+                    $hour += $activity->hour;
+                    $minute += $activity->minute;
+                }
+                $totalTime = DailyTask::countTime($hour, $minute);
+                $data[] = [
+                    'name' => $participant->name,
+                    'time' => $totalTime,
+                ];
+            }
+            return view('mentor.dashboard', compact('participants', 'tasks', 'kuotas', 'data'));
         } else if (Auth::User()->role == 'Participant') {
             $hourToday = 0;
             $minuteToday = 0;

@@ -9,4 +9,9 @@ class Institute extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function Participant()
+    {
+        return $this->hasMany(Participant::class, 'school_id');
+    }
 }

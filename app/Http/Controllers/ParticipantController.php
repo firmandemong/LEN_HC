@@ -278,9 +278,4 @@ class ParticipantController extends Controller
         toast('Pengajuan berhasil diupdate', 'success');
         return back();
     }
-
-    public function getParticipantActivity($id)
-    {
-        return view('mentor.list-participant.activity');
-    }
 }

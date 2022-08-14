@@ -25,7 +25,7 @@
                 <div class="row align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-uppercase mb-1">Jumlah Pengajuan</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $submissions }}</div>
                         <div class="mt-2 mb-0 text-muted text-xs">
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-uppercase mb-1">Jumlah Peserta aktif</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">650</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $participants }}</div>
                         <div class="mt-2 mb-0 text-muted text-xs">
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-uppercase mb-1">Jumlah Pembimbing</div>
-                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">366</div>
+                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ $mentors }}</div>
                         <div class="mt-2 mb-0 text-muted text-xs">
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-uppercase mb-1">Jumlah Divisi</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $divisionCount }}</div>
                         <div class="mt-2 mb-0 text-muted text-xs">
                         </div>
                     </div>
@@ -107,11 +107,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Udin Wayang</td>
-                                    <td>Nasi Padang</td>
-                                </tr>
+                                @foreach ($school as $row)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $row['name'] }}</td>
+                                        <td>{{ $row['totalPeserta'] }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -137,11 +139,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Udin Wayang</td>
-                                    <td>Nasi Padang</td>
-                                </tr>
+                                @foreach ($division as $row)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $row['name'] }}</td>
+                                        <td>{{ $row['quota'] }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
