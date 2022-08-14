@@ -165,4 +165,11 @@ class TaskController extends Controller
         toast('Submission berhasil dibatalkan', 'success');
         return back();
     }
+
+    public function approveTask(Task $id)
+    {
+        $id->update(['status' => 2]);
+        toast('Submission berhasil diapprove', 'success');
+        return back();
+    }
 }

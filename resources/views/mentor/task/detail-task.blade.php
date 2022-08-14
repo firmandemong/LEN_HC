@@ -68,7 +68,7 @@
                     </table>
                     @if ($task->status == 1)
                         <div style="float:right">
-                            <button class="btn-success btn">Approve</button>
+                            <button class="btn-success btn" data-toggle="modal" data-target="#modalApprove">Approve</button>
                             <button class="btn-danger btn">Reject</button>
                         </div>
                     @endif
@@ -108,31 +108,24 @@
     </div>
 
 
-    <div class="modal fade" id="create-task-modal" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
+    <div class="modal fade" id="modalApprove" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="delete-modal-label">Buat Penugasan</h5>
+                    <h5 class="modal-title" id="delete-modal-label">Approve File Submission</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="/task" method="post">
+                <form action="/task/{{ $task->id }}/approve" method="post">
                     @csrf
+                    @method('PUT')
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="">Judul Tugas</label>
-                            <input name="task_title" type="text" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Deskripsi Tugas</label>
-                            <textarea name="task_description" class="form-control" id="" required></textarea>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
+                        Anda yakin akan melakukan Approve terhadap tugas ini?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Ya</button>
                     </div>
                 </form>
             </div>

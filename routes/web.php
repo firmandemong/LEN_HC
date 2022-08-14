@@ -116,6 +116,7 @@ Route::group(['middleware' => 'isMentor'], function () {
     Route::get('/list-tugas', [TaskController::class, 'getTaskByMentor']);
     Route::put('/divisi/{id}/update-kuota', [DivisionController::class, 'updateQuota']);
     Route::post('/task', [TaskController::class, 'store']);
+    Route::put('/task/{id}/approve', [TaskController::class, 'approveTask']);
     // Route::get('/list-presensi', [AttendanceController::class, 'getAttendanceByMentor']);
 });
 
