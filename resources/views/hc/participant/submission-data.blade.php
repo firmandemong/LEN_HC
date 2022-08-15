@@ -88,7 +88,10 @@
                                     <td>{{ $submission->name }}</td>
                                     <td>{{ @$submission->getInstitute->name }}</td>
                                     <td>{{ @$submission->getMajor->name }}</td>
-                                    <td><a href="">Lihat Jadwal</a></td>
+                                    <td>
+                                        <a href="#" class="buttonLihatJadwal" 
+                                            data-id="{{ $submission->id }}" data-toggle='modal' data-target='#modalJadwal'>Lihat Jadwal</a>
+                                    </td>
                                     <td><button class="btn btn-success btn-sm btnLanjut2"
                                             data-id="{{ $submission->id }}">Lanjut</button><br><button
                                             class="btn btn-danger btn-sm mt-1">Tolak</button></td>
@@ -292,6 +295,55 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="modalJadwal" tabindex="-1" aria-labelledby="update-modal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-label">Jadwal Wawancara</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="accept-submission-form" method="post">
+                        @csrf
+                        @method('PUT')
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col">
+                                    Tanggal Wawancara: 
+                                </div>
+                                <div class="col" id="viewInterviewDate">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    Jam Wawancara: 
+                                </div>
+                                <div class="col" id="viewInterviewTime">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    Jenis Wawancara: 
+                                </div>
+                                <div class="col" id="viewInterviewType">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    Link/Tempat Wawancara
+                                </div>
+                                <div class="col" id="viewInterviewPlace">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     @stop
 
     @section('css')
@@ -352,6 +404,17 @@
                     })
                 });
                 $('#mentor').removeAttr('readonly')
+            });
+
+            $(document).on('click', '.buttonLihatJadwal', function() {
+
+                $.get(`/schedule/${$(this).attr('data-id')}/getSchedule`, function(data) {
+                    console.log(data)
+                    $('#viewInterviewDate').text(data.schedule.interviewDate);
+                    $('#viewInterviewTime').text(data.schedule.interviewTime);
+                    $('#viewInterviewType').text(data.schedule.interviewType);
+                    $('#viewInterviewPlace').text(data.schedule.interviewPlace);
+                });
             });
         </script>
     @endsection

@@ -12,6 +12,7 @@ use App\Http\Controllers\MentorController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ScheduleController;
 use App\Models\Attendance;
 use App\Models\Division;
 use App\Models\EvaluationForm;
@@ -54,14 +55,19 @@ Route::group(['middleware' => 'isHC'], function () {
     Route::get('/submission/{id}/recomendation', [ParticipantController::class, 'recomendation']);
     Route::put('/submission/{id}/acceptStepOne', [ParticipantController::class, 'acceptStepOne']);
     Route::put('/submission/{id}/acceptSubmission', [ParticipantController::class, 'acceptSubmission']);
+
     Route::get('/data-pengajuan', [ParticipantController::class, 'index']);
+
     Route::get('/data-peserta', [ParticipantController::class, 'getParticipant']);
     Route::get('/data-peserta/{id}', [ParticipantController::class, 'edit'])->name('participant.edit');
     Route::put('/data-peserta/{id}', [ParticipantController::class, 'update'])->name('participant.update');
     Route::delete('/data-peserta/{id}/reject', [ParticipantController::class, 'rejectSubmission']);
+
     Route::get('/division/{id}/getMentor', [DivisionController::class, 'getMentor']);
     Route::get('/data-sertifikat', [CertificateController::class, 'index']);
     Route::get('/school/{id}/history', [InstituteController::class, 'history']);
+    Route::get('/schedule/{id}/getSchedule', [ScheduleController::class, 'getSchedule']);
+
     Route::resource('/data-pembimbing', MentorController::class, [
         'names' => [
             'index' => 'mentor.index',
