@@ -112,15 +112,67 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $participant['name'] }}</td>
                                         <td>{{ $participant['time'] }}</td>
-                                        <td><button class="btn btn-sm btn-primary">Detail Aktivitas</button></td>
+                                        <td><button class="btn btn-sm btn-primary btn-detail-activity"
+                                                data-date="{{ date('Y-m-d') }}" data-id="{{ $participant['id'] }}">Detail
+                                                Aktivitas</button></td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalDetailActivity" tabindex="-1" aria-labelledby="update-modal" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-label">Detail Kegiatan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-stripped">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Deskripsi</th>
+                                <th>Jumlah Waktu</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                        </tbody>
+                    </table>
 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
 @stop
+
+@section('js')
+    <script>
+        $(document).on('click', '.btn-detail-activity', function() {
+            $.get(`/activity/peserta/${$(this).attr('data-id')}/tanggal/${$(this).attr('data-date')}/all`, function(
+                data) {
+                $.each(data.activities, function(index) {
+                    $('#table-body').append(`
+                    <tr>
+                        <td>${data.activities[index].description}</td>
+                        <td>${data.activities[index].totalTime}</td>
+                    </tr>
+                `)
+                })
+            })
+            $('#modalDetailActivity').modal('show');
+        })
+
+        $(document).on('hidden.bs.modal', '#modalDetailActivity', function() {
+            $('#table-body').empty();
+        })
+    </script>
+@endsection

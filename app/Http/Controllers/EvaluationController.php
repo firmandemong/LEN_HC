@@ -12,7 +12,7 @@ class EvaluationController extends Controller
 {
     public function index()
     {
-        $participants = Participant::where('mentor_id', $this->getUser()->id)->where('status', 2)->get();
+        $participants = Participant::where('mentor_id', $this->getUser()->id)->get();
         return view('mentor.score.index', compact('participants'));
     }
 
@@ -79,6 +79,10 @@ class EvaluationController extends Controller
 
     public function getEvaluationByParticipant()
     {
-        return view('participant.result');
+        $subjectSikap = EvaluationSubject::where('category', 'Sikap')->get();
+        $subjectKeterampilan = EvaluationSubject::where('category', 'Keterampilan')->get();
+        $subjectPengetahuan = EvaluationSubject::where('category', 'Pengetahuan')->get();
+        $evaluation = EvaluationForm::with('getDetail')->where('participant_id', $this->getUser()->id)->first();
+        return view('participant.result', compact('subjectSikap', 'subjectKeterampilan', 'subjectPengetahuan', 'evaluation'));
     }
 }

@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="{{asset('template/img/logo/logo.png')}}" rel="icon">
+    <link href="{{ asset('template/img/logo/logo.png') }}" rel="icon">
     <title>@yield('title')</title>
-    <link href="{{asset('template/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{asset('template/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{asset('template/css/ruang-admin.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('template/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('template/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('template/css/ruang-admin.min.css') }}" rel="stylesheet">
     @yield('css')
 </head>
 
@@ -21,9 +21,9 @@
         <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
                 <div class="sidebar-brand-icon">
-                    <img src="{{asset('template/img/logo/logo2.png')}}">
+                    <img src="{{ asset('template/img/logo/logo2.png') }}">
                 </div>
-                <div class="sidebar-brand-text mx-3">RuangAdmin</div>
+                <div class="sidebar-brand-text mx-3">PT LEN</div>
             </a>
             @yield('sidebar')
         </ul>
@@ -85,11 +85,15 @@
 
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="img-profile rounded-circle" src="{{asset('template/img/boy.png')}}" style="max-width: 60px">
-                                <span class="ml-2 d-none d-lg-inline text-white small">{{auth()->user()->getUser()->name}}</span>
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="img-profile rounded-circle" src="{{ asset('template/img/boy.png') }}"
+                                    style="max-width: 60px">
+                                <span
+                                    class="ml-2 d-none d-lg-inline text-white small">{{ auth()->user()->getUser()->name }}</span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
@@ -119,7 +123,8 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; <script>
+                        <span>Copyright &copy;
+                            <script>
                                 document.write(new Date().getFullYear());
                             </script>
                         </span>
@@ -135,12 +140,12 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <script src="{{asset('template/vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{asset('template/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{asset('template/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-    <script src="{{asset('template/js/ruang-admin.min.js')}}"></script>
-    <script src="{{asset('template/vendor/chart.js/Chart.min.js')}}"></script>
-    <script src="{{asset('template/js/demo/chart-area-demo.js')}}"></script>
+    <script src="{{ asset('template/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('template/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('template/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    <script src="{{ asset('template/js/ruang-admin.min.js') }}"></script>
+    <script src="{{ asset('template/vendor/chart.js/Chart.min.js') }}"></script>
+    <script src="{{ asset('template/js/demo/chart-area-demo.js') }}"></script>
     @yield('js')
 </body>
 

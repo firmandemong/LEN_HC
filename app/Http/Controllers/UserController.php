@@ -60,6 +60,7 @@ class UserController extends Controller
                 }
                 $totalTime = DailyTask::countTime($hour, $minute);
                 $data[] = [
+                    'id' => $participant->id,
                     'name' => $participant->name,
                     'time' => $totalTime,
                 ];

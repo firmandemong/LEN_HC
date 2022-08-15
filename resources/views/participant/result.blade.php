@@ -32,9 +32,85 @@
                         <th width="70%">Deskripsi</th>
                         <th width="20%">Nilai</th>
                     </thead>
-                    <tbody>
-                    </tbody>
+                    @if (!empty($evaluation))
+                        <tbody>
+                            <tr>
+                                <td class="bg-light" colspan="3"><b>A. Pengetahuan</b></td>
+                            </tr>
+                            @foreach ($subjectPengetahuan as $subject)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $subject->subject }}</td>
+                                    <td>{{ $evaluation->getDetail->where('subject_id', $subject->id)->first()->point }}</td>
+                                </tr>
+                            @endforeach
+                            <tr>
+                                <td class="bg-light" colspan="3"><b>B. Keterampilan</b></td>
+                            </tr>
+                            @foreach ($subjectKeterampilan as $subject)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $subject->subject }}</td>
+                                    <td>{{ $evaluation->getDetail->where('subject_id', $subject->id)->first()->point }}</td>
+
+                                </tr>
+                            @endforeach
+                            <tr>
+                                <td class="bg-light" colspan="3"><b>C. Sikap</b></td>
+                            </tr>
+                            @foreach ($subjectSikap as $subject)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $subject->subject }}</td>
+                                    <td>{{ $evaluation->getDetail->where('subject_id', $subject->id)->first()->point }}</td>
+
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    @endif
                 </table>
+                @if (!empty($evaluation))
+                    <hr>
+                    <div class="row">
+                        <div class="col-xl-6 col-md-6 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1">Rata-Rata Nilai</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $evaluation->average }}
+                                            </div>
+                                            <div class="mt-2 mb-0 text-muted text-xs">
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-clipboard fa-2x text-primary"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-md-6 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1">Predikat</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                {{ $evaluation->predicate }}
+                                            </div>
+                                            <div class="mt-2 mb-0 text-muted text-xs">
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-graduation-cap fa-2x text-primary"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
