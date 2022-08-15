@@ -89,8 +89,8 @@
                                     <td>{{ @$submission->getInstitute->name }}</td>
                                     <td>{{ @$submission->getMajor->name }}</td>
                                     <td>
-                                        <a href="#" class="buttonLihatJadwal" 
-                                            data-id="{{ $submission->id }}" data-toggle='modal' data-target='#modalJadwal'>Lihat Jadwal</a>
+                                        <a href="#" class="buttonLihatJadwal" data-id="{{ $submission->id }}"
+                                            data-toggle='modal' data-target='#modalJadwal'>Lihat Jadwal</a>
                                     </td>
                                     <td><button class="btn btn-success btn-sm btnLanjut2"
                                             data-id="{{ $submission->id }}">Lanjut</button><br><button
@@ -169,7 +169,7 @@
                                 </tr>
                                 <tr>
                                     <th>Histori Rata-rata Nilai</th>
-                                    <td>0</td>
+                                    <td><span id="averageParticipantScore"></span> </td>
                                 </tr>
                             </table>
                         </div>
@@ -311,14 +311,14 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col">
-                                    Tanggal Wawancara: 
+                                    Tanggal Wawancara:
                                 </div>
                                 <div class="col" id="viewInterviewDate">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    Jam Wawancara: 
+                                    Jam Wawancara:
                                 </div>
                                 <div class="col" id="viewInterviewTime">
                                 </div>
@@ -326,7 +326,7 @@
 
                             <div class="row">
                                 <div class="col">
-                                    Jenis Wawancara: 
+                                    Jenis Wawancara:
                                 </div>
                                 <div class="col" id="viewInterviewType">
                                 </div>
@@ -373,8 +373,15 @@
                 $.get(`/school/${$(this).attr('data-instansi')}/history`, function(data) {
                     $('#countParticipant').text(data.countParticipant);
                     $('#mostDivisionCount').text(data.mostDivisionCount);
+                    $('#averageParticipantScore').text(data.averageParticipantScore);
                 });
                 $('#modalHistori').modal('show');
+            })
+
+            $(document).on('hidden.bs.modal', '#modalHistori', function() {
+                $('#countParticipant').text('');
+                $('#mostDivisionCount').text('');
+                $('#averageParticipantScore').text('');
             })
 
             $(document).on('click', '.btnLanjut', function() {
@@ -416,5 +423,11 @@
                     $('#viewInterviewPlace').text(data.schedule.interviewPlace);
                 });
             });
+            $(document).on('hidden.bs.modal', '#modalJadwal', function() {
+                $('#viewInterviewDate').text('');
+                $('#viewInterviewTime').text('');
+                $('#viewInterviewType').text('');
+                $('#viewInterviewPlace').text('');
+            })
         </script>
     @endsection

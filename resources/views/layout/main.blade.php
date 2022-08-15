@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="{{ asset('template/img/logo/logo.png') }}" rel="icon">
+    <link href="{{ asset('logo-len.png') }}" rel="icon">
     <title>@yield('title')</title>
     <link href="{{ asset('template/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('template/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
@@ -21,9 +21,9 @@
         <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
                 <div class="sidebar-brand-icon">
-                    <img src="{{ asset('template/img/logo/logo2.png') }}">
+                    {{-- <img src="{{ asset('template/img/logo/logo2.png') }}"> --}}
                 </div>
-                <div class="sidebar-brand-text mx-3">PT LEN</div>
+                <div class="sidebar-brand-text mx-3">PT Len Industri</div>
             </a>
             @yield('sidebar')
         </ul>

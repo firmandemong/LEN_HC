@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Certificate;
 use App\Models\EvaluationForm;
 use App\Models\EvaluationFormDetail;
 use App\Models\EvaluationSubject;
@@ -83,6 +84,7 @@ class EvaluationController extends Controller
         $subjectKeterampilan = EvaluationSubject::where('category', 'Keterampilan')->get();
         $subjectPengetahuan = EvaluationSubject::where('category', 'Pengetahuan')->get();
         $evaluation = EvaluationForm::with('getDetail')->where('participant_id', $this->getUser()->id)->first();
-        return view('participant.result', compact('subjectSikap', 'subjectKeterampilan', 'subjectPengetahuan', 'evaluation'));
+        $certificate = Certificate::where('participant_id', $this->getUser()->id)->first();
+        return view('participant.result', compact('subjectSikap', 'subjectKeterampilan', 'subjectPengetahuan', 'evaluation', 'certificate'));
     }
 }

@@ -36,6 +36,11 @@ class Participant extends Model
         return $this->hasOne(EvaluationForm::class, 'participant_id');
     }
 
+    public function getCertificate()
+    {
+        return $this->hasOne(Certificate::class, 'participant_id');
+    }
+
     public function getMajor()
     {
         return $this->belongsTo(Major::class, 'major_id');

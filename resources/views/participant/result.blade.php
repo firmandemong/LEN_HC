@@ -63,7 +63,6 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $subject->subject }}</td>
                                     <td>{{ $evaluation->getDetail->where('subject_id', $subject->id)->first()->point }}</td>
-
                                 </tr>
                             @endforeach
                         </tbody>
@@ -120,15 +119,21 @@
                 <h6 class="m-0 font-weight-bold text-light">Sertifikat</h6>
             </div>
             <div>
-                <div class="customer-message align-items-center">
-                    <p class="text-center text-muted">Sertifikat belum dikirim</p>
-                </div>
-                {{-- <div class="customer-message align-items-center">
-          <a class="font-weight-bold" href="#">
-            <div class="text-truncate message-title">  <i class="fa fa-download"></i> Dwonload Sertifikat</div>
-            <div class="small text-gray-500 message-time font-weight-bold">Uploaded at ..</div>
-          </a>
-        </div> --}}
+                @if (empty($certificate))
+                    <div class="customer-message align-items-center">
+                        <p class="text-center text-muted">Sertifikat belum dikirim</p>
+                    </div>
+                @else
+                    <div class="customer-message align-items-center">
+                        <a class="font-weight-bold" href="{{ asset('certificate/' . $certificate->file) }}">
+                            <div class="text-truncate message-title"> <i class="fa fa-download"></i> Dwonload Sertifikat
+                            </div>
+                            <div class="small text-gray-500 message-time font-weight-bold">Uploaded at
+                                {{ date('d F Y', strtotime($certificate->uploaded_at)) }}</div>
+                        </a>
+                    </div>
+                @endif
+
             </div>
         </div>
     </div>

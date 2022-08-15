@@ -15,7 +15,7 @@ class InstituteController extends Controller
         $institutes = Institute::all();
 
         return view('hc.instansi.index', [
-            'institutes'=>$institutes,
+            'institutes' => $institutes,
         ]);
     }
 
@@ -28,6 +28,21 @@ class InstituteController extends Controller
         $participant = Participant::where('school_id', $id)->where(function ($query) {
             $query->where('status', 2)->orWhere('status', 4);
         })->get();
+
+        $averageParticipantScore = 0;
+        if (!empty($participant)) {
+            $totalScore = 0;
+            $totalParticipant = 0;
+            $participantScore = Participant::whereHas('getEvaluation')->where('school_id', $id)->where(function ($query) {
+                $query->where('status', 2)->orWhere('status', 4);
+            })->get();
+            foreach ($participantScore as $score) {
+                $totalScore += $score->getEvaluation->average;
+                $totalParticipant += 1;
+            }
+            $averageParticipantScore = round($totalScore / $totalParticipant, 1);
+        }
+
         $mostDivisionCount = '-';
         if ($participant->count() > 0) {
             $getInstance = $participant->toQuery()->select('division_id', DB::raw("count(division_id) as jumlah"))->groupBy('division_id')->get();
@@ -43,7 +58,7 @@ class InstituteController extends Controller
             $mostDivisionCount = Division::where('id', $participantByInstance)->first()->name;
         }
 
-        return response()->json(['countParticipant' => $countParticipant, 'mostDivisionCount' => $mostDivisionCount]);
+        return response()->json(['countParticipant' => $countParticipant, 'mostDivisionCount' => $mostDivisionCount, 'averageParticipantScore' => $averageParticipantScore]);
     }
 
     public function update(Request $request, $id)
