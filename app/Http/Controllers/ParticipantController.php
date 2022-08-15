@@ -208,7 +208,9 @@ class ParticipantController extends Controller
         $recomendationByNeed = '-';
 
         //by major
-        $getParticipant = Participant::select('division_id', DB::raw("count(division_id) as jumlah"))->where('id', '!=', $id->id)->where('major_id', $id->major_id)->where('status', 2)->groupBy('division_id')->get();
+        $getParticipant = Participant::select('division_id', DB::raw("count(division_id) as jumlah"))->where('id', '!=', $id->id)->where('major_id', $id->major_id)->where(function ($query) {
+            $query->where('status', 2)->orWhere('status', 4);
+        })->groupBy('division_id')->get();
         $participantByMajor = null;
         $maxMajor = 0;
         foreach ($getParticipant as $participant) {

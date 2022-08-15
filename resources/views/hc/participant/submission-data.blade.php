@@ -158,11 +158,11 @@
                                 </tr>
                                 <tr>
                                     <th>Histori Jumlah Peserta</th>
-                                    <td>0</td>
+                                    <td><span id="countParticipant"></span></td>
                                 </tr>
                                 <tr>
                                     <th>Histori Divisi terbanyak</th>
-                                    <td>0</td>
+                                    <td><span id="mostDivisionCount"></span></td>
                                 </tr>
                                 <tr>
                                     <th>Histori Rata-rata Nilai</th>
@@ -251,7 +251,6 @@
                                 <label for="">Link/Tempat Wawancara</label>
                                 <input type="text" name="interviewPlace" class="form-control" required>
                             </div>
-
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -319,6 +318,10 @@
             });
 
             $(document).on('click', '.btnHistori', function() {
+                $.get(`/school/${$(this).attr('data-instansi')}/history`, function(data) {
+                    $('#countParticipant').text(data.countParticipant);
+                    $('#mostDivisionCount').text(data.mostDivisionCount);
+                });
                 $('#modalHistori').modal('show');
             })
 
@@ -348,7 +351,6 @@
                             .id));
                     })
                 });
-
                 $('#mentor').removeAttr('readonly')
             });
         </script>

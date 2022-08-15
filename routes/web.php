@@ -14,8 +14,10 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Models\Attendance;
 use App\Models\Division;
+use App\Models\EvaluationForm;
 use App\Models\Participant;
 use Illuminate\Support\Facades\Route;
+use PhpParser\Node\Expr\Eval_;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +40,7 @@ Route::get('/templates', function () {
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/login', [UserController::class, 'loginView'])->name('login');
     Route::post('/login', [UserController::class, 'login']);
+    Route::get('/pengajuan', [ParticipantController::class, 'formPengajuan']);
     Route::post('/submission', [ParticipantController::class, 'submission']);
 });
 
@@ -58,6 +61,7 @@ Route::group(['middleware' => 'isHC'], function () {
     Route::delete('/data-peserta/{id}/reject', [ParticipantController::class, 'rejectSubmission']);
     Route::get('/division/{id}/getMentor', [DivisionController::class, 'getMentor']);
     Route::get('/data-sertifikat', [CertificateController::class, 'index']);
+    Route::get('/school/{id}/history', [InstituteController::class, 'history']);
     Route::resource('/data-pembimbing', MentorController::class, [
         'names' => [
             'index' => 'mentor.index',
@@ -117,6 +121,8 @@ Route::group(['middleware' => 'isMentor'], function () {
     Route::put('/divisi/{id}/update-kuota', [DivisionController::class, 'updateQuota']);
     Route::post('/task', [TaskController::class, 'store']);
     Route::put('/task/{id}/approve', [TaskController::class, 'approveTask']);
+    Route::get('/nilai-peserta/{id}/evaluasi', [EvaluationController::class, 'evaluationForm']);
+    Route::post('/nilai-peserta/{id}/evaluasi', [EvaluationController::class, 'evaluate']);
     // Route::get('/list-presensi', [AttendanceController::class, 'getAttendanceByMentor']);
 });
 
@@ -144,7 +150,6 @@ Route::group(['middleware' => 'isParticipant'], function () {
 //     return view('peserta/dashboardPeserta');
 // });
 // // pengajuan
-// Route::get('/pengajuan', [ParticipantController::class, 'formPengajuan']);
 // // Master AKUN
 // // Route::get('/masterakun', [UserController::class, 'masterAkun']);
 // Route::get('/master-akun', function () {

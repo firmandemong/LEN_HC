@@ -18,6 +18,7 @@
 @endsection
 
 @section('content')
+    @include('sweetalert::alert')
     <div class="col-lg-12">
         <div class="card mb-4">
 
@@ -43,7 +44,8 @@
                                 </td>
                                 <td>
                                     @if (empty($participant->getEvaluation))
-                                        <button class="btn-sm btn btn-primary">Evaluasi</button>
+                                        <a class="btn-sm btn btn-primary"
+                                            href="/nilai-peserta/{{ $participant->id }}/evaluasi">Evaluasi</a>
                                     @else
                                         <button class="btn-sm btn btn-success">Lihat Hasil</button>
                                     @endif

@@ -33,7 +33,7 @@ class Participant extends Model
 
     public function getEvaluation()
     {
-        return $this->belongsTo(EvaluationForm::class, 'participant_id');
+        return $this->hasOne(EvaluationForm::class, 'participant_id');
     }
 
     public function getMajor()
