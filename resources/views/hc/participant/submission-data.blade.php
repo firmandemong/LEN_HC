@@ -334,7 +334,7 @@
 
                             <div class="row">
                                 <div class="col">
-                                    Link/Tempat Wawancara
+                                    Link/Tempat Wawancara:
                                 </div>
                                 <div class="col" id="viewInterviewPlace">
                                 </div>
