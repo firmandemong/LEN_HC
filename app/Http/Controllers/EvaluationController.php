@@ -27,6 +27,8 @@ class EvaluationController extends Controller
 
     public function evaluate(Request $request, $id)
     {
+        $participant = Participant::where('id', $id)->first();
+
         $request->validate([
             'score' => 'required'
         ]);
@@ -68,6 +70,8 @@ class EvaluationController extends Controller
             'average' => $average,
             'predicate' => $predicate
         ]);
+
+        $participant->update(['status' => 4]);
 
         toast('Evaluasi berhasil dilakukan', 'success');
         return redirect('/nilai-peserta');
