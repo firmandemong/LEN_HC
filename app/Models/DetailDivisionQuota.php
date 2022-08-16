@@ -15,4 +15,9 @@ class DetailDivisionQuota extends Model
     {
         return $this->belongsTo(Division::class, 'division_id');
     }
+
+    public function Major()
+    {
+        return $this->belongsTo(Major::class, 'major_id');
+    }
 }

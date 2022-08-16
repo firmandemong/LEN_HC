@@ -64,6 +64,7 @@ Route::group(['middleware' => 'isHC'], function () {
     Route::delete('/data-peserta/{id}/reject', [ParticipantController::class, 'rejectSubmission']);
 
     Route::get('/division/{id}/getMentor', [DivisionController::class, 'getMentor']);
+    Route::get('/division/{id}/getQuota', [DivisionController::class, 'getQuota']);
     Route::get('/data-sertifikat', [CertificateController::class, 'index']);
     Route::get('/school/{id}/history', [InstituteController::class, 'history']);
     Route::get('/schedule/{id}/getSchedule', [ScheduleController::class, 'getSchedule']);

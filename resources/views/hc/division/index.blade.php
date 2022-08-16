@@ -37,8 +37,8 @@
                                 <td>{{ $division->name }}</td>
                                 <td>{{ $division->quota }}</td>
                                 <td>
-                                    <button button id="" data-id="{{ $division->id }}" data-toggle="modal"
-                                        data-target="" class="btn btn-success btn-sm">Detail Kuota</button>
+                                    <button button id="detail-button" data-id="{{ $division->id }}" data-toggle="modal"
+                                        data-target="#detail-modal" class="btn btn-success btn-sm">Detail Kuota</button>
                                     <button button id="edit-button" data-id="{{ $division->id }}"
                                         data-name="{{ $division->name }}" data-quota="{{ $division->quota }}"
                                         data-toggle="modal" data-target="#edit-modal"
@@ -142,6 +142,37 @@
             </div>
         </div>
     </div>
+
+    {{-- <!-- Modal Delete --> --}}
+    <div class="modal fade" id="detail-modal" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detail-modal-label">Detail Kuota</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive p-3">
+                        <table class="table align-items-center table-flush table-hover table-stripped" id="dataTableHover">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Jurusan</th>
+                                    <th>Kuota</th>
+                                </tr>
+                            </thead>
+                            <tbody id="detail-table-body">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('css')
@@ -176,6 +207,17 @@
                 var url = '/data-divisi/' + data_id;
                 $('#delete-form').attr('action', url);
             });
+
+            $(document).on('click', "#detail-button", function() {
+                $.get(`/division/${$(this).attr('data-id')}/getQuota`, function(data) {
+                    $.each(data.quotas, function(index) {
+                        $("#detail-table-body:last-child")
+                        .append(`<tr><td>${data.quotas[index].name}</td><td>${data.quotas[index].quota}</td></tr>`);
+                    })
+                });
+            });
+
+
         });
 
         $(document).ready(function() {

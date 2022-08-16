@@ -109,4 +109,10 @@ class DivisionController extends Controller
         $mentors = Mentor::where('division_id', $id)->get();
         return response()->json(['mentors' => $mentors]);
     }
+
+    public function getQuota($id)
+    {
+        $quotas = DetailDivisionQuota::where('division_id', $id)->join('majors', 'detail_division_quotas.major_id', '=', 'majors.id')->get();
+        return response()->json(['quotas' => $quotas]);
+    }
 }
