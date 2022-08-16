@@ -93,6 +93,33 @@ class TaskController extends Controller
         return back();
     }
 
+    public function updateDailyTask(Request $request, $id)
+    {
+        $request->validate([
+            'description' => 'required',
+        ]);
+
+        DailyTask::where('id', $id)->update([
+            'description' => $request->description,
+            'hour' => $request->hour,
+            'minute' => $request->minute,
+            'task_id' => $request->task,
+            'date' => date('Y-m-d')
+        ]);
+
+        toast('Kegiatan berhasil diubah', 'success');
+        return back();
+    }
+
+    public function destroyDailyTask(DailyTask $id)
+    {
+
+        $id->delete();
+
+        toast('Kegiatan berhasil dihapus', 'success');
+        return back();
+    }
+
     public function getActivityByDate($id, $date)
     {
         $data = null;

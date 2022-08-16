@@ -139,8 +139,13 @@ Route::group(['middleware' => 'isParticipant'], function () {
     Route::get('list-tugas', [TaskController::class, 'getListTaskByParticipant']);
     Route::get('evaluation-result', [EvaluationController::class, 'getEvaluationByParticipant']);
     Route::get('/list-tugas/{id}/detail', [TaskController::class, 'show']);
+
     Route::post('/daily-activity', [TaskController::class, 'storeDailyTask']);
     Route::post('/task/{id}/upload', [TaskController::class, 'uploadFile']);
+
+    Route::put('/daily-activity/{id}/update', [TaskController::class, 'updateDailyTask']);
+    Route::DELETE('/daily-activity/{id}', [TaskController::class, 'destroyDailyTask']);
+
     Route::DELETE('/task/{id}/cancelUpload', [TaskController::class, 'cancelUpload']);
     // Route::post('/clock-in', [AttendanceController::class, 'clockIn']);
     // Route::put('/clock-out', [AttendanceController::class, 'clockOut']);
