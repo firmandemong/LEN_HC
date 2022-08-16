@@ -55,6 +55,7 @@ Route::group(['middleware' => 'isHC'], function () {
     Route::get('/submission/{id}/recomendation', [ParticipantController::class, 'recomendation']);
     Route::put('/submission/{id}/acceptStepOne', [ParticipantController::class, 'acceptStepOne']);
     Route::put('/submission/{id}/acceptSubmission', [ParticipantController::class, 'acceptSubmission']);
+    Route::put('/submission/{id}/rejectSubmission', [ParticipantController::class, 'reject'])->name('rejectSubmission');
 
     Route::get('/data-pengajuan', [ParticipantController::class, 'index']);
 

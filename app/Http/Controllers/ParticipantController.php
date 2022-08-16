@@ -280,4 +280,11 @@ class ParticipantController extends Controller
         toast('Pengajuan berhasil diupdate', 'success');
         return back();
     }
+    
+    public function reject(Participant $id)
+    {
+        $id->update(['status'=>3]);
+        toast('Pengajuan berhasil ditolak', 'success');
+        return back();
+    }
 }

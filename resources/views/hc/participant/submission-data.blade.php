@@ -55,9 +55,15 @@
                                     </td>
                                     <td><a href="{{ asset('/file_submission/' . $submission->file_transcript) }}">Lihat
                                             File</a></td>
-                                    <td><button class="btn btn-success btn-sm btnLanjut"
-                                            data-id="{{ $submission->id }}">Lanjut</button><br><button
-                                            class="btn btn-danger btn-sm mt-1">Tolak</button></td>
+                                    <td>
+                                        <button class="btn btn-success btn-sm btnLanjut"
+                                            data-id="{{ $submission->id }}">Lanjut</button><br>
+                                            <form action="{{ route('rejectSubmission', $submission->id) }}" method="POST" >
+                                                @csrf
+                                                @method('put')
+                                                <button type="submit"class="btn btn-danger btn-sm mt-1 ">Tolak</a>
+                                            </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -92,9 +98,15 @@
                                         <a href="#" class="buttonLihatJadwal" data-id="{{ $submission->id }}"
                                             data-toggle='modal' data-target='#modalJadwal'>Lihat Jadwal</a>
                                     </td>
-                                    <td><button class="btn btn-success btn-sm btnLanjut2"
-                                            data-id="{{ $submission->id }}">Lanjut</button><br><button
-                                            class="btn btn-danger btn-sm mt-1">Tolak</button></td>
+                                    <td>
+                                        <button class="btn btn-success btn-sm btnLanjut2" data-id="{{ $submission->id }}">Lanjut</button>
+                                        <br>
+                                        <form action="{{ route('rejectSubmission', $submission->id) }}" method="POST" >
+                                            @csrf
+                                            @method('put')
+                                            <button type="submit"class="btn btn-danger btn-sm mt-1 ">Tolak</a>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -423,11 +435,12 @@
                     $('#viewInterviewPlace').text(data.schedule.interviewPlace);
                 });
             });
+
             $(document).on('hidden.bs.modal', '#modalJadwal', function() {
                 $('#viewInterviewDate').text('');
                 $('#viewInterviewTime').text('');
                 $('#viewInterviewType').text('');
                 $('#viewInterviewPlace').text('');
-            })
+            });
         </script>
     @endsection
