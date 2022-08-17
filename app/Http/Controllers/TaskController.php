@@ -42,6 +42,32 @@ class TaskController extends Controller
         return back();
     }
 
+    public function update(Request $request, Task $id)
+    {
+        $request->validate([
+            'task_title' => 'required',
+            'task_description' => 'required',
+            'participant' => 'required',
+        ]);
+
+        $id->update([
+            'title' => $request->task_title,
+            'description' => $request->task_description,
+            'participant_id' => $request->participant,
+        ]);
+
+        toast("Tugas berhasil diubah", 'success');
+        return back();
+    }
+
+    public function destroy(Task $id)
+    {
+        $id->delete();
+
+        toast("Tugas berhasil dihapus", 'success');
+        return back();
+    }
+
     public function dailyReport()
     {
         $data = [];

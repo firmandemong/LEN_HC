@@ -116,19 +116,23 @@ Route::group(['middleware' => 'isHC'], function () {
 });
 
 Route::group(['middleware' => 'isMentor'], function () {
-    Route::get('/my-peserta', [ParticipantController::class, 'showQuota']);
     Route::get('/divisi/kuota', [DivisionController::class, 'showQuota']);
+    Route::get('/my-peserta', [ParticipantController::class, 'showQuota']);
     Route::get('/list-peserta', [ParticipantController::class, 'getParticipantByMentor']);
+
     Route::get('/list-peserta/{id}/activity', [TaskController::class, 'getParticipantActivity']);
     Route::get('/tugas-peserta', [TaskController::class, 'index']);
     Route::get('/tugas-peserta/{id}/detail', [TaskController::class, 'show']);
-    Route::get('/nilai-peserta', [EvaluationController::class, 'index']);
     Route::get('/list-tugas/create', [TaskController::class, 'create']);
     Route::post('/list-tugas/store', [TaskController::class, 'store']);
     Route::get('/list-tugas', [TaskController::class, 'getTaskByMentor']);
     Route::put('/divisi/{id}/update-kuota', [DivisionController::class, 'updateQuota']);
     Route::post('/task', [TaskController::class, 'store']);
+    Route::put('/task/{id}/update', [TaskController::class, 'update']);
+    Route::delete('/task/{id}', [TaskController::class, 'destroy']);
     Route::put('/task/{id}/approve', [TaskController::class, 'approveTask']);
+    
+    Route::get('/nilai-peserta', [EvaluationController::class, 'index']);
     Route::get('/nilai-peserta/{id}/evaluasi', [EvaluationController::class, 'evaluationForm']);
     Route::post('/nilai-peserta/{id}/evaluasi', [EvaluationController::class, 'evaluate']);
     // Route::get('/list-presensi', [AttendanceController::class, 'getAttendanceByMentor']);

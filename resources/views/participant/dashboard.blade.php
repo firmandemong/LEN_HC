@@ -303,7 +303,6 @@
             $("#edit_hour").val($(this).attr('data-hour'));
             $("#edit_minute").val($(this).attr('data-minute'));
             
-            // validate here
         });
         
         $(document).on('click', '#submit-edit-button', function(){
