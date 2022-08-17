@@ -131,6 +131,7 @@ Route::group(['middleware' => 'isMentor'], function () {
     Route::put('/task/{id}/update', [TaskController::class, 'update']);
     Route::delete('/task/{id}', [TaskController::class, 'destroy']);
     Route::put('/task/{id}/approve', [TaskController::class, 'approveTask']);
+    Route::put('/task/{id}/reject', [TaskController::class, 'rejectTask']);
     
     Route::get('/nilai-peserta', [EvaluationController::class, 'index']);
     Route::get('/nilai-peserta/{id}/evaluasi', [EvaluationController::class, 'evaluationForm']);

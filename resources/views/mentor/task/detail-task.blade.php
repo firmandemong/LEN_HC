@@ -69,7 +69,7 @@
                     @if ($task->status == 1)
                         <div style="float:right">
                             <button class="btn-success btn" data-toggle="modal" data-target="#modalApprove">Approve</button>
-                            <button class="btn-danger btn">Reject</button>
+                            <button class="btn-danger btn" data-toggle="modal" data-target="#modalReject">Reject</button>
                         </div>
                     @endif
                 @endif
@@ -122,6 +122,30 @@
                     @method('PUT')
                     <div class="modal-body">
                         Anda yakin akan melakukan Approve terhadap tugas ini?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Ya</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalReject" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="delete-modal-label">Reject File Submission</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/task/{{ $task->id }}/reject" method="post">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-body">
+                        Anda yakin akan melakukan Reject terhadap tugas ini?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
