@@ -111,8 +111,8 @@
                     @method('put')
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="">Peserta</label>
-                            {{-- <select name="participant" id="edit_participant" class="form-control" required>
+                            {{-- <label for="">Peserta</label>
+                            <select name="participant" id="edit_participant" class="form-control" required>
                                 <option value="0" disabled selected>Pilih Peserta</option>
                                 @foreach ($participants as $participant)
                                     <option value="{{ $participant->id }}">{{ $participant->name }}</option>
