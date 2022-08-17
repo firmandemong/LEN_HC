@@ -95,7 +95,7 @@ class ParticipantController extends Controller
             'school_name' => 'required',
             'school_type' => 'required',
             'major' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique:users',
             'file_application_letter' => 'required|max:10240',
             'file_cv' => 'required|max:10240',
             'file_transcript' => 'required|max:10240',
