@@ -28,7 +28,7 @@
                         <th style="min-width:20px">No</th>
                         <th>No Peserta</th>
                         <th>Nama</th>
-                        <th>Status</th>
+                        {{-- <th>Status</th> --}}
                         <th class="text-center">Action</th>
 
                     </thead>
@@ -38,11 +38,11 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $participant->participant_code }}</td>
                                 <td>{{ $participant->name }}</td>
-                                <td>{!! \App\Models\Participant::getLabelStatus($participant->status) !!}</td>
+                                {{-- <td>{!! \App\Models\Participant::getLabelStatus($participant->status) !!}</td> --}}
                                 <td class="text-center">
                                     @if ($participant->getCertificate)
-                                        <button button class="btn btn-primary btn-sm download-btn" data-id="{{$participant->id}}">Download</button>
-                                    @else
+                                            <a href="{{ asset('/certificate/' . $participant->getCertificate->file) }}" class="btn btn-primary btn-sm download-btn">Download</a>
+                                    @elseif ($participant->status==4)
                                         <button button class="btn btn-primary btn-sm upload-btn"  data-id="{{$participant->id}}" data-toggle="modal" data-target='#upload-modal'>Upload</button>
                                     @endif
                                 </td>

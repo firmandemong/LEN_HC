@@ -10,7 +10,7 @@ class CertificateController extends Controller
 {
     public function index()
     {
-        $participants = Participant::with('Division', 'Mentor')->Active()->get();
+        $participants = Participant::with('Division', 'Mentor')->ActiveAndFinished()->get();
         return view('hc.participant.certificate', compact('participants'));
     }
 

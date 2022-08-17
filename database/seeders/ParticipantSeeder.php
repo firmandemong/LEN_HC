@@ -67,7 +67,7 @@ class ParticipantSeeder extends Seeder
             'start_date'=>'2022-06-06',
             'end_date'=>'2022-07-07',
             'user_id'=>$user2->id,
-            'status'=>2,
+            'status'=>4,
         ]);
 
         $user3 = User::create([
