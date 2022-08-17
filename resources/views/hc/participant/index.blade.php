@@ -27,9 +27,11 @@
                         <th style="min-width:20px">No</th>
                         <th>No Peserta</th>
                         <th>Nama</th>
-                        <th>Periode</th>
+                        <th>Asal Instansi</th>
                         <th>Divisi</th>
-                        {{-- <th>Action</th> --}}
+                        <th>Mentor</th>
+                        <th>Status</th>
+                        <th>Action</th>
 
                     </thead>
                     <tbody>
@@ -39,10 +41,20 @@
                                 <td>{{ $participant->participant_code }}</td>
                                 <td>{{ $participant->name }}</td>
                                 <td>{{ $participant->getInstitute->name }}</td>
+                                <td>{{ $participant->division->name }}</td>
+                                <td>{{ $participant->mentor->name }}</td>
                                 <td>{!! \App\Models\Participant::getLabelStatus($participant->status) !!}</td>
                                 {{-- <td>{{date('d F Y',strtotime($participant->start_date)) .' - ' . date('d F Y',strtotime($participant->end_date))}}</td> --}}
-                                {{-- <td><a href="/list-peserta/{{ $participant->id }}/activity"
-                                        class="btn btn-sm btn-primary">Daily Activity</a></td> --}}
+                                <td>
+                                    <button button 
+                                        class="btn btn-primary btn-sm">Detail</button>
+                                    <button button id="" data-id="{{ $participant->id }}"
+                                        data-name="{{ $participant->name }}"
+                                        data-toggle="modal" data-target="#edit-modal"
+                                        class="btn btn-warning btn-sm edit-button">Edit</button>
+                                    <button button id="" data-id="{{ $participant->id }}" data-toggle="modal"
+                                        data-target="#delete-modal" class="btn btn-danger btn-sm delete-button">Delete</button>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
