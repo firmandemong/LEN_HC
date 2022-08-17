@@ -29,11 +29,22 @@
                         <th>Nama</th>
                         <th>Periode</th>
                         <th>Divisi</th>
-                        <th>Action</th>
+                        {{-- <th>Action</th> --}}
 
                     </thead>
                     <tbody>
-
+                        @foreach ($participants as $participant)
+                        <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $participant->participant_code }}</td>
+                                <td>{{ $participant->name }}</td>
+                                <td>{{ $participant->getInstitute->name }}</td>
+                                <td>{!! \App\Models\Participant::getLabelStatus($participant->status) !!}</td>
+                                {{-- <td>{{date('d F Y',strtotime($participant->start_date)) .' - ' . date('d F Y',strtotime($participant->end_date))}}</td> --}}
+                                {{-- <td><a href="/list-peserta/{{ $participant->id }}/activity"
+                                        class="btn btn-sm btn-primary">Daily Activity</a></td> --}}
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

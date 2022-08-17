@@ -23,7 +23,7 @@ class ParticipantSeeder extends Seeder
         ]);
         Participant::create([
             'participant_code'=>'123456',
-            'name'=>'Peserta',
+            'name'=>'Peserta 1',
             'school_type'=>'Universitas',
             'school_id'=>1,
             'major_id' => 3,
@@ -46,7 +46,7 @@ class ParticipantSeeder extends Seeder
         ]);
         Participant::create([
             'participant_code'=>'123456',
-            'name'=>'Peserta',
+            'name'=>'Peserta 2',
             'school_type'=>'Universitas',
             'school_id'=>1,
             'major_id' => 3,
