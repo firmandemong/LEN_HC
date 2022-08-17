@@ -47,13 +47,12 @@ class TaskController extends Controller
         $request->validate([
             'task_title' => 'required',
             'task_description' => 'required',
-            'participant' => 'required',
         ]);
 
         $id->update([
             'title' => $request->task_title,
             'description' => $request->task_description,
-            'participant_id' => $request->participant,
+            // 'participant_id' => $request->participant,
         ]);
 
         toast("Tugas berhasil diubah", 'success');

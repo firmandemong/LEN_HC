@@ -112,12 +112,12 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="">Peserta</label>
-                            <select name="participant" id="edit_participant" class="form-control" required>
+                            {{-- <select name="participant" id="edit_participant" class="form-control" required>
                                 <option value="0" disabled selected>Pilih Peserta</option>
                                 @foreach ($participants as $participant)
                                     <option value="{{ $participant->id }}">{{ $participant->name }}</option>
                                 @endforeach
-                            </select>
+                            </select> --}}
                         </div>
                         <div class="form-group">
                             <label for="">Judul Tugas</label>
@@ -191,7 +191,7 @@
             $(document).on('click', '.edit-button', function(){
                 data_id = $(this).attr('data-id');
                 
-                $("#edit_participant").val(($(this).attr('data-participant') == null || $(this).attr('data-participant') == false) ? "0" : $(this).attr('data-participant')).change();
+                // $("#edit_participant").val(($(this).attr('data-participant') == null || $(this).attr('data-participant') == false) ? "0" : $(this).attr('data-participant')).change();
                 $("#edit_task_title").val($(this).attr('data-title'));
                 $("#edit_task_description").val($(this).attr('data-desc'));
                 
