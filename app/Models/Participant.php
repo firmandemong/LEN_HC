@@ -51,6 +51,11 @@ class Participant extends Model
         return $query->where('status', 2)->orWhere('status', 4);
     }
 
+    public function scopeFinished($query)
+    {
+        return $query->Where('status', 4);
+    }
+
     public function scopeActive($query)
     {
         return $query->where('status', 2);
