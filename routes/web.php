@@ -48,6 +48,8 @@ Route::group(['middleware' => 'guest'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
     Route::get('/logout', [UserController::class, 'logout']);
+    Route::get('/profile', [UserController::class, 'getProfile']);
+    Route::post('/update-profile', [UserController::class, 'update']);
     Route::get('/activity/peserta/{id}/tanggal/{date}/all', [TaskController::class, 'getActivityByDate']);
 });
 

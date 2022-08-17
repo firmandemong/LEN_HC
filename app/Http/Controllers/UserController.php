@@ -12,6 +12,7 @@ use App\Models\Participant;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -117,6 +118,35 @@ class UserController extends Controller
 
     public function getProfile()
     {
+        $user = auth()->user();
+        return view('profile', compact('user'));
+    }
+
+    public function update(Request $request)
+    {
+        $user = auth()->user();
+
+        // validate
+        if ($request->password1 != $request->password2) {
+            toast('Password lama tidak sama', 'error');
+            return back();
+        } elseif (!Hash::check($request->password1, $user->password)) {
+            toast('Password lama salah', 'error');
+            return back();
+        }
+
+        if ($request->new_password1 != $request->new_password2) {
+            toast('Password baru tidak sama', 'error');
+            return back();
+        } 
+
+        $user->update([
+            'email' => $request->email,
+            'password' => bcrypt($request->new_password1),
+        ]);
+
+        toast('Data pengguna berhasil diubah', 'success');
+        return view('profile', compact('user'));
     }
 
     public function masterAkun()
