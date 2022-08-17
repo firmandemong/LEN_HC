@@ -47,7 +47,8 @@
                                         <a class="btn-sm btn btn-primary"
                                             href="/nilai-peserta/{{ $participant->id }}/evaluasi">Evaluasi</a>
                                     @else
-                                        <button class="btn-sm btn btn-success">Lihat Hasil</button>
+                                        <a class="bbtn-sm btn btn-success"
+                                            href="/evaluation-result/{{ $participant->id }}">Lihat Hasil</a>
                                     @endif
                                 </td>
                             </tr>

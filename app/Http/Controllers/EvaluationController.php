@@ -87,4 +87,14 @@ class EvaluationController extends Controller
         $certificate = Certificate::where('participant_id', $this->getUser()->id)->first();
         return view('participant.result', compact('subjectSikap', 'subjectKeterampilan', 'subjectPengetahuan', 'evaluation', 'certificate'));
     }
+
+    public function getEvaluationResult($id)
+    {
+        $subjectSikap = EvaluationSubject::where('category', 'Sikap')->get();
+        $subjectKeterampilan = EvaluationSubject::where('category', 'Keterampilan')->get();
+        $subjectPengetahuan = EvaluationSubject::where('category', 'Pengetahuan')->get();
+        $evaluation = EvaluationForm::with('getDetail')->where('participant_id', $id)->first();
+        $participant = Participant::where('id', $id)->first();
+        return view('mentor.list-participant.result', compact('subjectSikap', 'subjectKeterampilan', 'subjectPengetahuan', 'evaluation', 'participant'));
+    }
 }
