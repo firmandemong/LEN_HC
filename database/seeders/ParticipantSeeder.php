@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Mentor;
 use App\Models\Participant;
+use App\Models\Certificate;
 use Illuminate\Database\Seeder;
 
 class ParticipantSeeder extends Seeder
@@ -21,7 +22,7 @@ class ParticipantSeeder extends Seeder
             'password'=>bcrypt('password'),
             'role'=>'Participant',
         ]);
-        Participant::create([
+        $participant1 = Participant::create([
             'participant_code'=>'123456',
             'name'=>'Peserta 1',
             'school_type'=>'Universitas',
@@ -37,6 +38,13 @@ class ParticipantSeeder extends Seeder
             'end_date'=>'2022-07-07',
             'user_id'=>$user->id,
             'status'=>2,
+        ]);
+
+        // cert
+        $cert_1 = Certificate::create([
+            'participant_id' => $participant1->id,
+            'file' => 'file1.pdf',
+            'uploaded_at' => '2022-08-08',
         ]);
 
         $user2 = User::create([

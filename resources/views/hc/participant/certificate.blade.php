@@ -18,6 +18,7 @@
 @endsection
 
 @section('content')
+    @include('sweetalert::alert')
     <div class="col-lg-12">
         <div class="card mb-4">
 
@@ -28,13 +29,52 @@
                         <th>No Peserta</th>
                         <th>Nama</th>
                         <th>Status</th>
-                        <th>Action</th>
+                        <th class="text-center">Action</th>
 
                     </thead>
                     <tbody>
-
+                        @foreach ($participants as $participant)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $participant->participant_code }}</td>
+                                <td>{{ $participant->name }}</td>
+                                <td>{!! \App\Models\Participant::getLabelStatus($participant->status) !!}</td>
+                                <td class="text-center">
+                                    @if ($participant->getCertificate)
+                                        <button button class="btn btn-primary btn-sm download-btn" data-id="{{$participant->id}}">Download</button>
+                                    @else
+                                        <button button class="btn btn-primary btn-sm upload-btn"  data-id="{{$participant->id}}" data-toggle="modal" data-target='#upload-modal'>Upload</button>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+
+    {{-- upload --}}
+    <div class="modal fade" id="upload-modal" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detail-modal-label">Silahkan pilih file sertifikat</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="upload-form" method="POST"  enctype="multipart/form-data">
+                        {{-- <form action="{{route('division.destroy', $division->id)}}" method="POST"> --}}
+                        @csrf
+                        <input type="file" class="form-control" name="file_cert" id="file_cert">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="upload-form-button" data-dismiss="modal">Upload</button>
+                </div>
             </div>
         </div>
     </div>
@@ -61,6 +101,18 @@
             $('#dataTableHover3').DataTable({
                 "ordering": false,
             }); // I// ID From dataTable with Hover
+
+            let upload_url;
+            $(document).on('click', '.upload-btn', function(){
+                var data_id = $(this).attr('data-id');
+                upload_url = `/data-sertifikat/${data_id}/upload`;
+            });
+
+            $(document).on('click', '#upload-form-button', function(){
+                $('#upload-form').attr('action', upload_url);
+                $('#upload-form').submit();
+            });
+
         });
     </script>
 @endsection

@@ -66,7 +66,11 @@ Route::group(['middleware' => 'isHC'], function () {
 
     Route::get('/division/{id}/getMentor', [DivisionController::class, 'getMentor']);
     Route::get('/division/{id}/getQuota', [DivisionController::class, 'getQuota']);
+
     Route::get('/data-sertifikat', [CertificateController::class, 'index']);
+    Route::post('/data-sertifikat/{id}/upload', [CertificateController::class, 'upload']);
+    Route::get('/data-sertifikat/download', [CertificateController::class, 'getCertificate']);
+
     Route::get('/school/{id}/history', [InstituteController::class, 'history']);
     Route::get('/schedule/{id}/getSchedule', [ScheduleController::class, 'getSchedule']);
 
