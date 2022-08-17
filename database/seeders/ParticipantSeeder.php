@@ -16,8 +16,54 @@ class ParticipantSeeder extends Seeder
      */
     public function run()
     {
+        $user = User::create([
+            'email'=>'participant1@gmail.com',
+            'password'=>bcrypt('password'),
+            'role'=>'Participant',
+        ]);
+        Participant::create([
+            'participant_code'=>'123456',
+            'name'=>'Peserta',
+            'school_type'=>'Universitas',
+            'school_id'=>1,
+            'major_id' => 3,
+            'email'=>'participant1@gmail.com',
+            'file_application_letter'=>'file1.pdf',
+            'file_cv'=>'file2.pdf',
+            'file_transcript'=>'file3.pdf',
+            'division_id'=>1,
+            'mentor_id'=>2,
+            'start_date'=>'2022-06-06',
+            'end_date'=>'2022-07-07',
+            'user_id'=>$user->id,
+            'status'=>2,
+        ]);
+
+        $user2 = User::create([
+            'email'=>'participant2@gmail.com',
+            'password'=>bcrypt('password'),
+            'role'=>'Participant',
+        ]);
+        Participant::create([
+            'participant_code'=>'123456',
+            'name'=>'Peserta',
+            'school_type'=>'Universitas',
+            'school_id'=>1,
+            'major_id' => 3,
+            'email'=>'participant2@gmail.com',
+            'file_application_letter'=>'file1.pdf',
+            'file_cv'=>'file2.pdf',
+            'file_transcript'=>'file3.pdf',
+            'division_id'=>1,
+            'mentor_id'=>2,
+            'start_date'=>'2022-06-06',
+            'end_date'=>'2022-07-07',
+            'user_id'=>$user2->id,
+            'status'=>2,
+        ]);
+
         $user3 = User::create([
-            'email'=>'participant@gmail.com',
+            'email'=>'participant3@gmail.com',
             'password'=>bcrypt('password'),
             'role'=>'Participant',
         ]);
@@ -27,7 +73,7 @@ class ParticipantSeeder extends Seeder
             'school_type'=>'Universitas',
             'school_id'=>1,
             'major_id' => 1,
-            'email'=>'participant@gmail.com',
+            'email'=>'participant3@gmail.com',
             'file_application_letter'=>'file1.pdf',
             'file_cv'=>'file2.pdf',
             'file_transcript'=>'file3.pdf',
@@ -39,7 +85,7 @@ class ParticipantSeeder extends Seeder
         ]);
 
         $user4 = User::create([
-            'email'=>'participant2@gmail.com',
+            'email'=>'participant4@gmail.com',
             'password'=>bcrypt('password'),
             'role'=>'Participant',
         ]);
@@ -49,7 +95,7 @@ class ParticipantSeeder extends Seeder
             'school_type'=>'Universitas',
             'school_id'=>1,
             'major_id' => 1,
-            'email'=>'participant@gmail.com',
+            'email'=>'participant4@gmail.com',
             'file_application_letter'=>'file1.pdf',
             'file_cv'=>'file2.pdf',
             'file_transcript'=>'file3.pdf',
@@ -62,7 +108,7 @@ class ParticipantSeeder extends Seeder
         ]);
 
         $user5 = User::create([
-            'email'=>'participant3@gmail.com',
+            'email'=>'participant5@gmail.com',
             'password'=>bcrypt('password'),
             'role'=>'Participant',
         ]);
@@ -72,7 +118,7 @@ class ParticipantSeeder extends Seeder
             'school_type'=>'Universitas',
             'school_id'=>1,
             'major_id' => 1,
-            'email'=>'participant@gmail.com',
+            'email'=>'participant5@gmail.com',
             'file_application_letter'=>'file1.pdf',
             'file_cv'=>'file2.pdf',
             'file_transcript'=>'file3.pdf',
@@ -85,7 +131,7 @@ class ParticipantSeeder extends Seeder
         ]);
 
         $user6 = User::create([
-            'email'=>'participant4@gmail.com',
+            'email'=>'participant6@gmail.com',
             'password'=>bcrypt('password'),
             'role'=>'Participant',
         ]);
@@ -95,7 +141,7 @@ class ParticipantSeeder extends Seeder
             'school_type'=>'Universitas',
             'school_id'=>1,
             'major_id' => 3,
-            'email'=>'participant@gmail.com',
+            'email'=>'participant6@gmail.com',
             'file_application_letter'=>'file1.pdf',
             'file_cv'=>'file2.pdf',
             'file_transcript'=>'file3.pdf',
@@ -106,6 +152,8 @@ class ParticipantSeeder extends Seeder
             'user_id'=>$user6->id,
             'status'=>2,
         ]);
+
+
 
         // Participant::create([
         //     'name'=>'Peserta2',

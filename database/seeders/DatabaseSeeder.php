@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ParticipantSeeder::class);
         $this->call(QuotaSeeder::class);
         $this->call(EvaluationSeeder::class);
+        $this->call(TaskSeeder::class);
     }
 }
