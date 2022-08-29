@@ -5,7 +5,13 @@
 @endsection
 
 @section('sidebar')
+  @if (Auth::user()->role == 'HC')
+    @include('layout.hc-sidebar')
+  @elseif (Auth::user()->role == 'Mentor')
     @include('layout.mentor-sidebar')
+  @elseif (Auth::user()->role == 'Mentor')
+    @include('layout.participant-sidebar')
+  @endif
 @endsection
 
 @section('subheader')
