@@ -56,11 +56,39 @@ class ParticipantController extends Controller
         $participant = Participant::where('id', $id)->first();
         $divisions = Division::all();
         $mentors = Mentor::all();
+        $majors = Major::all();
+        $institutes = Institute::all();
         return view('hc.participant.edit', compact(
             'divisions',
             'mentors',
             'participant',
+            'majors',
+            'institutes',
         ));
+    }
+
+    public function detail(Request $request, $id)
+    {
+        $participant = Participant::where('id', $id)->first();
+        $divisions = Division::all();
+        $mentors = Mentor::all();
+        $majors = Major::all();
+        $institutes = Institute::all();
+        return view('hc.participant.detail', compact(
+            'divisions',
+            'mentors',
+            'participant',
+            'majors',
+            'institutes',
+        ));
+    }
+
+    public function destroy(Participant $id)
+    {
+        $name = $id->name;
+        $id->delete();
+        toast('Peserta ' . $name . ' dihapus', 'success');
+        return redirect()->route('participant.index');
     }
 
     public function update(Request $request, $id)

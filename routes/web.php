@@ -61,10 +61,12 @@ Route::group(['middleware' => 'isHC'], function () {
 
     Route::get('/data-pengajuan', [ParticipantController::class, 'index']);
 
-    Route::get('/data-peserta', [ParticipantController::class, 'getParticipant']);
+    Route::get('/data-peserta', [ParticipantController::class, 'getParticipant'])->name('participant.index');
     Route::get('/data-peserta/{id}', [ParticipantController::class, 'edit'])->name('participant.edit');
+    Route::get('/data-peserta/{id}/detail', [ParticipantController::class, 'detail'])->name('participant.detail');
     Route::put('/data-peserta/{id}', [ParticipantController::class, 'update'])->name('participant.update');
     Route::delete('/data-peserta/{id}/reject', [ParticipantController::class, 'rejectSubmission']);
+    Route::delete('/data-peserta/{id}/delete', [ParticipantController::class, 'destroy']);
 
     Route::get('/division/{id}/getMentor', [DivisionController::class, 'getMentor']);
     Route::get('/division/{id}/getQuota', [DivisionController::class, 'getQuota']);

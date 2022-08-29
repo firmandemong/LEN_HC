@@ -18,6 +18,7 @@
 @endsection
 
 @section('content')
+    @include('sweetalert::alert')
     <div class="col-lg-12">
         <div class="card mb-4">
 
@@ -46,19 +47,43 @@
                                 <td>{!! \App\Models\Participant::getLabelStatus($participant->status) !!}</td>
                                 {{-- <td>{{date('d F Y',strtotime($participant->start_date)) .' - ' . date('d F Y',strtotime($participant->end_date))}}</td> --}}
                                 <td>
-                                    <button button 
-                                        class="btn btn-primary btn-sm">Detail</button>
-                                    <button button id="" data-id="{{ $participant->id }}"
-                                        data-name="{{ $participant->name }}"
-                                        data-toggle="modal" data-target="#edit-modal"
-                                        class="btn btn-warning btn-sm edit-button">Edit</button>
-                                    <button button id="" data-id="{{ $participant->id }}" data-toggle="modal"
+                                    <a href="{{ route('participant.detail', $participant->id) }}" 
+                                        class="btn btn-primary btn-sm">Detail</a>
+                                    <a  href="{{ route('participant.edit', $participant->id) }}"
+                                        class="btn btn-warning btn-sm edit-button">Edit</a>
+                                    <button button id="delete-button" data-id="{{ $participant->id }}" data-toggle="modal"
                                         data-target="#delete-modal" class="btn btn-danger btn-sm delete-button">Delete</button>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+
+    {{-- <!-- Modal Delete --> --}}
+    <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="delete-modal-label">Apakah anda yakin ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Data yang dihapus tidak dapat dikembalikan!!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <form id="delete-form" method="POST">
+                        {{-- <form action="{{route('division.destroy', $division->id)}}" method="POST"> --}}
+                        @method('delete')
+                        @csrf
+                        <button button type="submit" class="btn btn-danger">Hapus</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -85,6 +110,12 @@
             $('#dataTableHover3').DataTable({
                 "ordering": false,
             }); // I// ID From dataTable with Hover
+
+            $(document).on('click', "#delete-button", function() {
+                var data_id = $(this).attr('data-id');
+                var url = '/data-peserta/' + data_id + '/delete';
+                $('#delete-form').attr('action', url);
+            });
         });
     </script>
 @endsection
