@@ -64,7 +64,7 @@
                                 </td>
 
                                 <td>
-                                    {{ $mentor->getDivision->name }}
+                                    {{ @$mentor->getDivision->name }}
                                 </td>
                                 <td>
                                     {{ $mentor->no_hp }}

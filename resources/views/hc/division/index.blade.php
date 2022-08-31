@@ -35,7 +35,7 @@
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $division->name }}</td>
-                                <td>{{ $division->quota }}</td>
+                                <td>{{ $division->getDetailQuota->sum('quota') }}</td>
                                 <td>
                                     <button button id="detail-button" data-id="{{ $division->id }}" data-toggle="modal"
                                         data-target="#detail-modal" class="btn btn-success btn-sm">Detail Kuota</button>
@@ -155,7 +155,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="table-responsive p-3">
-                        <table class="table align-items-center table-flush table-hover table-stripped" id="dataTableHover">
+                        <table class="table align-items-center table-flush table-hover table-stripped"
+                            id="dataTableHover">
                             <thead class="thead-light">
                                 <tr>
                                     <th>Jurusan</th>
@@ -212,12 +213,16 @@
                 $.get(`/division/${$(this).attr('data-id')}/getQuota`, function(data) {
                     $.each(data.quotas, function(index) {
                         $("#detail-table-body:last-child")
-                        .append(`<tr><td>${data.quotas[index].name}</td><td>${data.quotas[index].quota}</td></tr>`);
+                            .append(
+                                `<tr><td>${data.quotas[index].name}</td><td>${data.quotas[index].quota}</td></tr>`
+                            );
                     })
                 });
             });
 
-
+            $(document).on('hidden.bs.modal', '#detail-modal', function() {
+                $('#detail-table-body').empty();
+            })
         });
 
         $(document).ready(function() {

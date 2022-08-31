@@ -58,11 +58,11 @@
                                     <td>
                                         <button class="btn btn-success btn-sm btnLanjut"
                                             data-id="{{ $submission->id }}">Lanjut</button><br>
-                                            <form action="{{ route('rejectSubmission', $submission->id) }}" method="POST" >
-                                                @csrf
-                                                @method('put')
-                                                <button type="submit"class="btn btn-danger btn-sm mt-1 ">Tolak</a>
-                                            </form>
+                                        <form action="{{ route('rejectSubmission', $submission->id) }}" method="POST">
+                                            @csrf
+                                            @method('put')
+                                            <button type="submit"class="btn btn-danger btn-sm mt-1 ">Tolak</a>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -99,9 +99,10 @@
                                             data-toggle='modal' data-target='#modalJadwal'>Lihat Jadwal</a>
                                     </td>
                                     <td>
-                                        <button class="btn btn-success btn-sm btnLanjut2" data-id="{{ $submission->id }}">Lanjut</button>
+                                        <button class="btn btn-success btn-sm btnLanjut2"
+                                            data-id="{{ $submission->id }}">Lanjut</button>
                                         <br>
-                                        <form action="{{ route('rejectSubmission', $submission->id) }}" method="POST" >
+                                        <form action="{{ route('rejectSubmission', $submission->id) }}" method="POST">
                                             @csrf
                                             @method('put')
                                             <button type="submit"class="btn btn-danger btn-sm mt-1 ">Tolak</a>
