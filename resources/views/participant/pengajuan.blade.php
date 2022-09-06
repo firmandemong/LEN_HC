@@ -20,8 +20,44 @@
     <!-- Login Content -->
     <div class="container-login">
         <div class="row justify-content-center">
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-5 col-lg-5 col-md-5 mt-5">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-uppercase mb-1">Jumlah Pengajuan Diterima
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $acceptedSubmission->count() }}
+                                </div>
+
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-user-check fa-2x text-primary"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-5 col-lg-5 col-md-5 mt-5">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-uppercase mb-1">Jumlah Pengajuan Ditolak</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $rejectedSubmission->count() }}
+                                </div>
+
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-user-times fa-2x text-danger"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="col-xl-10 col-lg-12 col-md-9">
-                <div class="card shadow-sm my-5">
+                <div class="card shadow-sm my-3">
                     <div class="card-body p-0">
                         <div class="row">
                             <div class="col-lg-12">
@@ -108,7 +144,8 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">Upload CV</label>
-                                                    <input type="file" name="file_cv" class="form-control" required>
+                                                    <input type="file" name="file_cv" class="form-control"
+                                                        required>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">

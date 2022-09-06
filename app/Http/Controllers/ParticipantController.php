@@ -31,6 +31,8 @@ class ParticipantController extends Controller
 
     public function formPengajuan()
     {
+        $acceptedSubmission = Participant::where('status', 1)->orderBy('updated_at')->get();
+        $rejectedSubmission = Participant::where('status', 3)->orderBy('updated_at')->get();
         $majors = Major::all();
 
         $schools = [];
@@ -39,7 +41,7 @@ class ParticipantController extends Controller
             $schools[] = $school->name;
         }
 
-        return view('participant/pengajuan', compact('majors'))->with(['schools' => json_encode($schools)]);
+        return view('participant.pengajuan', compact('majors', 'acceptedSubmission', 'rejectedSubmission'))->with(['schools' => json_encode($schools)]);
     }
 
     public function getParticipant()
@@ -308,10 +310,10 @@ class ParticipantController extends Controller
         toast('Pengajuan berhasil diupdate', 'success');
         return back();
     }
-    
+
     public function reject(Participant $id)
     {
-        $id->update(['status'=>3]);
+        $id->update(['status' => 3]);
         toast('Pengajuan berhasil ditolak', 'success');
         return back();
     }
