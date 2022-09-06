@@ -21,7 +21,23 @@
     <div class="container-login">
         <div class="row justify-content-center">
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-5 col-lg-5 col-md-5 mt-5">
+            <div class="col-xl-4 col-lg-4 col-md-4 mt-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-uppercase mb-1">Jumlah Pengajuan Pending</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $pendingSubmission->count() }}
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-user-clock fa-2x text-warning"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 mt-4">
                 <div class="card h-100">
                     <div class="card-body">
                         <div class="row align-items-center">
@@ -39,7 +55,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-5 col-lg-5 col-md-5 mt-5">
+            <div class="col-xl-4 col-lg-4 col-md-4 mt-4">
                 <div class="card h-100">
                     <div class="card-body">
                         <div class="row align-items-center">
@@ -47,7 +63,6 @@
                                 <div class="text-xs font-weight-bold text-uppercase mb-1">Jumlah Pengajuan Ditolak</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $rejectedSubmission->count() }}
                                 </div>
-
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-user-times fa-2x text-danger"></i>
@@ -56,7 +71,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="col-xl-12 col-lg-12 col-md-9">
                 <div class="card shadow-sm my-3">
                     <div class="card-body p-0">
                         <div class="row">
@@ -121,7 +137,8 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="">Jurusan</label>
-                                                    <select id="" class="form-control" name="major" required>
+                                                    <select id="" class="form-control" name="major"
+                                                        required>
                                                         <option disabled selected>Pilih Jurusan</option>
                                                         @foreach ($majors as $major)
                                                             <option value="{{ $major->id }}"

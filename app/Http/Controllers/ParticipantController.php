@@ -33,6 +33,7 @@ class ParticipantController extends Controller
     {
         $acceptedSubmission = Participant::where('status', 1)->orderBy('updated_at')->get();
         $rejectedSubmission = Participant::where('status', 3)->orderBy('updated_at')->get();
+        $pendingSubmission = Participant::where('status', 0)->orderBy('updated_at')->get();
         $majors = Major::all();
 
         $schools = [];
@@ -41,7 +42,7 @@ class ParticipantController extends Controller
             $schools[] = $school->name;
         }
 
-        return view('participant.pengajuan', compact('majors', 'acceptedSubmission', 'rejectedSubmission'))->with(['schools' => json_encode($schools)]);
+        return view('participant.pengajuan', compact('majors', 'acceptedSubmission', 'rejectedSubmission', 'pendingSubmission'))->with(['schools' => json_encode($schools)]);
     }
 
     public function getParticipant()
